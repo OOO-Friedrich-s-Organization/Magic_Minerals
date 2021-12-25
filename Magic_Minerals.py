@@ -8,7 +8,6 @@ WIDTH = 1080
 HEIGHT = 720
 STEP = 10
 
-# группы спрайтов
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Magic Minerals')
 clock = pygame.time.Clock()
