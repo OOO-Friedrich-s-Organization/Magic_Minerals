@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="115c5626-8a81-4c47-8743-1598f21bccc7" name="Changes" comment="menu" />
+    <list default="true" id="115c5626-8a81-4c47-8743-1598f21bccc7" name="Changes" comment="bijwerking">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_01_2022_22_25_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_07_01_2022_22_25__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_11_22_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_11_22__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_12_13_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_12_13__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_09_[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_09__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/buttons/big_button.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/buttons/mini_button.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/buttons/zag/button_big.xcf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stones/amber.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stones/amethyst.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stones/diamond.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stones/emerald.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stones/level.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stones/ruby.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/stones/sapphire.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Magic_Minerals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Magic_Minerals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/zag/button_big — копия.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/buttons/zag/button_big — копия.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/zag/mini_button — копия.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/buttons/zag/mini_button — копия.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/zag/mini_button.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/buttons/zag/mini_button.xcf" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Denis" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="22hA5X7J0KJzUk4VhrFZWftylBw" />
+  <component name="ProjectId" id="23PBUjJT0UFgyI8BL6Jt5tferYS" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -30,7 +44,6 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager" selected="Python.Magic_Minerals">
     <configuration name="Magic_Minerals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -77,52 +90,20 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.main_menu" />
         <item itemvalue="Python.Magic_Minerals" />
-        <item itemvalue="Python.main_menu" />
-        <item itemvalue="Python.main_menu" />
-        <item itemvalue="Python.main_menu" />
-        <item itemvalue="Python.main_menu" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="115c5626-8a81-4c47-8743-1598f21bccc7" name="Changes" comment="" />
-      <created>1640279262411</created>
+      <changelist id="115c5626-8a81-4c47-8743-1598f21bccc7" name="Changes" comment="btns" />
+      <created>1641625860745</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1640279262411</updated>
+      <updated>1641625860745</updated>
     </task>
-    <task id="LOCAL-00001" summary="test1">
-      <created>1640279346960</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1640279346960</updated>
-    </task>
-    <task id="LOCAL-00002" summary="gimp_menu_add">
-      <created>1640282341876</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1640282341876</updated>
-    </task>
-    <task id="LOCAL-00003" summary="menu_and_level_start">
-      <created>1640427903442</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1640427903442</updated>
-    </task>
-    <task id="LOCAL-00004" summary="imgs1">
-      <created>1641137708823</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1641137708823</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -136,7 +117,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="Andrej" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -150,11 +131,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="test1" />
-    <MESSAGE value="gimp_menu_add" />
-    <MESSAGE value="menu_and_level_start" />
-    <MESSAGE value="imgs1" />
-    <MESSAGE value="menu" />
-    <option name="LAST_COMMIT_MESSAGE" value="menu" />
+    <MESSAGE value="bijwerking" />
+    <option name="LAST_COMMIT_MESSAGE" value="bijwerking" />
   </component>
 </project>
