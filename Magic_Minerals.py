@@ -11,6 +11,7 @@ STEP = 10
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Magic Minerals')
 clock = pygame.time.Clock()
+
 # группы спрайтов
 all_sprites = pygame.sprite.Group()
 tiles_group = pygame.sprite.Group()
