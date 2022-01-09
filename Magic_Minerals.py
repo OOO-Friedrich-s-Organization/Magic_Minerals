@@ -11,7 +11,6 @@ STEP = 10
 first_time = True
 victory = False
 
-# группы спрайтов
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Magic Minerals')
 clock = pygame.time.Clock()
