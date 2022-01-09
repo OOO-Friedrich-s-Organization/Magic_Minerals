@@ -9,6 +9,7 @@ HEIGHT = 720
 STEP = 10
 
 first_time = True
+victory = False
 
 # группы спрайтов
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -406,7 +407,7 @@ class WinOrDefeat:
         self.moves = moves
 
     def check_moves(self):
-        if self.moves == 0:
+        if self.moves == 0 and not victory:
             self.defeat()
 
     def defeat(self):
@@ -420,6 +421,7 @@ class WinOrDefeat:
         screen.blit(string_rendered, text_rect)
 
     def victory(self):
+        global victory
         text = 'Изумительно!' if self.moves < 3 else 'Прелестно!'
         font = pygame.font.Font(None, 200)
         text_coord = 17
@@ -428,6 +430,7 @@ class WinOrDefeat:
         text_rect.top = text_coord
         text_rect.x = 10
         screen.blit(string_rendered, text_rect)
+        victory = True
 
 
 board = Board(8, 8, 10, 10, 75)
@@ -441,6 +444,8 @@ while running:
             running = False
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             board.get_click(event.pos)
+    board.horizontal_reduce()
+    board.vertical_reduce()
     draw_cell_field()
     draw_instruments()
     move_pad.show()
