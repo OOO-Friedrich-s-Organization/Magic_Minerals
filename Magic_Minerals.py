@@ -1,7 +1,6 @@
 import pygame
 import sys
 import os
-from copy import deepcopy
 
 pygame.init()
 FPS = 50
@@ -17,27 +16,34 @@ pygame.display.set_caption('Magic Minerals')
 clock = pygame.time.Clock()
 
 all_sprites = pygame.sprite.Group()
+animated_group = pygame.sprite.Group()
 stones_group = pygame.sprite.Group()
 necessary_stones = []  # список необходимых камней (объектов класса NecessaryStone)
 necessary_stones_group = pygame.sprite.Group()
 instruments_group = pygame.sprite.Group()
 
+loaded_images = {}
+
 
 def load_image(name,  directory='stones', color_key=None):
     full_name = os.path.join(directory, name)
-    try:
-        image = pygame.image.load(full_name)
-    except pygame.error as message:
-        print(f'В папке отсутствует файл {name}')
-        raise SystemExit(message)
+    if full_name not in loaded_images.keys():
+        try:
+            image = pygame.image.load(full_name)
+        except pygame.error as message:
+            print(f'В папке отсутствует файл {name}')
+            raise SystemExit(message)
 
-    if color_key is not None:
-        if color_key == -1:
-            color_key = image.get_at((0, 0))
-        image.set_colorkey(color_key)
+        if color_key is not None:
+            if color_key == -1:
+                color_key = image.get_at((0, 0))
+            image.set_colorkey(color_key)
+        else:
+            image = image.convert_alpha()
+        loaded_images[full_name] = image
+        return image
     else:
-        image = image.convert_alpha()
-    return image
+        return loaded_images[full_name]
 
 
 def load_level(filename):
@@ -69,6 +75,9 @@ def terminate():
 def draw_cell_field():
     board.render(screen)
     stones_group.draw(screen)
+    # animated_group.draw(screen)
+    # animated_group.update()
+    # [b.kill() for b in animated_group]
 
 
 def draw_instruments():
@@ -117,10 +126,15 @@ def write_statistic(*stones):
         text_rect.x = 10
         text_coord += text_rect.height
         screen.blit(string_rendered, text_rect)
+    count = 0
+    for stone in necessary_stones:
+        if stone.text[0] >= stone.text[1]:
+            count += 1
+    if count == len(necessary_stones):
+        game_result.victory()
 
 
 stone_images = {
-    '0': load_image('tiger.png'),
     '1': load_image('amber.png'),
     '2': load_image('amethyst.png'), '3': load_image('diamond.png'),
     '4': load_image('emerald.png'), '5': load_image('ruby.png'),
@@ -130,7 +144,7 @@ stone_images = {
 instruments = ['pickaxe', 'drill', 'dynamite', 'lantern']
 instrument_images = {}
 
-for i in range(0, 7):
+for i in range(1, 7):
     stone_images[str(i)] = pygame.transform.scale(stone_images[str(i)], (75, 75))
 
 for ins in instruments:
@@ -152,6 +166,15 @@ class Board:
         self.top = top
         self.c1 = (None, None)
         self.c2 = (None, None)
+        with open('stones/fall.txt', 'rt') as f:
+            file = f.readlines()
+        self.queue = list(file[0])
+        self.global_del_list = []
+
+    def next_in_queue(self):
+        next = self.queue[0]
+        del self.queue[0]
+        return next
 
     def set_view(self, left, top, cell_size):
         self.left = left
@@ -174,7 +197,15 @@ class Board:
                                   self.top + y * self.cell_size,
                                   self.cell_size, self.cell_size), 1)
 
+        for lst in self.global_del_list:
+            for x, y in lst:
+                pygame.draw.rect(screen, pygame.Color('Khaki'),
+                                 (self.left + y * self.cell_size,
+                                  self.top + x * self.cell_size, self.cell_size, self.cell_size), 0)
+                boom = AnimatedSprite(load_image("boom.jpg"), 6, 5, x * self.cell_size, y * self.cell_size)
+
     def on_click(self, cell):
+        self.global_del_list = []
         if self.c1 == (None, None) and self.c2 == (None, None):
             self.c1 = cell
         elif self.c1 != (None, None) and self.c2 == (None, None):
@@ -254,9 +285,10 @@ class Board:
                     cur_st = self.board[i][j]
                     del_list = []
                 if len(del_list) >= 3:
+                    self.global_del_list.append(del_list)
                     tmp_line = list(self.board[i])
                     for tpl in del_list:
-                        tmp_line[tpl[1]] = '0'
+                        tmp_line[tpl[1]] = self.next_in_queue()
                     tmp_line = ''.join(tmp_line)
                     self.board[i] = tmp_line
                     del_list = []
@@ -286,14 +318,38 @@ class Board:
                     del_list = []
                 if len(del_list) >= 3:
                     # tmp_line = list(self.board[i])
+                    self.global_del_list.append(del_list)
                     for tpl in del_list:
                         tmp_line = list(self.board[tpl[0]])
-                        tmp_line[tpl[1]] = '0'
+                        tmp_line[tpl[1]] = self.next_in_queue()
                         tmp_line = ''.join(tmp_line)
                         self.board[tpl[0]] = tmp_line
                     del_list = []
             j += 1
             i = 0
+
+
+class AnimatedSprite(pygame.sprite.Sprite):
+    def __init__(self, sheet, columns, rows, x, y):
+        super().__init__(animated_group)
+        self.frames = []
+        self.cut_sheet(sheet, columns, rows)
+        self.cur_frame = 0
+        self.image = self.frames[self.cur_frame]
+        self.rect = self.rect.move(x, y)
+
+    def cut_sheet(self, sheet, columns, rows):
+        self.rect = pygame.Rect(0, 0, sheet.get_width() // columns,
+                                sheet.get_height() // rows)
+        for j in range(rows):
+            for i in range(columns):
+                frame_location = (self.rect.w * i, self.rect.h * j)
+                self.frames.append(sheet.subsurface(pygame.Rect(
+                    frame_location, self.rect.size)))
+
+    def update(self):
+        self.cur_frame = (self.cur_frame + 1) % len(self.frames)
+        self.image = self.frames[self.cur_frame]
 
 
 class Stone(pygame.sprite.Sprite):
@@ -332,7 +388,7 @@ class Move:
     def show(self):
         pygame.draw.ellipse(screen, 'YellowGreen', (630, 10, 90, 90), 0)
         pygame.draw.ellipse(screen, 'DarkGreen', (630, 10, 90, 90), 5)
-        text = [str(self.n)]
+        text = [str(self.n).rjust(2, ' ')]
         font = pygame.font.Font(None, 70)
         text_coord = 17
         for line in text:
@@ -345,10 +401,40 @@ class Move:
             screen.blit(string_rendered, text_rect)
 
 
+class WinOrDefeat:
+    def __init__(self, moves):
+        self.moves = moves
+
+    def check_moves(self):
+        if self.moves == 0:
+            self.defeat()
+
+    def defeat(self):
+        text = 'Неудача!'
+        font = pygame.font.Font(None, 200)
+        text_coord = 17
+        string_rendered = font.render(text, 1, pygame.Color('White'))
+        text_rect = string_rendered.get_rect()
+        text_rect.top = text_coord
+        text_rect.x = 10
+        screen.blit(string_rendered, text_rect)
+
+    def victory(self):
+        text = 'Изумительно!' if self.moves < 3 else 'Прелестно!'
+        font = pygame.font.Font(None, 200)
+        text_coord = 17
+        string_rendered = font.render(text, 1, pygame.Color('White'))
+        text_rect = string_rendered.get_rect()
+        text_rect.top = text_coord
+        text_rect.x = 10
+        screen.blit(string_rendered, text_rect)
+
+
 board = Board(8, 8, 10, 10, 75)
 move_pad = Move(20)
 running = True
 while running:
+    game_result = WinOrDefeat(move_pad.n)
     level_x, level_y = generate_level(board.board)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -359,8 +445,8 @@ while running:
     draw_instruments()
     move_pad.show()
     write_statistic(('5', 10), ('6', 15), ('4', 20))
+    game_result.check_moves()
     pygame.display.flip()
     screen.fill('black')
     clock.tick(FPS)
 terminate()
-
