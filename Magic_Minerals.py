@@ -456,7 +456,6 @@ class Board:
                     cur_st = self.board[i][j]
                     del_list = []
                 if len(del_list) >= 3:
-                    # tmp_line = list(self.board[i])
                     self.global_del_list.append(del_list)
                     for tpl in del_list:
                         tmp_line = list(self.board[tpl[0]])
