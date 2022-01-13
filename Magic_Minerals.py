@@ -639,8 +639,6 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             board.get_click(event.pos)
             instrument_pad.get_click(event.pos)
-    # board.horizontal_reduce()
-    # board.vertical_reduce()
     draw_cell_field()
     draw_instruments()
     move_pad.show()
