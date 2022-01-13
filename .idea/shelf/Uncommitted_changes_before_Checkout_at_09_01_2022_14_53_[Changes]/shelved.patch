@@ -1,0 +1,410 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"7f7bfae0-b5ff-486a-9cb7-29f90c679952\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"PUSH_TAGS\">\r\n      <GitPushTagMode>\r\n        <option name=\"argument\" value=\"--tags\" />\r\n        <option name=\"title\" value=\"All\" />\r\n      </GitPushTagMode>\r\n    </option>\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"Denis\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"22gsnv3rmSYj34ET2lM3LIr8vKB\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Python.main_menu\">\r\n    <configuration name=\"Magic_Minerals\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"F:\\Python310\\python.exe\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <module name=\"\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/Magic_Minerals.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"main_menu\" type=\"PythonConfigurationType\" factoryName=\"Python\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"F:\\Python310\\python.exe\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <module name=\"\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"$PROJECT_DIR$/main_menu.py\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Python.main_menu\" />\r\n        <item itemvalue=\"Python.Magic_Minerals\" />\r\n        <item itemvalue=\"Python.Magic_Minerals\" />\r\n        <item itemvalue=\"Python.main_menu\" />\r\n        <item itemvalue=\"Python.Magic_Minerals\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"7f7bfae0-b5ff-486a-9cb7-29f90c679952\" name=\"Changes\" comment=\"\" />\r\n      <created>1640270735623</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1640270735623</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Work starts\">\r\n      <created>1640270946388</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640270946388</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Master branch\">\r\n      <created>1640274404511</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640274404511</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"First function\">\r\n      <created>1640274599672</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640274599672</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"First function\">\r\n      <created>1640274660046</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640274660046</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Rename\">\r\n      <created>1640274914354</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640274914354</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Delete d_fun1\">\r\n      <created>1640275064012</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640275064012</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"New\">\r\n      <created>1640275177664</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640275177664</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Pictures stones\">\r\n      <created>1640275653851</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640275653851</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Stone field with necessary stones\">\r\n      <created>1640420440538</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640420440538</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"First merge from Denis\">\r\n      <created>1640420579171</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1640420579171</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"6th January update\">\r\n      <created>1641471439745</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641471439745</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"6th January update with tiger)))\">\r\n      <created>1641471559656</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641471559656</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"9th January update\">\r\n      <created>1641709591562</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641709591562</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"9th January update\">\r\n      <created>1641709614893</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641709614893</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"9th January update with fall and boom\">\r\n      <created>1641709829453</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641709829453</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"9th January update new\">\r\n      <created>1641715986220</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641715986220</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00017\" summary=\"9th January update new\">\r\n      <created>1641716116565</created>\r\n      <option name=\"number\" value=\"00017\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641716116565</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00018\" summary=\"9th January update new 1\">\r\n      <created>1641716212670</created>\r\n      <option name=\"number\" value=\"00018\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641716212670</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00019\" summary=\"9th January merge from Denis\">\r\n      <created>1641716494829</created>\r\n      <option name=\"number\" value=\"00019\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641716494829</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00020\" summary=\"9th January merge from Denis 2\">\r\n      <created>1641716567604</created>\r\n      <option name=\"number\" value=\"00020\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1641716567604</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"21\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"Denis\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Work starts\" />\r\n    <MESSAGE value=\"Master branch\" />\r\n    <MESSAGE value=\"First function\" />\r\n    <MESSAGE value=\"Rename\" />\r\n    <MESSAGE value=\"Delete d_fun1\" />\r\n    <MESSAGE value=\"New\" />\r\n    <MESSAGE value=\"Pictures stones\" />\r\n    <MESSAGE value=\"Stone field with necessary stones\" />\r\n    <MESSAGE value=\"First merge from Denis\" />\r\n    <MESSAGE value=\"6th January update\" />\r\n    <MESSAGE value=\"6th January update with tiger)))\" />\r\n    <MESSAGE value=\"9th January update\" />\r\n    <MESSAGE value=\"9th January update with fall and boom\" />\r\n    <MESSAGE value=\"9th January update new\" />\r\n    <MESSAGE value=\"9th January update new 1\" />\r\n    <MESSAGE value=\"9th January merge from Denis\" />\r\n    <MESSAGE value=\"9th January merge from Denis 2\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"9th January merge from Denis 2\" />\r\n  </component>\r\n</project>
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -1,7 +1,21 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
++<<<<<<< HEAD
+     <list default="true" id="7f7bfae0-b5ff-486a-9cb7-29f90c679952" name="Changes" comment="" />
++=======
++    <list default="true" id="115c5626-8a81-4c47-8743-1598f21bccc7" name="Changes" comment="menu">
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_11_22__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_11_22__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_12_13__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_12_13__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_09__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_22__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_22__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_22__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_13_22__Changes_1.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_23_03__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_23_03__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_23_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_08_01_2022_23_05__Changes_.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/assets/animations/zag/mineral_die_animate.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/animations/zag/mineral_die_animate.xcf" afterDir="false" />
++    </list>
++>>>>>>> origin/master
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -15,12 +29,15 @@
+     </option>
+   </component>
+   <component name="Git.Settings">
++<<<<<<< HEAD
+     <option name="PUSH_TAGS">
+       <GitPushTagMode>
+         <option name="argument" value="--tags" />
+         <option name="title" value="All" />
+       </GitPushTagMode>
+     </option>
++=======
++>>>>>>> origin/master
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+         <entry key="$PROJECT_DIR$" value="Denis" />
+@@ -28,16 +45,27 @@
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++<<<<<<< HEAD
+   <component name="ProjectId" id="22gsnv3rmSYj34ET2lM3LIr8vKB" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+     <option name="showMembers" value="true" />
++=======
++  <component name="ProjectId" id="22hA5X7J0KJzUk4VhrFZWftylBw" />
++  <component name="ProjectViewState">
++    <option name="hideEmptyMiddlePackages" value="true" />
++    <option name="showLibraryContents" value="true" />
++>>>>>>> origin/master
+   </component>
+   <component name="PropertiesComponent">
+     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
++<<<<<<< HEAD
++=======
++    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python/Винг" />
++>>>>>>> origin/master
+   </component>
+   <component name="RunManager" selected="Python.main_menu">
+     <configuration name="Magic_Minerals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+@@ -46,7 +74,11 @@
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
++<<<<<<< HEAD
+       <option name="SDK_HOME" value="F:\Python310\python.exe" />
++=======
++      <option name="SDK_HOME" value="C:\Users\Gip4eer\AppData\Local\Programs\Python\Python39\python.exe" />
++>>>>>>> origin/master
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+       <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+@@ -67,7 +99,11 @@
+       <envs>
+         <env name="PYTHONUNBUFFERED" value="1" />
+       </envs>
++<<<<<<< HEAD
+       <option name="SDK_HOME" value="F:\Python310\python.exe" />
++=======
++      <option name="SDK_HOME" value="C:\Users\Gip4eer\AppData\Local\Programs\Python\Python39\python.exe" />
++>>>>>>> origin/master
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+       <option name="IS_MODULE_SDK" value="false" />
+       <option name="ADD_CONTENT_ROOTS" value="true" />
+@@ -86,15 +122,22 @@
+       <list>
+         <item itemvalue="Python.main_menu" />
+         <item itemvalue="Python.Magic_Minerals" />
++<<<<<<< HEAD
+         <item itemvalue="Python.Magic_Minerals" />
+         <item itemvalue="Python.main_menu" />
+         <item itemvalue="Python.Magic_Minerals" />
++=======
++        <item itemvalue="Python.main_menu" />
++        <item itemvalue="Python.main_menu" />
++        <item itemvalue="Python.main_menu" />
++>>>>>>> origin/master
+       </list>
+     </recent_temporary>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
++<<<<<<< HEAD
+       <changelist id="7f7bfae0-b5ff-486a-9cb7-29f90c679952" name="Changes" comment="" />
+       <created>1640270735623</created>
+       <option name="number" value="Default" />
+@@ -242,6 +285,43 @@
+       <updated>1641716567604</updated>
+     </task>
+     <option name="localTasksCounter" value="21" />
++=======
++      <changelist id="115c5626-8a81-4c47-8743-1598f21bccc7" name="Changes" comment="" />
++      <created>1640279262411</created>
++      <option name="number" value="Default" />
++      <option name="presentableId" value="Default" />
++      <updated>1640279262411</updated>
++    </task>
++    <task id="LOCAL-00001" summary="test1">
++      <created>1640279346960</created>
++      <option name="number" value="00001" />
++      <option name="presentableId" value="LOCAL-00001" />
++      <option name="project" value="LOCAL" />
++      <updated>1640279346960</updated>
++    </task>
++    <task id="LOCAL-00002" summary="gimp_menu_add">
++      <created>1640282341876</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1640282341876</updated>
++    </task>
++    <task id="LOCAL-00003" summary="menu_and_level_start">
++      <created>1640427903442</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1640427903442</updated>
++    </task>
++    <task id="LOCAL-00004" summary="imgs1">
++      <created>1641137708823</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1641137708823</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
++>>>>>>> origin/master
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -255,7 +335,11 @@
+                   <entry key="branch">
+                     <value>
+                       <list>
++<<<<<<< HEAD
+                         <option value="Denis" />
++=======
++                        <option value="Andrej" />
++>>>>>>> origin/master
+                       </list>
+                     </value>
+                   </entry>
+@@ -269,6 +353,7 @@
+     <option name="oldMeFiltersMigrated" value="true" />
+   </component>
+   <component name="VcsManagerConfiguration">
++<<<<<<< HEAD
+     <MESSAGE value="Work starts" />
+     <MESSAGE value="Master branch" />
+     <MESSAGE value="First function" />
+@@ -287,5 +372,13 @@
+     <MESSAGE value="9th January merge from Denis" />
+     <MESSAGE value="9th January merge from Denis 2" />
+     <option name="LAST_COMMIT_MESSAGE" value="9th January merge from Denis 2" />
++=======
++    <MESSAGE value="test1" />
++    <MESSAGE value="gimp_menu_add" />
++    <MESSAGE value="menu_and_level_start" />
++    <MESSAGE value="imgs1" />
++    <MESSAGE value="menu" />
++    <option name="LAST_COMMIT_MESSAGE" value="menu" />
++>>>>>>> origin/master
+   </component>
+ </project>
+\ No newline at end of file
+Index: main_menu.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import pygame\r\nimport os\r\nimport sys\r\n\r\npygame.init()\r\n\r\nWIDTH, HEIGHT = 1080, 720\r\nBUTTONS_COORDS = [[390, 300, 300, 100],\r\n                  [390, 450, 300, 100],\r\n                  [1000, 640, 60, 60]]\r\n\r\nscreen = pygame.display.set_mode((WIDTH, HEIGHT))\r\n\r\nlevels_sprites = pygame.sprite.Group()\r\n\r\ncondition = 'menu'\r\nlevels = 8\r\n\r\n\r\ndef terminate():\r\n    pygame.quit()\r\n    sys.exit()\r\n\r\n\r\ndef load_image(name, color_key=None):\r\n    fullname = os.path.join('data', name)\r\n    try:\r\n        image = pygame.image.load(fullname)#.convert()\r\n    except pygame.error as message:\r\n        print('Cannot load image:', name)\r\n        raise SystemExit(message)\r\n\r\n    if color_key is None:\r\n        if color_key == -1:\r\n            color_key = image.get_at((0, 0))\r\n        image.set_colorkey(color_key)\r\n    else:\r\n        image = image.convert_alpha()\r\n    return image\r\n\r\n\r\ndef menu_screen():\r\n    for button in BUTTONS_COORDS:\r\n        pygame.draw.rect(screen, (255, 175, 24),\r\n                         (button[0], button[1], button[2], button[3]))\r\n    buttons_text = {'Новая игра': [410, 330, 1],\r\n                    'Уровни': [440, 480, 1],\r\n                    'Продолжить': [394, 330, 0]}\r\n    font = pygame.font.Font(None, 50)\r\n    for button in buttons_text:\r\n        if buttons_text[button][2]:\r\n            string_rendered = font.render(button, 1, (255, 255, 255))\r\n            text_rect = string_rendered.get_rect()\r\n            text_rect.top = buttons_text[button][1]\r\n            text_rect.x = buttons_text[button][0]\r\n            screen.blit(string_rendered, text_rect)\r\n\r\n\r\ndef levels_screen():\r\n    y, x = 200, 310\r\n    for _ in range(levels // 4):\r\n        for _ in range(4):\r\n            pygame.draw.rect(screen, (255, 175, 24), (x, y, 100, 100))\r\n            x += 120\r\n        x = 310\r\n        y += 120\r\n    for _ in range(levels % 4):\r\n        pygame.draw.rect(screen, (255, 175, 24), (x, y, 100, 100))\r\n        x += 120\r\n    font = pygame.font.Font(None, 70)\r\n    y, x = 230, 340\r\n    for text in range(1, levels + 1):\r\n        string_rendered = font.render(str(text), 1, (255, 255, 255))\r\n        text_rect = string_rendered.get_rect()\r\n        text_rect.top = y\r\n        text_rect.x = x\r\n        screen.blit(string_rendered, text_rect)\r\n        x += 120\r\n        if text % 4 == 0:\r\n            y += 120\r\n            x = 340\r\n\r\n\r\ndef start_levels_menu():\r\n    global condition\r\n    condition = 'levels'\r\n\r\n\r\ndef click_check(coords):\r\n    for ind, button in enumerate(BUTTONS_COORDS):\r\n        if (button[0] < coords[0] < button[0] + button[2] and\r\n                button[1] < coords[1] < button[1] + button[3]):\r\n            if ind == 0:\r\n                pass\r\n            elif ind == 1:\r\n                start_levels_menu()\r\n\r\n\r\nif __name__ == '__main__':\r\n    running = True\r\n    while running:\r\n        for event in pygame.event.get():\r\n            if event.type == pygame.QUIT:\r\n                running = False\r\n            elif event.type == pygame.MOUSEBUTTONDOWN:\r\n                click_check(event.pos)\r\n\r\n        screen.fill((117, 66, 61))\r\n\r\n        # fon = pygame.transform.scale(load_image('fon.jpg'), (WIDTH, HEIGHT))\r\n        # screen.blit(fon, (0, 0))\r\n        if condition == 'menu':\r\n            menu_screen()\r\n        else:\r\n            levels_screen()\r\n\r\n        pygame.display.flip()\r\n\r\nterminate()\r\n
+===================================================================
+diff --git a/main_menu.py b/main_menu.py
+--- a/main_menu.py	
++++ b/main_menu.py	
+@@ -2,15 +2,16 @@
+ import os
+ import sys
+ 
++
+ pygame.init()
+ 
+ WIDTH, HEIGHT = 1080, 720
+-BUTTONS_COORDS = [[390, 300, 300, 100],
+-                  [390, 450, 300, 100],
+-                  [1000, 640, 60, 60]]
+ 
+ screen = pygame.display.set_mode((WIDTH, HEIGHT))
++clock = pygame.time.Clock()
+ 
++btn_menu_sprites = pygame.sprite.Group()
++btn_levels_sprites = pygame.sprite.Group()
+ levels_sprites = pygame.sprite.Group()
+ 
+ condition = 'menu'
+@@ -23,7 +24,7 @@
+ 
+ 
+ def load_image(name, color_key=None):
+-    fullname = os.path.join('data', name)
++    fullname = os.path.join('assets', name)
+     try:
+         image = pygame.image.load(fullname)#.convert()
+     except pygame.error as message:
+@@ -39,46 +40,84 @@
+     return image
+ 
+ 
+-def menu_screen():
+-    for button in BUTTONS_COORDS:
+-        pygame.draw.rect(screen, (255, 175, 24),
+-                         (button[0], button[1], button[2], button[3]))
+-    buttons_text = {'Новая игра': [410, 330, 1],
+-                    'Уровни': [440, 480, 1],
+-                    'Продолжить': [394, 330, 0]}
+-    font = pygame.font.Font(None, 50)
+-    for button in buttons_text:
+-        if buttons_text[button][2]:
+-            string_rendered = font.render(button, 1, (255, 255, 255))
++btns_positions = {'Новая игра': [390, 300, 300, 100],
++                  'Продолжить': [390, 300, 300, 100],
++                  'Уровни': [390, 450, 300, 100],
++                  'laud_on': [1000, 640, 60, 60],
++                  'laud_off': [1000, 640, 60, 60]
++                  }
++
++btns_levels_pos = [[177, 179, 100, 100], [300, 364, 100, 100], [563, 257, 100, 100],
++                   [730, 434, 100, 100], [884, 253, 100, 100]]
++circles_pos = [[210, 287], [216, 327], [235, 364], [267, 395], [400, 404], [435, 375],
++               [462, 336], [491, 305], [530, 287], [668, 294], [689, 327],
++               [679, 368], [668, 409], [666, 446], [694, 471], [833, 472],
++               [866, 453], [895, 430], [917, 355], [913, 394]]
++
++btns = {'Новая игра': load_image('buttons/300x100_btn.png'),
++        'Продолжить': load_image('buttons/300x100_btn.png'),
++        'Уровни': load_image('buttons/300x100_btn.png'),
++        '100x100': load_image('buttons/100x100_btn.png'),
++        'circle': load_image('buttons/circle.png'),
++        'laud_on': load_image('buttons/60x60_btn_laud_on.png'),
++        'laud_off': load_image('buttons/60x60_btn_laud_off.png'),
++        }
++
++font_positions = {'Новая игра': [420, 327],
++                  'Продолжить': [410, 327],
++                  'Уровни': [464, 477],
++                  }
++
++btns_now = ['Новая игра', 'Уровни', 'laud_off']
++fonts_now = ['Новая игра', 'Уровни']
++
++
++class Menu:
++    def __init__(self):
++        fon = pygame.transform.scale(load_image('fon/bg_logo.png'), (WIDTH, HEIGHT))
++        screen.blit(fon, (0, 0))
++
++        for btn in btns_now:
++            Button(btns[btn], btns_positions[btn], btn_menu_sprites)
++        btn_menu_sprites.draw(screen)
++        btn_menu_sprites.update()
++
++        font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 53)
++        for button in fonts_now:
++            string_rendered = font.render(button, 3, (122, 63, 0))
+             text_rect = string_rendered.get_rect()
+-            text_rect.top = buttons_text[button][1]
+-            text_rect.x = buttons_text[button][0]
++            text_rect.top = font_positions[button][1]
++            text_rect.x = font_positions[button][0]
+             screen.blit(string_rendered, text_rect)
+ 
+ 
+-def levels_screen():
+-    y, x = 200, 310
+-    for _ in range(levels // 4):
+-        for _ in range(4):
+-            pygame.draw.rect(screen, (255, 175, 24), (x, y, 100, 100))
+-            x += 120
+-        x = 310
+-        y += 120
+-    for _ in range(levels % 4):
+-        pygame.draw.rect(screen, (255, 175, 24), (x, y, 100, 100))
+-        x += 120
+-    font = pygame.font.Font(None, 70)
+-    y, x = 230, 340
+-    for text in range(1, levels + 1):
+-        string_rendered = font.render(str(text), 1, (255, 255, 255))
+-        text_rect = string_rendered.get_rect()
+-        text_rect.top = y
+-        text_rect.x = x
+-        screen.blit(string_rendered, text_rect)
+-        x += 120
+-        if text % 4 == 0:
+-            y += 120
+-            x = 340
++class LevelsMenu:
++    def __init__(self):
++        fon = pygame.transform.scale(load_image('fon/bg.png'), (WIDTH, HEIGHT))
++        screen.blit(fon, (0, 0))
++
++        Button(btns[btns_now[2]], btns_positions[btns_now[2]], btn_levels_sprites)
++        for circle in circles_pos:
++            Button(btns['circle'], circle, btn_levels_sprites)
++        for btn in btns_levels_pos:
++            Button(btns['100x100'], btn, btn_levels_sprites)
++        btn_levels_sprites.draw(screen)
++        btn_levels_sprites.update()
++
++        font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 70)
++        for button in range(1, 6):
++            string_rendered = font.render(str(button), 3, (122, 63, 0))
++            text_rect = string_rendered.get_rect()
++            text_rect.top = btns_levels_pos[button - 1][1] + 20
++            text_rect.x = btns_levels_pos[button - 1][0] + 35
++            screen.blit(string_rendered, text_rect)
++
++
++class Button(pygame.sprite.Sprite):
++    def __init__(self, image, coords, group):
++        super().__init__(group)
++        self.image = image
++        self.rect = self.image.get_rect().move(coords[0], coords[1])
+ 
+ 
+ def start_levels_menu():
+@@ -86,14 +125,25 @@
+     condition = 'levels'
+ 
+ 
++def laud_control():
++    if btns_now[2] == 'laud_off':
++        btns_now[2] = 'laud_on'
++    else:
++        btns_now[2] = 'laud_off'
++
++
+ def click_check(coords):
+-    for ind, button in enumerate(BUTTONS_COORDS):
+-        if (button[0] < coords[0] < button[0] + button[2] and
+-                button[1] < coords[1] < button[1] + button[3]):
+-            if ind == 0:
+-                pass
+-            elif ind == 1:
++    for ind, button in enumerate(btns_positions):
++        btn = btns_positions[button]
++        if (btn[0] < coords[0] < btn[0] + btn[2] and
++                btn[1] < coords[1] < btn[1] + btn[3]):
++            if ind == 0 or ind == 1:
++                break
++            elif ind == 2:
+                 start_levels_menu()
++            elif ind == 3 or ind == 4:
++                laud_control()
++                break
+ 
+ 
+ if __name__ == '__main__':
+@@ -105,15 +155,12 @@
+             elif event.type == pygame.MOUSEBUTTONDOWN:
+                 click_check(event.pos)
+ 
+-        screen.fill((117, 66, 61))
+-
+-        # fon = pygame.transform.scale(load_image('fon.jpg'), (WIDTH, HEIGHT))
+-        # screen.blit(fon, (0, 0))
+         if condition == 'menu':
+-            menu_screen()
+-        else:
+-            levels_screen()
++            Menu()
++        elif condition == 'levels':
++            LevelsMenu()
+ 
+         pygame.display.flip()
++        clock.tick(15)
+ 
+ terminate()
