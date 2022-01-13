@@ -292,11 +292,10 @@ class Board:
                 self.horizontal_reduce()
                 self.vertical_reduce()
             ins.active = False
-            self.c1, self.c2 = None, None
+            # self.c1, self.c2 = None, None
         instrument_pad.active_instrument = None
 
     def on_click(self, cell):
-        self.tools_into_battle(cell)
         self.global_del_list = []
         if self.c1 == (None, None) and self.c2 == (None, None):
             self.c1 = cell
@@ -366,6 +365,7 @@ class Board:
                 move_pad.minus()
                 board.horizontal_reduce()
                 board.vertical_reduce()
+        self.tools_into_battle(cell)
 
     def get_cell(self, mouse_pos):
         cell_x = (mouse_pos[0] - self.left) // self.cell_size
