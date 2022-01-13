@@ -1,7 +1,7 @@
 import pygame
 import os
 import sys
-# from level_generator import GamePlace
+from level_generator import GamePlace, Button
 
 
 pygame.init()
@@ -17,6 +17,8 @@ levels_sprites = pygame.sprite.Group()
 
 
 class Main:
+    btns_now = ['Начать игру', 'Уровни', 'laud_off', 'back_btn']
+
     def __init__(self):
         self.condition = 'menu'
 
@@ -44,8 +46,6 @@ class Main:
                             [462, 336], [491, 305], [530, 287], [668, 294], [689, 327],
                             [679, 368], [668, 409], [666, 446], [694, 471], [833, 472],
                             [866, 453], [895, 430], [917, 355], [913, 394]]
-
-        self.btns_now = ['Начать игру', 'Уровни', 'laud_off', 'back_btn']
 
     def terminate(self):
         pygame.quit()
@@ -92,10 +92,14 @@ class Main:
 class Menu(Main):
     def __init__(self):
         super().__init__()
+
+    def render(self):
         fon = pygame.transform.scale(self.load_image('fon/bg_logo.png'), (WIDTH, HEIGHT))
         screen.blit(fon, (0, 0))
 
         for btn in self.btns_now[:-1]:
+            if btn == 'loud_on':
+                print(1)
             Button(self.btns[btn], self.btns_positions[btn], btn_menu_sprites)
         btn_menu_sprites.draw(screen)
         btn_menu_sprites.update()
@@ -112,6 +116,8 @@ class Menu(Main):
 class LevelsMenu(Main):
     def __init__(self):
         super().__init__()
+
+    def render(self):
         fon = pygame.transform.scale(self.load_image('fon/bg.png'), (WIDTH, HEIGHT))
         screen.blit(fon, (0, 0))
 
@@ -133,13 +139,6 @@ class LevelsMenu(Main):
             screen.blit(string_rendered, text_rect)
 
 
-class Button(pygame.sprite.Sprite):
-    def __init__(self, image, coords, group):
-        super().__init__(group)
-        self.image = image
-        self.rect = self.image.get_rect().move(coords[0], coords[1])
-
-
 main = Main()
 if __name__ == '__main__':
     running = True
@@ -151,11 +150,11 @@ if __name__ == '__main__':
                 main.click_check_levels_menu(event.pos)
 
         if main.condition == 'menu':
-            Menu()
+            Menu().render()
         elif main.condition == 'levels':
-            LevelsMenu()
+            LevelsMenu().render()
         elif main.condition == 'game':
-            GamePlace()
+            GamePlace(main).render()
 
         pygame.display.flip()
         clock.tick(15)

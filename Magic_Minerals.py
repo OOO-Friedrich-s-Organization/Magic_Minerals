@@ -85,8 +85,6 @@ def draw_instruments():
     pygame.draw.rect(screen, pygame.Color('brown'), (630, 130, 90, 360), 0)
     pygame.draw.rect(screen, pygame.Color('wheat'), (630, 130, 90, 360), 3)
     for i in range(4):
-        pygame.draw.ellipse(screen, pygame.Color('lightsalmon'), (630, 130 + 90 * i, 90, 90), 0)
-        pygame.draw.ellipse(screen, pygame.Color('wheat'), (630, 130 + 90 * i, 90, 90), 2)
         Instrument(instruments[i], 0, i)
     instruments_group.draw(screen)
 
