@@ -317,6 +317,7 @@ class Board:
             if c1 not in self.ore_coords and c2 not in self.ore_coords:
                 if c1[1] == c2[1] and abs(c1[0] - c2[0]) == 1:
                     line1 = list(self.board[c1[1]])
+                    print(line1)
                     stone1, stone2 = line1[c1[0]], line1[c2[0]]
                     if c1[0] < c2[0]:
                         del line1[c1[0]]
@@ -330,6 +331,7 @@ class Board:
                         line1.insert(c2[0], stone1)
                     line1 = ''.join(line1)
                     old_line = self.board[self.c1[1]][:]
+                    print(self.board[self.c1[1]][:])
                     self.board[self.c1[1]] = line1
                     # i, j = self.c1[1], 0
                     # count = 1
@@ -347,8 +349,8 @@ class Board:
                     #     else:
                     #         cur_st = self.board[i][j]
                     # if count >= 3:
-                    self.horizontal_reduce()
-                    self.vertical_reduce()
+                    # self.horizontal_reduce()
+                    # self.vertical_reduce()
                     # else:
                     #     self.board[self.c1[1]] = old_line
                 elif c1[0] == c2[0] and abs(c1[1] - c2[1]) == 1:
@@ -476,33 +478,33 @@ class Fon(pygame.sprite.Sprite):
         self.rect = self.image.get_rect().move(0, 0)
 
 
-class AnimatedSprite(pygame.sprite.Sprite):
-    def __init__(self, sheet, columns, rows, x, y):
-        super().__init__(animated_group)
-        self.frames = []
-        self.cut_sheet(sheet, columns, rows)
-        self.cur_frame = 0
-        self.image = pygame.transform.scale(self.frames[self.cur_frame], (90, 90))
-        self.rect = self.rect.move(x, y)
-        self.i = 0
-
-    def cut_sheet(self, sheet, columns, rows):
-        self.rect = pygame.Rect(0, 0, sheet.get_width() // columns,
-                                sheet.get_height() // rows)
-        for j in range(rows):
-            for i in range(columns):
-                frame_location = (self.rect.w * i, self.rect.h * j)
-                self.frames.append(sheet.subsurface(pygame.Rect(
-                    frame_location, self.rect.size)))
-
-    def update(self):
-        if self.i < len(self.frames):
-            self.cur_frame = (self.cur_frame + 1) % len(self.frames)
-            self.image = pygame.transform.scale(self.frames[self.cur_frame], (90, 90))
-            self.i += 1
-        else:
-            self.kill()
-            board.on_click(board.c1)
+# class AnimatedSprite(pygame.sprite.Sprite):
+#     def __init__(self, sheet, columns, rows, x, y):
+#         super().__init__(animated_group)
+#         self.frames = []
+#         self.cut_sheet(sheet, columns, rows)
+#         self.cur_frame = 0
+#         self.image = pygame.transform.scale(self.frames[self.cur_frame], (90, 90))
+#         self.rect = self.rect.move(x, y)
+#         self.i = 0
+#
+#     def cut_sheet(self, sheet, columns, rows):
+#         self.rect = pygame.Rect(0, 0, sheet.get_width() // columns,
+#                                 sheet.get_height() // rows)
+#         for j in range(rows):
+#             for i in range(columns):
+#                 frame_location = (self.rect.w * i, self.rect.h * j)
+#                 self.frames.append(sheet.subsurface(pygame.Rect(
+#                     frame_location, self.rect.size)))
+#
+#     def update(self):
+#         if self.i < len(self.frames):
+#             self.cur_frame = (self.cur_frame + 1) % len(self.frames)
+#             self.image = pygame.transform.scale(self.frames[self.cur_frame], (90, 90))
+#             self.i += 1
+#         else:
+#             self.kill()
+#             board.on_click(board.c1)
 
 
 class Checkmark(pygame.sprite.Sprite):
@@ -521,17 +523,6 @@ class Stone(pygame.sprite.Sprite):
             10 + tile_width * pos_x, 10 + tile_height * pos_y)
 
 
-class NecessaryStone(pygame.sprite.Sprite):
-    def __init__(self, tile_type, pos_x, pos_y, need):
-        super().__init__(necessary_stones_group, all_sprites)
-        self.tile_type = tile_type
-        self.image = stone_images[tile_type]
-        self.text = [0, need]
-        self.rect = self.image.get_rect().move(
-            10 + tile_width * pos_x, 10 + tile_height * pos_y)
-        self.x, self.y = pos_x, pos_y
-
-
 class Instrument(pygame.sprite.Sprite):
     def __init__(self, tile_type, pos_x, pos_y):
         super().__init__(instruments_group, all_sprites)
@@ -542,6 +533,17 @@ class Instrument(pygame.sprite.Sprite):
             630, 130 + 90 * pos_y)
         self.active = False
         self.used = False
+
+
+class NecessaryStone(pygame.sprite.Sprite):
+    def __init__(self, tile_type, pos_x, pos_y, need):
+        super().__init__(necessary_stones_group, all_sprites)
+        self.tile_type = tile_type
+        self.image = stone_images[tile_type]
+        self.text = [0, need]
+        self.rect = self.image.get_rect().move(
+            10 + tile_width * pos_x, 10 + tile_height * pos_y)
+        self.x, self.y = pos_x, pos_y
 
 
 class InstrumentPad:

@@ -1,6 +1,7 @@
 import pygame
 import os
 import sys
+from test import Board
 
 
 pygame.init()
@@ -21,6 +22,8 @@ field_minerals_and_stones = pygame.sprite.Group()
 
 instruments_create = []
 paneles_create = []
+
+board = Board()
 
 
 class GamePlace:
@@ -108,7 +111,7 @@ class GamePlace:
 
         self.render_bg_panels()
         self.render_instruments()
-        self.draw_cell_field(level)
+        self.draw_cell_field()
 
         bg_panels_sprites.draw(screen)
         btn_sprites.draw(screen)
@@ -137,8 +140,10 @@ class GamePlace:
             if instruments_create[ind].used:
                 Button(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
 
-    def draw_cell_field(self, level):
+    def draw_cell_field(self):
         if self.was_move:
+            field.empty()
+            field_minerals_and_stones.empty()
             for ind_y, row in enumerate(self.board):
                 for ind_x, elem in enumerate(row):
                     if elem != '_':
@@ -156,20 +161,31 @@ class GamePlace:
 
     def board_loader(self, level):
         with open(f'assets/levels/level_{level}.txt', 'r', encoding='utf-8') as level_file:
-            self.board = [list(line.rstrip('\n')) for line in level_file.readlines()]
+            self.board = [line.rstrip('\n') for line in level_file.readlines()]
 
     def click_check(self, coords):
-        for panel in paneles_create:
+        for ind, panel in enumerate(paneles_create):
             if (panel.rect.x < coords[0] < panel.rect.x + panel.rect.w and
                     panel.rect.y < coords[1] < panel.rect.y + panel.rect.h):
-                for instr in instruments_create:
-                    if (instr.rect.x < coords[0] < instr.rect.x + instr.rect.w and
-                            instr.rect.y < coords[1] < instr.rect.y + instr.rect.h):
-                        if instr.active:
-                            instr.active = False
-                        else:
-                            instr.active = True
-                        break
+                if ind == 1:
+                    for instr in instruments_create:
+                        if (instr.rect.x < coords[0] < instr.rect.x + instr.rect.w and
+                                instr.rect.y < coords[1] < instr.rect.y + instr.rect.h):
+                            if instr.active:
+                                instr.active = False
+                            else:
+                                instr.active = True
+                            break
+                else:
+                    self.board = board.on_click(self.get_cell(coords), self.board)
+                    self.was_move = True
+
+    def get_cell(self, mouse_pos):
+        cell_x = (mouse_pos[0] - 120) // 75
+        cell_y = (mouse_pos[1] - 30) // 75
+        if cell_x < 0 or cell_x >= WIDTH or cell_y < 0 or cell_y >= HEIGHT:
+            return None
+        return cell_x, cell_y
 
 
 class Button(pygame.sprite.Sprite):
@@ -189,6 +205,17 @@ class Instrument(pygame.sprite.Sprite):
             825, 75 + 110 * pos_y)
         self.active = False
         self.used = False
+
+
+# class NecessaryStone(pygame.sprite.Sprite):
+#     def __init__(self, tile_type, pos_x, pos_y, need):
+#         super().__init__(necessary_stones_group, all_sprites)
+#         self.tile_type = tile_type
+#         self.image = stone_images[tile_type]
+#         self.text = [0, need]
+#         self.rect = self.image.get_rect().move(
+#             10 + tile_width * pos_x, 10 + tile_height * pos_y)
+#         self.x, self.y = pos_x, pos_y
 
 
 class AnimatedSprite(pygame.sprite.Sprite):

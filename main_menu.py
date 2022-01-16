@@ -81,13 +81,13 @@ class Main:
                         menu.first_time = True
                 elif ind == 4:
                     if self.condition == 'menu':
-                        Menu().click_check(coords)
+                        menu.click_check(coords)
                         break
                     elif self.condition == 'levels':
-                        LevelsMenu().click_check(coords)
+                        levels.click_check(coords)
                         break
                     elif self.condition == 'game':
-                        GamePlace(main).click_check(coords)
+                        game.click_check(coords)
                         break
 
     def laud_control(self):
@@ -185,7 +185,7 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            elif event.type == pygame.MOUSEBUTTONDOWN:
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 main.click_check_main(event.pos)
 
         if main.condition == 'menu':
