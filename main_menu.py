@@ -67,20 +67,28 @@ class Main:
             image = image.convert_alpha()
         return image
 
-    def click_check_levels_menu(self, coords):
+    def click_check_main(self, coords):
         for ind, button in enumerate(self.btns_positions):
-            btn = self.btns_positions[button]
-            if (btn[0] < coords[0] < btn[0] + btn[2] and
-                    btn[1] < coords[1] < btn[1] + btn[3]):
-                if ind == 0:
-                    self.condition = 'game'
-                elif ind == 1:
-                    self.condition = 'levels'
-                elif ind == 2 or ind == 3:
-                    self.laud_control()
-                    break
+            if ind >= 2:
+                btn = self.btns_positions[button]
+                if (btn[0] < coords[0] < btn[0] + btn[2] and
+                        btn[1] < coords[1] < btn[1] + btn[3]):
+                    if ind == 2 or ind == 3:
+                        self.laud_control()
+                        break
+                    elif ind == 4:
+                        self.condition = 'menu'
+                        menu.first_time = True
                 elif ind == 4:
-                    self.condition = 'menu'
+                    if self.condition == 'menu':
+                        Menu().click_check(coords)
+                        break
+                    elif self.condition == 'levels':
+                        LevelsMenu().click_check(coords)
+                        break
+                    elif self.condition == 'game':
+                        GamePlace(main).click_check(coords)
+                        break
 
     def laud_control(self):
         if 'laud_off' in self.btns_now:
@@ -92,10 +100,13 @@ class Main:
 class Menu(Main):
     def __init__(self):
         super().__init__()
+        self.fon = pygame.transform.scale(self.load_image('fon/bg_logo.png'), (WIDTH, HEIGHT))
+        self.first_time = True
 
     def render(self):
-        fon = pygame.transform.scale(self.load_image('fon/bg_logo.png'), (WIDTH, HEIGHT))
-        screen.blit(fon, (0, 0))
+        if self.first_time:
+            screen.blit(self.fon, (0, 0))
+            self.first_time = False
 
         for btn in self.btns_now[:-1]:
             if btn == 'loud_on':
@@ -112,14 +123,31 @@ class Menu(Main):
             text_rect.x = self.font_positions[button][0]
             screen.blit(string_rendered, text_rect)
 
+    def click_check(self, coords):
+        for ind, button in enumerate(self.btns_positions):
+            if ind < 2:
+                btn = self.btns_positions[button]
+                if (btn[0] < coords[0] < btn[0] + btn[2] and
+                        btn[1] < coords[1] < btn[1] + btn[3]):
+                    if ind == 0:
+                        main.condition = 'game'
+                        game.first_time = True
+                    elif ind == 1:
+                        main.condition = 'levels'
+                        levels.first_time = True
+
 
 class LevelsMenu(Main):
     def __init__(self):
         super().__init__()
+        self.fon = pygame.transform.scale(self.load_image('fon/bg.png'), (WIDTH, HEIGHT))
+        self.first_time = True
 
     def render(self):
-        fon = pygame.transform.scale(self.load_image('fon/bg.png'), (WIDTH, HEIGHT))
-        screen.blit(fon, (0, 0))
+        screen.blit(self.fon, (0, 0))
+        if self.first_time:
+            screen.blit(self.fon, (0, 0))
+            self.first_time = False
 
         for btn in self.btns_now[2:]:
             Button(self.btns[btn], self.btns_positions[btn], btn_levels_sprites)
@@ -138,8 +166,19 @@ class LevelsMenu(Main):
             text_rect.x = self.btns_levels_pos[button - 1][0] + 35
             screen.blit(string_rendered, text_rect)
 
+    def click_check(self, coords):
+        for ind, button in enumerate(self.btns_positions):
+            if ind < 2:
+                btn = self.btns_positions[button]
+                if (btn[0] < coords[0] < btn[0] + btn[2] and
+                        btn[1] < coords[1] < btn[1] + btn[3]):
+                    pass
+
 
 main = Main()
+menu = Menu()
+levels = LevelsMenu()
+game = GamePlace(main)
 if __name__ == '__main__':
     running = True
     while running:
@@ -147,16 +186,16 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                main.click_check_levels_menu(event.pos)
+                main.click_check_main(event.pos)
 
         if main.condition == 'menu':
-            Menu().render()
+            menu.render()
         elif main.condition == 'levels':
-            LevelsMenu().render()
+            levels.render()
         elif main.condition == 'game':
-            GamePlace(main).render()
+            game.render(1)
 
         pygame.display.flip()
-        clock.tick(15)
+        clock.tick(30)
 
 main.terminate()
