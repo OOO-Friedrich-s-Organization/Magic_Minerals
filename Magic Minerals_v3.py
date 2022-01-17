@@ -545,7 +545,7 @@ class Board:
 
     def get_click(self, mouse_pos):
         cell = self.get_cell(mouse_pos)
-        if cell:
+        if cell and self.board[cell[0]][cell[1]] != '0':
             self.on_click(cell)
 
     # def check_move_possibility(self, old_board):
