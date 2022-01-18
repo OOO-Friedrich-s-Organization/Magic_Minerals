@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="stones_edit">
+    <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="stones_can_move">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_43_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_43__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_44_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_44__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Magic_Minerals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Magic_Minerals.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/level_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +54,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python/Винг" />
   </component>
   <component name="RunManager" selected="Python.main_menu">
     <configuration name="Magic_Minerals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -317,7 +319,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642348138944</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="stones_can_move">
+      <created>1642354594118</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1642354594118</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -367,6 +376,7 @@
     <MESSAGE value="pole_zag2" />
     <MESSAGE value="pole_zag4" />
     <MESSAGE value="stones_edit" />
-    <option name="LAST_COMMIT_MESSAGE" value="stones_edit" />
+    <MESSAGE value="stones_can_move" />
+    <option name="LAST_COMMIT_MESSAGE" value="stones_can_move" />
   </component>
 </project>

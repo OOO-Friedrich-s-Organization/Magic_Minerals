@@ -15,6 +15,8 @@ btn_menu_sprites = pygame.sprite.Group()
 btn_levels_sprites = pygame.sprite.Group()
 levels_sprites = pygame.sprite.Group()
 
+last_level = 1
+
 
 class Main:
     btns_now = ['Начать игру', 'Уровни', 'laud_off', 'back_btn']
@@ -131,7 +133,7 @@ class Menu(Main):
                         btn[1] < coords[1] < btn[1] + btn[3]):
                     if ind == 0:
                         main.condition = 'game'
-                        game.first_time = True
+                        game_start()
                     elif ind == 1:
                         main.condition = 'levels'
                         levels.first_time = True
@@ -178,7 +180,14 @@ class LevelsMenu(Main):
 main = Main()
 menu = Menu()
 levels = LevelsMenu()
-game = GamePlace(main)
+game = 0
+
+
+def game_start():
+    global game
+    game = GamePlace(main)
+
+
 if __name__ == '__main__':
     running = True
     while running:
@@ -193,7 +202,7 @@ if __name__ == '__main__':
         elif main.condition == 'levels':
             levels.render()
         elif main.condition == 'game':
-            game.render(1)
+            game.render(last_level)
 
         pygame.display.flip()
         clock.tick(30)

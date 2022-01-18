@@ -31,6 +31,9 @@ class GamePlace:
         self.parent = parent
         self.first_time = True
         self.was_move = True
+        self.move_now = False
+        self.move_wasnt_done = False
+        self.move_x = self.move_y = 0
 
         self.fon = pygame.transform.scale(self.parent.load_image('fon/bg.png'), (WIDTH, HEIGHT))
 
@@ -99,6 +102,10 @@ class GamePlace:
                       'x2': self.parent.load_image('cells/cell_blue.png'),
                       'ore': self.parent.load_image('cells/cell_green.png'),
                       '$': self.parent.load_image('cells/cell_pink.png'),
+                      'sel1': self.parent.load_image('cells/cell_sel.png'),
+                      'sel2': self.parent.load_image('cells/cell_sel2.png'),
+                      'x2_sel1': self.parent.load_image('cells/cell_blue_sel.png'),
+                      'x2_sel2': self.parent.load_image('cells/cell_blue_sel2.png'),
                       }
 
     def render(self, level):
@@ -141,23 +148,58 @@ class GamePlace:
                 Button(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
 
     def draw_cell_field(self):
-        if self.was_move:
+        if self.was_move or self.move_now:
             field.empty()
             field_minerals_and_stones.empty()
+            if self.move_now:
+                self.stone_move()
             for ind_y, row in enumerate(self.board):
                 for ind_x, elem in enumerate(row):
                     if elem != '_':
                         cell = 'simple'
+                        if (ind_x, ind_y) == board.c1 and not self.move_wasnt_done:
+                            cell = 'sel1'
+                        elif (ind_x, ind_y) == board.c2 and not self.move_wasnt_done:
+                            cell = 'sel2'
                         if elem == '$':
                             cell = '$'
                         elif int(elem) >= 7:
                             cell = 'ore'
                         elif elem == '??????????????????????????????????????????????????????????????????':
                             cell = 'x2'
+                            if (ind_x, ind_y) == board.c1 and not self.move_wasnt_done:
+                                cell = 'x2_sel1'
+                            elif (ind_x, ind_y) == board.c2 and not self.move_wasnt_done:
+                                cell = 'x2_sel2'
                         Button(self.cells[cell], [120 + 75 * ind_x, 30 + 75 * ind_y], field)
+                        move_x = move_y = 0
+                        if (ind_x, ind_y) == board.c1:
+                            move_x += self.move_x
+                            move_y += self.move_y
+                        elif (ind_x, ind_y) == board.c2:
+                            move_x -= self.move_x
+                            move_y -= self.move_y
                         Button(self.stone_images[elem],
-                               [121 + 75 * ind_x, 31 + 75 * ind_y], field_minerals_and_stones)
+                               [121 + 75 * ind_x + move_x,
+                                31 + 75 * ind_y + move_y], field_minerals_and_stones)
             self.was_move = False
+
+    def stone_move(self):
+        if abs(self.move_x) == 70 or abs(self.move_y) == 70:
+            self.move_x = self.move_y = 0
+            self.move_now = False
+            self.was_move = True
+            self.board, self.old_board = self.old_board[:], self.board[:]
+        elif board.c1[0] == board.c2[0]:
+            if board.c1[1] < board.c2[1]:
+                self.move_y += 10
+            else:
+                self.move_y -= 10
+        elif board.c1[1] == board.c2[1]:
+            if board.c1[0] < board.c2[0]:
+                self.move_x += 10
+            else:
+                self.move_x -= 10
 
     def board_loader(self, level):
         with open(f'assets/levels/level_{level}.txt', 'r', encoding='utf-8') as level_file:
@@ -177,8 +219,17 @@ class GamePlace:
                                 instr.active = True
                             break
                 else:
-                    self.board = board.on_click(self.get_cell(coords), self.board)
-                    self.was_move = True
+                    if self.get_click(coords) and not self.move_now:
+                        self.old_board = self.board[:]
+                        if self.move_wasnt_done:
+                            self.move_wasnt_done = False
+                        self.board = board.on_click(self.get_cell(coords), self.board)
+                        if type(board.c1[0]) == int and type(board.c2[0]) == int and self.board == self.old_board:
+                            self.move_wasnt_done = True
+                        elif type(board.c1[0]) == int and type(board.c2[0]) == int and self.board != self.old_board:
+                            self.move_now = True
+                            self.board, self.old_board = self.old_board[:], self.board[:]
+                        self.was_move = True
 
     def get_cell(self, mouse_pos):
         cell_x = (mouse_pos[0] - 120) // 75
@@ -186,6 +237,12 @@ class GamePlace:
         if cell_x < 0 or cell_x >= WIDTH or cell_y < 0 or cell_y >= HEIGHT:
             return None
         return cell_x, cell_y
+
+    def get_click(self, mouse_pos):
+        cell = self.get_cell(mouse_pos)
+        if cell:
+            return True
+        return False
 
 
 class Button(pygame.sprite.Sprite):
