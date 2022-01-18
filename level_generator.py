@@ -138,10 +138,11 @@ class GamePlace:
                 paneles_create.append(Button(self.bg_panels[bg], self.bg_panels_pos[bg], bg_panels_sprites))
 
     def render_instruments(self):
+        if self.first_time:
+            instruments_create.clear()
+            instruments_group.empty()
         for ind, instrument in enumerate(self.instruments):
             if self.first_time:
-                instruments_create.clear()
-                instruments_group.empty()
                 instruments_create.append(Instrument(instrument, ind,
                                                      self.instruments[instrument], self.animations[instrument]))
             if instruments_create[ind].active:
@@ -152,6 +153,8 @@ class GamePlace:
                 Button(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
 
     def draw_cell_field(self):
+        if self.first_time:
+            board.c1, board.c2 = (None, None), (None, None)
         if self.was_move or self.move_now:
             field.empty()
             field_minerals_and_stones.empty()

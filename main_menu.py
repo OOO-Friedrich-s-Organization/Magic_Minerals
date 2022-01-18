@@ -81,6 +81,7 @@ class Main:
                     elif ind == 4:
                         self.condition = 'menu'
                         menu.first_time = True
+                        game_start()
                 elif ind == 4:
                     if self.condition == 'menu':
                         menu.click_check(coords)
@@ -134,7 +135,6 @@ class Menu(Main):
                     if ind == 0:
                         main.condition = 'game'
                         game_start()
-                        game.first_time = True
                     elif ind == 1:
                         main.condition = 'levels'
                         levels.first_time = True
