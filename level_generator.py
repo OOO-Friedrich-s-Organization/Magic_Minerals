@@ -132,12 +132,16 @@ class GamePlace:
 
     def render_bg_panels(self):
         if self.first_time:
+            bg_panels_sprites.empty()
+            paneles_create.clear()
             for bg in self.bg_panels:
                 paneles_create.append(Button(self.bg_panels[bg], self.bg_panels_pos[bg], bg_panels_sprites))
 
     def render_instruments(self):
         for ind, instrument in enumerate(self.instruments):
             if self.first_time:
+                instruments_create.clear()
+                instruments_group.empty()
                 instruments_create.append(Instrument(instrument, ind,
                                                      self.instruments[instrument], self.animations[instrument]))
             if instruments_create[ind].active:

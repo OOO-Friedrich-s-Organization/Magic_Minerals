@@ -134,6 +134,7 @@ class Menu(Main):
                     if ind == 0:
                         main.condition = 'game'
                         game_start()
+                        game.first_time = True
                     elif ind == 1:
                         main.condition = 'levels'
                         levels.first_time = True

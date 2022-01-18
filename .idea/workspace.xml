@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="stones_can_move">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_43_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_43__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_44_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_44__Changes_.xml" beforeDir="false" />
+    <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="wtf">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/level_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu.py" afterDir="false" />
@@ -326,7 +322,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642354594118</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="wtf">
+      <created>1642512289598</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1642512289598</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -377,6 +380,7 @@
     <MESSAGE value="pole_zag4" />
     <MESSAGE value="stones_edit" />
     <MESSAGE value="stones_can_move" />
-    <option name="LAST_COMMIT_MESSAGE" value="stones_can_move" />
+    <MESSAGE value="wtf" />
+    <option name="LAST_COMMIT_MESSAGE" value="wtf" />
   </component>
 </project>
