@@ -2,6 +2,9 @@ import pygame
 import sys
 import os
 
+
+WIDTH, HEIGHT = 1080, 720
+
 first_time = True
 first_time_in_ore = True
 victory = False
@@ -159,16 +162,18 @@ class Board:
     def __init__(self):
         self.c1 = (None, None)
         self.c2 = (None, None)
+        self.width = 8
+        self.height = 8
         self.ore_coords = []
         with open('stones/fall.txt', 'rt') as f:
             file = f.readlines()
         self.queue = list(file[0])
         self.global_del_list = []
 
-    # def next_in_queue(self):
-    #     next = self.queue[0]
-    #     del self.queue[0]
-    #     return next
+    def next_in_queue(self):
+        next = self.queue[0]
+        del self.queue[0]
+        return next
 
     # def find_ores(self):
     #     for y in range(self.height):
@@ -202,38 +207,6 @@ class Board:
     #                     line[ore[1]] = o
     #                     self.board[ore[0]] = ''.join(line)
     #                 next_ore = True
-
-    # def set_view(self, left, top, cell_size):
-    #     self.left = left
-    #     self.top = top
-    #     self.cell_size = cell_size
-
-    # def render(self, screen):
-    #     global first_time_in_ore
-    #     if first_time_in_ore:
-    #         self.find_ores()
-    #         first_time_in_ore = False
-    #     for y in range(self.height):
-    #         for x in range(self.width):
-    #             pygame.draw.rect(screen, pygame.Color('white'),
-    #                              (self.left + x * self.cell_size,
-    #                               self.top + y * self.cell_size,
-    #                               self.cell_size, self.cell_size), 1)
-    #             if self.board[y][x] in ['7', '8', '9']:
-    #                 pygame.draw.rect(screen, pygame.Color('yellowgreen'),
-    #                                  (self.left + x * self.cell_size,
-    #                                   self.top + y * self.cell_size,
-    #                                   self.cell_size, self.cell_size), 0)
-    #             if self.board[y][x] == '$':
-    #                 pygame.draw.rect(screen, pygame.Color('pink'),
-    #                                  (self.left + x * self.cell_size,
-    #                                   self.top + y * self.cell_size,
-    #                                   self.cell_size, self.cell_size), 0)
-    #
-    #     for lst in self.global_del_list:
-    #         for x, y in lst:
-    #             boom = AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-    #                                   3, 1, y * self.cell_size, x * self.cell_size)
 
     # def tools_into_battle(self, cell):
     #     for ins in instrument_quadra:
@@ -302,26 +275,26 @@ class Board:
                     line1 = ''.join(line1)
                     old_line = self.board[self.c1[1]][:]
                     self.board[self.c1[1]] = line1
-                    # i, j = self.c1[1], 0
-                    # count = 1
-                    # cur_st = self.board[i][j]
-                    # while j < self.width:
-                    #     j += 1
-                    #     if j == self.width - 1:
-                    #         break
-                    #     if self.board[i][j] == cur_st:
-                    #         while self.board[i][j] == cur_st:
-                    #             count += 1
-                    #             j += 1
-                    #             if j == self.width - 1:
-                    #                 break
-                    #     else:
-                    #         cur_st = self.board[i][j]
-                    # if count >= 3:
-                    # self.horizontal_reduce()
-                    # self.vertical_reduce()
-                    # else:
-                    #     self.board[self.c1[1]] = old_line
+                    i, j = self.c1[1], 0
+                    count = 1
+                    cur_st = self.board[i][j]
+                    while j < self.width:
+                        j += 1
+                        if j == self.width - 1:
+                            break
+                        if self.board[i][j] == cur_st:
+                            while self.board[i][j] == cur_st:
+                                count += 1
+                                j += 1
+                                if j == self.width - 1:
+                                    break
+                        else:
+                            cur_st = self.board[i][j]
+                    if count >= 3:
+                        self.horizontal_reduce()
+                        # self.vertical_reduce()
+                    else:
+                        self.board[self.c1[1]] = old_line
                 elif c1[0] == c2[0] and abs(c1[1] - c2[1]) == 1:
                     line1, line2 = list(self.board[c1[1]]), list(self.board[c2[1]])
                     stone1, stone2 = line1[c1[0]], line2[c2[0]]
@@ -338,18 +311,6 @@ class Board:
                 # board.vertical_reduce()
         # self.tools_into_battle(cell)
         return self.board
-
-    # def get_cell(self, mouse_pos):
-    #     cell_x = (mouse_pos[0] - self.left) // self.cell_size
-    #     cell_y = (mouse_pos[1] - self.top) // self.cell_size
-    #     if cell_x < 0 or cell_x >= self.width or cell_y < 0 or cell_y >= self.height:
-    #         return None
-    #     return cell_x, cell_y
-
-    # def get_click(self, mouse_pos):
-    #     cell = self.get_cell(mouse_pos)
-    #     if cell:
-    #         self.on_click(cell)
 
     # def check_move_possibility(self, old_board):
     #     i, j = self.c1[1], 0
@@ -373,38 +334,38 @@ class Board:
     #     else:
     #         self.board = old_board
 
-    # def horizontal_reduce(self):
-    #     i, j = 0, 0
-    #     while i < self.height:
-    #         del_list = []
-    #         while j < self.width:
-    #             cur_st = self.board[i][j]
-    #             del_list.append((i, j))
-    #             j += 1
-    #             if j == self.width:
-    #                 break
-    #             if self.board[i][j] == cur_st:
-    #                 while self.board[i][j] == cur_st:
-    #                     del_list.append((i, j))
-    #                     j += 1
-    #                     if j == self.width:
-    #                         break
-    #                 if len(del_list) >= 3:
-    #                     to_statistic(cur_st, len(del_list))
-    #             else:
-    #                 cur_st = self.board[i][j]
-    #                 del_list = []
-    #             if len(del_list) >= 3:
-    #                 self.global_del_list.append(del_list)
-    #                 tmp_line = list(self.board[i])
-    #                 for tpl in del_list:
-    #                     tmp_line[tpl[1]] = self.next_in_queue()
-    #                 tmp_line = ''.join(tmp_line)
-    #                 self.board[i] = tmp_line
-    #                 self.check_near_ores(del_list)
-    #                 del_list = []
-    #         i += 1
-    #         j = 0
+    def horizontal_reduce(self):
+        i, j = 0, 0
+        while i < HEIGHT:
+            del_list = []
+            while j < WIDTH:
+                cur_st = self.board[i][j]
+                del_list.append((i, j))
+                j += 1
+                if j == WIDTH:
+                    break
+                if self.board[i][j] == cur_st:
+                    while self.board[i][j] == cur_st:
+                        del_list.append((i, j))
+                        j += 1
+                        if j == WIDTH:
+                            break
+                    if len(del_list) >= 3:
+                        to_statistic(cur_st, len(del_list))
+                else:
+                    cur_st = self.board[i][j]
+                    del_list = []
+                if len(del_list) >= 3:
+                    self.global_del_list.append(del_list)
+                    tmp_line = list(self.board[i])
+                    for tpl in del_list:
+                        tmp_line[tpl[1]] = self.next_in_queue()
+                    tmp_line = ''.join(tmp_line)
+                    self.board[i] = tmp_line
+                    # self.check_near_ores(del_list)
+                    del_list = []
+            i += 1
+            j = 0
     #
     # def vertical_reduce(self):
     #     i, j = 0, 0
