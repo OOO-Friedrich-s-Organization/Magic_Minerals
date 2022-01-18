@@ -275,26 +275,26 @@ class Board:
                     line1 = ''.join(line1)
                     old_line = self.board[self.c1[1]][:]
                     self.board[self.c1[1]] = line1
-                    i, j = self.c1[1], 0
-                    count = 1
-                    cur_st = self.board[i][j]
-                    while j < self.width:
-                        j += 1
-                        if j == self.width - 1:
-                            break
-                        if self.board[i][j] == cur_st:
-                            while self.board[i][j] == cur_st:
-                                count += 1
-                                j += 1
-                                if j == self.width - 1:
-                                    break
-                        else:
-                            cur_st = self.board[i][j]
-                    if count >= 3:
-                        self.horizontal_reduce()
-                        # self.vertical_reduce()
-                    else:
-                        self.board[self.c1[1]] = old_line
+                    # i, j = self.c1[1], 0
+                    # count = 1
+                    # cur_st = self.board[i][j]
+                    # while j < self.width:
+                    #     j += 1
+                    #     if j == self.width - 1:
+                    #         break
+                    #     if self.board[i][j] == cur_st:
+                    #         while self.board[i][j] == cur_st:
+                    #             count += 1
+                    #             j += 1
+                    #             if j == self.width - 1:
+                    #                 break
+                    #     else:
+                    #         cur_st = self.board[i][j]
+                    # if count >= 3:
+                    self.horizontal_reduce()
+                    self.vertical_reduce()
+                    # else:
+                    #     self.board[self.c1[1]] = old_line
                 elif c1[0] == c2[0] and abs(c1[1] - c2[1]) == 1:
                     line1, line2 = list(self.board[c1[1]]), list(self.board[c2[1]])
                     stone1, stone2 = line1[c1[0]], line2[c2[0]]
@@ -304,8 +304,8 @@ class Board:
                     line2.insert(c1[0], stone1)
                     line1, line2 = ''.join(line1), ''.join(line2)
                     self.board[c1[1]], self.board[c2[1]] = line1, line2
-                    # self.horizontal_reduce()
-                    # self.vertical_reduce()
+                    self.horizontal_reduce()
+                    self.vertical_reduce()
                 # move_pad.minus()
                 # board.horizontal_reduce()
                 # board.vertical_reduce()
@@ -336,22 +336,22 @@ class Board:
 
     def horizontal_reduce(self):
         i, j = 0, 0
-        while i < HEIGHT:
+        while i < self.height:
             del_list = []
-            while j < WIDTH:
+            while j < self.width:
                 cur_st = self.board[i][j]
                 del_list.append((i, j))
                 j += 1
-                if j == WIDTH:
+                if j == self.width:
                     break
                 if self.board[i][j] == cur_st:
                     while self.board[i][j] == cur_st:
                         del_list.append((i, j))
                         j += 1
-                        if j == WIDTH:
+                        if j == self.width:
                             break
-                    if len(del_list) >= 3:
-                        to_statistic(cur_st, len(del_list))
+                    # if len(del_list) >= 3:
+                    #     to_statistic(cur_st, len(del_list))
                 else:
                     cur_st = self.board[i][j]
                     del_list = []
@@ -366,40 +366,40 @@ class Board:
                     del_list = []
             i += 1
             j = 0
-    #
-    # def vertical_reduce(self):
-    #     i, j = 0, 0
-    #     while j < self.height:
-    #         del_list = []
-    #         while i < self.width:
-    #             cur_st = self.board[i][j]
-    #             del_list.append((i, j))
-    #             i += 1
-    #             if i == self.height:
-    #                 break
-    #             if self.board[i][j] == cur_st:
-    #                 while self.board[i][j] == cur_st:
-    #                     del_list.append((i, j))
-    #                     i += 1
-    #                     if i == self.height:
-    #                         break
-    #                 if len(del_list) >= 3:
-    #                     to_statistic(cur_st, len(del_list))
-    #             else:
-    #                 cur_st = self.board[i][j]
-    #                 del_list = []
-    #             if len(del_list) >= 3:
-    #                 # tmp_line = list(self.board[i])
-    #                 self.global_del_list.append(del_list)
-    #                 for tpl in del_list:
-    #                     tmp_line = list(self.board[tpl[0]])
-    #                     tmp_line[tpl[1]] = self.next_in_queue()
-    #                     tmp_line = ''.join(tmp_line)
-    #                     self.board[tpl[0]] = tmp_line
-    #                 self.check_near_ores(del_list)
-    #                 del_list = []
-    #         j += 1
-    #         i = 0
+
+    def vertical_reduce(self):
+        i, j = 0, 0
+        while j < self.height:
+            del_list = []
+            while i < self.width:
+                cur_st = self.board[i][j]
+                del_list.append((i, j))
+                i += 1
+                if i == self.height:
+                    break
+                if self.board[i][j] == cur_st:
+                    while self.board[i][j] == cur_st:
+                        del_list.append((i, j))
+                        i += 1
+                        if i == self.height:
+                            break
+                    # if len(del_list) >= 3:
+                    #     to_statistic(cur_st, len(del_list))
+                else:
+                    cur_st = self.board[i][j]
+                    del_list = []
+                if len(del_list) >= 3:
+                    # tmp_line = list(self.board[i])
+                    self.global_del_list.append(del_list)
+                    for tpl in del_list:
+                        tmp_line = list(self.board[tpl[0]])
+                        tmp_line[tpl[1]] = self.next_in_queue()
+                        tmp_line = ''.join(tmp_line)
+                        self.board[tpl[0]] = tmp_line
+                    # self.check_near_ores(del_list)
+                    del_list = []
+            j += 1
+            i = 0
 
 
 # class Fon(pygame.sprite.Sprite):

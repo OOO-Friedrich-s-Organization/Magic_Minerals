@@ -19,6 +19,7 @@ instruments_group = pygame.sprite.Group()
 top_layer_sprites = pygame.sprite.Group()
 field = pygame.sprite.Group()
 field_minerals_and_stones = pygame.sprite.Group()
+stat_group = pygame.sprite.Group()
 
 instruments_create = []
 paneles_create = []
@@ -68,9 +69,6 @@ class GamePlace:
         for instr in self.instruments:
             self.instruments[instr] = pygame.transform.scale(self.instruments[instr], (90, 90))
 
-        self.font_positions = {'': [0, 0],
-                               }
-
         self.animation_lens = {'die': [15, 3, 1],
                                'boren': [33, 3, 1],
                                'dinamite': [12, 2, 3],
@@ -108,6 +106,8 @@ class GamePlace:
                       'x2_sel2': self.parent.load_image('cells/cell_blue_sel2.png'),
                       }
 
+        self.statistik = [['5', '0', '10'], ['6', '0', '15'], ['4', '0', '20']]
+
     def render(self, level):
         if self.first_time:
             screen.blit(self.fon, (0, 0))
@@ -119,6 +119,7 @@ class GamePlace:
         self.render_bg_panels()
         self.render_instruments()
         self.draw_cell_field()
+        self.render_statistik()
 
         bg_panels_sprites.draw(screen)
         btn_sprites.draw(screen)
@@ -127,6 +128,7 @@ class GamePlace:
         top_layer_sprites.draw(screen)
         field.draw(screen)
         field_minerals_and_stones.draw(screen)
+        stat_group.draw(screen)
 
         self.first_time = False
 
@@ -190,6 +192,19 @@ class GamePlace:
                                [121 + 75 * ind_x + move_x,
                                 31 + 75 * ind_y + move_y], field_minerals_and_stones)
             self.was_move = False
+
+    def render_statistik(self):
+        if self.first_time:
+            for ind, mineral in enumerate(self.statistik):
+                Button(self.stone_images[mineral[0]], [12, ind * 150 + 105], stat_group)
+
+        font = pygame.font.Font(None, 40)
+        for ind, stat in enumerate(self.statistik):
+            string_rendered = font.render('/'.join(stat[1:]), 3, (180, 100, 0))
+            text_rect = string_rendered.get_rect()
+            text_rect.top = ind * 150 + 180
+            text_rect.x = 20 if len(stat[1]) == 1 else 13
+            screen.blit(string_rendered, text_rect)
 
     def stone_move(self):
         if abs(self.move_x) == 70 or abs(self.move_y) == 70:
@@ -271,15 +286,15 @@ class Instrument(pygame.sprite.Sprite):
         self.used = False
 
 
-# class NecessaryStone(pygame.sprite.Sprite):
-#     def __init__(self, tile_type, pos_x, pos_y, need):
-#         super().__init__(necessary_stones_group, all_sprites)
-#         self.tile_type = tile_type
-#         self.image = stone_images[tile_type]
-#         self.text = [0, need]
-#         self.rect = self.image.get_rect().move(
-#             10 + tile_width * pos_x, 10 + tile_height * pos_y)
-#         self.x, self.y = pos_x, pos_y
+class NecessaryStone(pygame.sprite.Sprite):
+    def __init__(self, tile_type, pos_x, pos_y, need):
+        super().__init__(necessary_stones_group, all_sprites)
+        self.tile_type = tile_type
+        self.image = stone_images[tile_type]
+        self.text = [0, need]
+        self.rect = self.image.get_rect().move(
+            10 + tile_width * pos_x, 10 + tile_height * pos_y)
+        self.x, self.y = pos_x, pos_y
 
 
 class AnimatedSprite(pygame.sprite.Sprite):
