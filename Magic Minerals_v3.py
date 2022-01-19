@@ -121,10 +121,19 @@ def draw_fly_stones():
         stone = FlyStone(st, x, y)
 
 
-def to_statistic(stone_num, quantity):
+def to_statistic(stone_num, quantity, prize=False):
     for st in necessary_stones:
         if st.tile_type == stone_num:
             st.text[0] += quantity
+    if prize:
+        extra = 7
+    else:
+        extra = 1
+    if stone_num in necessary_stones:
+        game_result.update_score(15 * quantity * extra)
+    else:
+        game_result.update_score(5 * quantity * extra)
+    print(game_result.score)
 
 
 def write_statistic(*stones):
@@ -589,12 +598,14 @@ class Board:
                                 break
                         if len(del_list) >= 3:
                             score = 0
+                            prize = False
                             for st in del_list:
                                 if st in lighted_cells:
                                     score += 2
+                                    prize = True
                                 else:
                                     score += 1
-                            to_statistic(cur_st, score)
+                            to_statistic(cur_st, score, prize=prize)
                     else:
                         cur_st = self.board[i][j]
                         del_list = []
@@ -631,12 +642,14 @@ class Board:
                                 break
                         if len(del_list) >= 3:
                             score = 0
+                            prize = False
                             for st in del_list:
                                 if st in lighted_cells:
                                     score += 2
+                                    prize = True
                                 else:
                                     score += 1
-                            to_statistic(cur_st, score)
+                            to_statistic(cur_st, score, prize=prize)
                     else:
                         cur_st = self.board[i][j]
                         del_list = []
@@ -825,10 +838,14 @@ class Move:
 class WinOrDefeat:
     def __init__(self, moves):
         self.moves = moves
+        self.score = 0
 
     def check_moves(self):
         if self.moves == 0 and not victory:
             self.defeat()
+
+    def update_score(self, plus):
+        self.score += plus
 
     def defeat(self):
         text = 'Неудача!'
@@ -863,8 +880,8 @@ board = Board(8, 8, BOARD_X, BOARD_Y, 75)
 instrument_pad = InstrumentPad()
 move_pad = Move(20)
 running = True
+game_result = WinOrDefeat(move_pad.n)
 while running:
-    game_result = WinOrDefeat(move_pad.n)
     level_x, level_y = generate_level(board.board)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
