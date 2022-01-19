@@ -606,6 +606,10 @@ class Board:
                                 else:
                                     score += 1
                             to_statistic(cur_st, score, prize=prize)
+                        else:  # последовательность меньше 3-х удаляем из списка удалений
+                            if j < self.width:
+                                cur_st = self.board[i][j]
+                            del_list = []
                     else:
                         cur_st = self.board[i][j]
                         del_list = []
@@ -650,6 +654,10 @@ class Board:
                                 else:
                                     score += 1
                             to_statistic(cur_st, score, prize=prize)
+                        else:  # последовательность меньше 3-х удаляем из списка удалений
+                            if i < self.height:
+                                cur_st = self.board[i][j]
+                            del_list = []
                     else:
                         cur_st = self.board[i][j]
                         del_list = []
