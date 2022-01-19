@@ -112,6 +112,7 @@ class GamePlace:
         if self.first_time:
             screen.blit(self.fon, (0, 0))
             self.board_loader(level)
+        screen.blit(self.fon, (0, 0))
 
         for btn in self.parent.btns_now[2:]:
             Button(self.btns[btn], self.btns_positions[btn], btn_sprites)
@@ -200,7 +201,10 @@ class GamePlace:
 
         font = pygame.font.Font(None, 40)
         for ind, stat in enumerate(self.statistik):
-            string_rendered = font.render('/'.join(stat[1:]), 3, (180, 100, 0))
+            if int(stat[1]) < int(stat[2]):
+                string_rendered = font.render('/'.join(stat[1:]), 3, (180, 100, 0))
+            else:
+                string_rendered = font.render(f'{stat[2]}/{stat[2]}', 3, (180, 100, 0))
             text_rect = string_rendered.get_rect()
             text_rect.top = ind * 150 + 180
             text_rect.x = 20 if len(stat[1]) == 1 else 13
@@ -245,7 +249,8 @@ class GamePlace:
                         self.old_board = self.board[:]
                         if self.move_wasnt_done:
                             self.move_wasnt_done = False
-                        self.board = board.on_click(self.get_cell(coords), self.board)
+                        self.board = board.on_click(self.get_cell(coords), self.board, self.statistik)
+                        self.statistik = board.statistic_minerals
                         if type(board.c1[0]) == int and type(board.c2[0]) == int and self.board == self.old_board:
                             self.move_wasnt_done = True
                         elif type(board.c1[0]) == int and type(board.c2[0]) == int and self.board != self.old_board:

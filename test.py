@@ -10,8 +10,6 @@ first_time_in_ore = True
 victory = False
 double_stones_in_ores = True
 
-necessary_stones = []  # список необходимых камней (объектов класса NecessaryStone)
-
 
 # def load_image(name,  directory='stones', color_key=None):
 #     full_name = os.path.join(directory, name)
@@ -81,12 +79,6 @@ necessary_stones = []  # список необходимых камней (об�
 #                 pygame.draw.ellipse(screen, pygame.Color('red'), (630, 130 + 90 * i, 90, 90), 0)
 #             pygame.draw.ellipse(screen, pygame.Color('wheat'), (630, 130 + 90 * i, 90, 90), 2)
 #     instruments_group.draw(screen)
-
-
-# def to_statistic(stone_num, quantity):
-#     for st in necessary_stones:
-#         if st.tile_type == stone_num:
-#             st.text[0] += quantity
 
 
 # def write_statistic(*stones):
@@ -169,6 +161,12 @@ class Board:
             file = f.readlines()
         self.queue = list(file[0])
         self.global_del_list = []
+        self.statistic_minerals = []
+
+    def to_statistic(self, stone_num, quantity):
+        for ind, st in enumerate(self.statistic_minerals):
+            if st[0] == stone_num:
+                self.statistic_minerals[ind][1] = str(int(self.statistic_minerals[ind][1]) + quantity)
 
     def next_in_queue(self):
         next = self.queue[0]
@@ -239,7 +237,8 @@ class Board:
     #         # self.c1, self.c2 = None, None
     #     instrument_pad.active_instrument = None
 
-    def on_click(self, cell, board):
+    def on_click(self, cell, board, stat):
+        self.statistic_minerals = stat
         self.board = board
         self.global_del_list = []
         if self.c1 == (None, None) and self.c2 == (None, None):
@@ -350,8 +349,8 @@ class Board:
                         j += 1
                         if j == self.width:
                             break
-                    # if len(del_list) >= 3:
-                    #     to_statistic(cur_st, len(del_list))
+                    if len(del_list) >= 3:
+                        self.to_statistic(cur_st, len(del_list))
                 else:
                     cur_st = self.board[i][j]
                     del_list = []
@@ -383,8 +382,8 @@ class Board:
                         i += 1
                         if i == self.height:
                             break
-                    # if len(del_list) >= 3:
-                    #     to_statistic(cur_st, len(del_list))
+                    if len(del_list) >= 3:
+                        self.to_statistic(cur_st, len(del_list))
                 else:
                     cur_st = self.board[i][j]
                     del_list = []
