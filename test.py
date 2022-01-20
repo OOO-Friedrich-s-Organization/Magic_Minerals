@@ -163,10 +163,18 @@ class Board:
         self.global_del_list = []
         self.statistic_minerals = []
 
-    def to_statistic(self, stone_num, quantity):
+    def to_statistic(self, stone_num, quantity, prize=False):
         for ind, st in enumerate(self.statistic_minerals):
             if st[0] == stone_num:
                 self.statistic_minerals[ind][1] = str(int(self.statistic_minerals[ind][1]) + quantity)
+        if prize:
+            extra = 7
+        else:
+            extra = 1
+        if stone_num in list(map(lambda x: x[0], self.statistic_minerals)):
+            game_result.update_score(15 * quantity * extra)
+        else:
+            game_result.update_score(5 * quantity * extra)
 
     def next_in_queue(self):
         next = self.queue[0]
@@ -206,36 +214,126 @@ class Board:
     #                     self.board[ore[0]] = ''.join(line)
     #                 next_ore = True
 
-    # def tools_into_battle(self, cell):
-    #     for ins in instrument_quadra:
-    #         if ins.active and not ins.used:
-    #             an = AnimatedSprite(instrument_animations[ins.name], 6, 1,
-    #                                 cell[0] * self.cell_size, cell[1] * self.cell_size)
-    #             if ins.name == 'pikhouweel' and not ins.used:
-    #                 to_statistic(self.board[cell[1]][cell[0]], 1)
-    #                 line = list(self.board[cell[1]])
-    #                 line[cell[0]] = self.next_in_queue()
-    #                 self.board[cell[1]] = ''.join(line)
-    #                 instrument_quadra[instruments.index(ins.name)].used = True
-    #                 boom = AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-    #                                       3, 1, cell[0] * self.cell_size, cell[1] * self.cell_size)
-    #             elif ins.name == 'boren' and not ins.used:
-    #                 for elem in self.board[cell[1]]:
-    #                     to_statistic(elem, 1)
-    #                 line = ''
-    #                 for i in range(8):
-    #                     line += self.next_in_queue()
-    #                     boom = AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-    #                                           3, 1, i * self.cell_size, cell[1] * self.cell_size)
-    #                 self.board[cell[1]] = line
-    #                 instrument_quadra[instruments.index(ins.name)].used = True
-    #             # elif ins.name
-    #             [st.kill() for st in stones_group]
-    #             self.horizontal_reduce()
-    #             self.vertical_reduce()
-    #         ins.active = False
-    #         # self.c1, self.c2 = None, None
-    #     instrument_pad.active_instrument = None
+    def tools_into_battle(self, cell, instrument_quadra):
+        for ins in instrument_quadra:
+            if ins.active and not ins.used:
+                if ins.name in ['lantern', 'dynamite']:
+                    an = AnimatedSprite(instrument_animations[ins.name], 6, 1,
+                                        BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size,
+                                        big=True)
+                else:
+                    an = AnimatedSprite(instrument_animations[ins.name], 6, 1,
+                                        BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
+                if ins.name == 'pickaxe' and not ins.used:
+                    to_statistic(self.board[cell[0]][cell[1]], 1)
+                    if cell in lighted_cells:
+                        to_statistic(self.board[cell[0]][cell[1]], 1)
+                    line = list(self.board[cell[0]])
+                    if self.board[cell[0]][cell[1]] not in ['7', '8', '9', '$']:
+                        line[cell[1]] = self.next_in_queue(line[cell[1]])
+                        self.board[cell[0]] = ''.join(line)
+                    else:
+                        self.check_near_ores([(cell[0], cell[1])], it_is_stone=True)
+
+                    instrument_quadra[instruments.index(ins.name)].used = True
+                    boom = AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
+                                          3, 1, BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
+                elif ins.name == 'drill' and not ins.used:
+                    i = 0
+                    for elem in self.board[cell[0]]:
+                        to_statistic(elem, 1)
+                        if tuple([cell[0], i]) in lighted_cells:
+                            to_statistic(elem, 1)
+                        i += 1
+                    line = list(self.board[cell[0]])
+                    for i in range(self.width):
+                        if line[i] not in ['7', '8', '9', '$']:
+                            line[i] = self.next_in_queue(line[i])
+                        else:
+                            self.check_near_ores([tuple([(cell[0]), i])], it_is_stone=True)
+                            line[i] = self.board[cell[0]][i]
+                        self.board[cell[0]] = ''.join(line)
+                        AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
+                                              3, 1, BOARD_X + i * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
+                    instrument_quadra[instruments.index(ins.name)].used = True
+                elif ins.name == 'dynamite':
+                    lines = []
+                    faze = -1
+                    if cell[0] - 1 > -1:
+                        lines.append(self.board[cell[0] - 1])
+                    else:
+                        faze = 0
+                    lines.append(self.board[cell[0]])
+                    if cell[0] + 1 < 8:
+                        lines.append(self.board[cell[0] + 1])
+                    for line in lines:
+                        ln_index = self.board.index(line)
+                        l = list(self.board[ln_index])
+                        if cell[1] - 1 > -1:
+                            to_statistic(l[cell[1] - 1], 1)
+                            if tuple([ln_index, cell[1] - 1]) in lighted_cells:
+                                to_statistic(l[cell[1] - 1], 1)
+                            if l[cell[1] - 1] not in ['7', '8', '9', '$']:
+                                l[cell[1] - 1] = self.next_in_queue(l[cell[1] - 1])
+                            else:
+                                self.check_near_ores([(ln_index, cell[1] - 1)], it_is_stone=True)
+                                l[cell[1] - 1] = self.board[ln_index][cell[1] - 1]
+                            AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
+                                                  3, 1, BOARD_X + (cell[1] - 1) * self.cell_size,
+                                                  BOARD_Y + (cell[0] + faze) * self.cell_size)
+                        to_statistic(l[cell[1]], 1)
+                        if tuple([ln_index, cell[1]]) in lighted_cells:
+                            to_statistic(l[cell[1]], 1)
+                        if l[cell[1]] not in ['7', '8', '9', '$']:
+                            l[cell[1]] = self.next_in_queue(l[cell[1]])
+                        else:
+                            self.check_near_ores([(ln_index, cell[1])], it_is_stone=True)
+                            l[cell[1]] = self.board[ln_index][cell[1]]
+                        AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
+                                              3, 1, BOARD_X + cell[1] * self.cell_size,
+                                              BOARD_Y + (cell[0] + faze) * self.cell_size)
+                        if cell[1] + 1 < self.width:
+                            to_statistic(l[cell[1] + 1], 1)
+                            if tuple([ln_index, cell[1] + 1]) in lighted_cells:
+                                to_statistic(l[cell[1] + 1], 1)
+                            if l[cell[1] + 1] not in ['7', '8', '9', '$']:
+                                l[cell[1] + 1] = self.next_in_queue(l[cell[1] + 1])
+                            else:
+                                self.check_near_ores([(ln_index, cell[1] + 1)], it_is_stone=True)
+                                l[cell[1] + 1] = self.board[ln_index][cell[1] + 1]
+                            AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
+                                                  3, 1, BOARD_X + (cell[1] + 1) * self.cell_size,
+                                                  BOARD_Y + (cell[0] + faze) * self.cell_size)
+                        self.board[ln_index] = ''.join(l)
+                        faze += 1
+                    instrument_quadra[instruments.index(ins.name)].used = True
+                elif ins.name == 'lantern':
+                    lines = []
+                    faze = -1
+                    if cell[1] - 1 > -1:
+                        lines.append(self.board[cell[0] - 1])
+                    else:
+                        faze = 0
+                    lines.append(self.board[cell[0]])
+                    if cell[1] + 1 < 8:
+                        lines.append(self.board[cell[0] + 1])
+                    for line in lines:
+                        l = list(self.board[self.board.index(line)])
+                        if cell[1] - 1 > -1 and self.board[cell[0] + faze][cell[1] - 1] != '0':
+                            lighted_cells.append((cell[0] + faze, cell[1] - 1))
+                        if self.board[cell[0] + faze][cell[1]] != '0':
+                            lighted_cells.append((cell[0] + faze, cell[1]))
+                        if cell[1] + 1 < 8 and self.board[cell[0]+ faze][cell[1] + 1] != '0':
+                            lighted_cells.append((cell[0] + faze, cell[1] + 1))
+                        faze += 1
+                    instrument_quadra[instruments.index(ins.name)].used = True
+                self.horizontal_reduce()
+                self.vertical_reduce()
+                [st.kill() for st in stones_group]
+            ins.active = False
+            self.vertical_reduce()
+            self.horizontal_reduce()
+        instrument_pad.active_instrument = None
 
     def on_click(self, cell, board, stat):
         self.statistic_minerals = stat
@@ -400,59 +498,6 @@ class Board:
             j += 1
             i = 0
 
-
-# class Fon(pygame.sprite.Sprite):
-#     def __init__(self):
-#         super().__init__(all_sprites, fon_sprites)
-#         self.image = load_image(name='bg.png', directory='assets/fon')
-#         self.rect = self.image.get_rect().move(0, 0)
-
-
-# class AnimatedSprite(pygame.sprite.Sprite):
-#     def __init__(self, sheet, columns, rows, x, y):
-#         super().__init__(animated_group)
-#         self.frames = []
-#         self.cut_sheet(sheet, columns, rows)
-#         self.cur_frame = 0
-#         self.image = pygame.transform.scale(self.frames[self.cur_frame], (90, 90))
-#         self.rect = self.rect.move(x, y)
-#         self.i = 0
-#
-#     def cut_sheet(self, sheet, columns, rows):
-#         self.rect = pygame.Rect(0, 0, sheet.get_width() // columns,
-#                                 sheet.get_height() // rows)
-#         for j in range(rows):
-#             for i in range(columns):
-#                 frame_location = (self.rect.w * i, self.rect.h * j)
-#                 self.frames.append(sheet.subsurface(pygame.Rect(
-#                     frame_location, self.rect.size)))
-#
-#     def update(self):
-#         if self.i < len(self.frames):
-#             self.cur_frame = (self.cur_frame + 1) % len(self.frames)
-#             self.image = pygame.transform.scale(self.frames[self.cur_frame], (90, 90))
-#             self.i += 1
-#         else:
-#             self.kill()
-#             board.on_click(board.c1)
-
-
-# class Checkmark(pygame.sprite.Sprite):
-#     def __init__(self, pos_x, pos_y):
-#         super().__init__(checkmark_group, all_sprites)
-#         self.image = pygame.transform.scale(load_image('checkmark.png'), (60, 45))
-#         self.rect = self.image.get_rect().move(
-#             5 + tile_width * pos_x, 30 + tile_height * pos_y)
-
-
-# class Stone(pygame.sprite.Sprite):
-#     def __init__(self, tile_type, pos_x, pos_y):
-#         super().__init__(stones_group, all_sprites)
-#         self.image = stone_images[tile_type]
-#         self.rect = self.image.get_rect().move(
-#             10 + tile_width * pos_x, 10 + tile_height * pos_y)
-
-
 # class Move:
 #     def __init__(self, n):
 #         self.n = n
@@ -476,35 +521,40 @@ class Board:
 #             screen.blit(string_rendered, text_rect)
 
 
-# class WinOrDefeat:
-#     def __init__(self, moves):
-#         self.moves = moves
-#
-#     def check_moves(self):
-#         if self.moves == 0 and not victory:
-#             self.defeat()
-#
-#     def defeat(self):
-#         text = 'Неудача!'
-#         font = pygame.font.Font(None, 200)
-#         text_coord = 17
-#         string_rendered = font.render(text, 1, pygame.Color('White'))
-#         text_rect = string_rendered.get_rect()
-#         text_rect.top = text_coord
-#         text_rect.x = 10
-#         screen.blit(string_rendered, text_rect)
-#
-#     def victory(self):
-#         global victory
-#         text = 'Изумительно!' if self.moves < 3 else 'Прелестно!'
-#         font = pygame.font.Font(None, 200)
-#         text_coord = 17
-#         string_rendered = font.render(text, 1, pygame.Color('White'))
-#         text_rect = string_rendered.get_rect()
-#         text_rect.top = text_coord
-#         text_rect.x = 10
-#         screen.blit(string_rendered, text_rect)
-#         victory = True
+class WinOrDefeat:
+    def __init__(self, moves):
+        self.moves = moves
+        self.score = 0
+
+    def check_moves(self):
+        if self.moves == 0 and not victory:
+            self.defeat()
+
+    def update_score(self, plus):
+        self.score += plus
+
+    def defeat(self):
+        text = 'Неудача!'
+        font = pygame.font.Font(None, 200)
+        text_coord = 17
+        string_rendered = font.render(text, 1, pygame.Color('White'))
+        text_rect = string_rendered.get_rect()
+        text_rect.top = text_coord
+        text_rect.x = 10
+        screen.blit(string_rendered, text_rect)
+
+    def victory(self):
+        global victory
+        text = 'Изумительно!' if self.moves < 3 else 'Прелестно!'
+        font = pygame.font.Font(None, 200)
+        text_coord = 17
+        string_rendered = font.render(text, 1, pygame.Color('White'))
+        text_rect = string_rendered.get_rect()
+        text_rect.top = text_coord
+        text_rect.x = 10
+        screen.blit(string_rendered, text_rect)
+        victory = True
+        draw_fly_stones()
 
 
 # board = Board(8, 8, 10, 10, 75)

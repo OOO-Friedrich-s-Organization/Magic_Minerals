@@ -266,11 +266,7 @@ class GamePlace:
                     for instr in instruments_create:
                         if (instr.rect.x < coords[0] < instr.rect.x + instr.rect.w and
                                 instr.rect.y < coords[1] < instr.rect.y + instr.rect.h):
-                            if instr.active:
-                                instr.active = False
-                            else:
-                                instr.active = True
-                            break
+                            pass
                 else:
                     if self.get_click(coords) and not self.move_now:
                         self.old_board = self.board[:]
