@@ -167,14 +167,14 @@ class Board:
         for ind, st in enumerate(self.statistic_minerals):
             if st[0] == stone_num:
                 self.statistic_minerals[ind][1] = str(int(self.statistic_minerals[ind][1]) + quantity)
-        if prize:
-            extra = 7
-        else:
-            extra = 1
-        if stone_num in list(map(lambda x: x[0], self.statistic_minerals)):
-            game_result.update_score(15 * quantity * extra)
-        else:
-            game_result.update_score(5 * quantity * extra)
+        # if prize:
+        #     extra = 7
+        # else:
+        #     extra = 1
+        # if stone_num in list(map(lambda x: x[0], self.statistic_minerals)):
+        #     game_result.update_score(15 * quantity * extra)
+        # else:
+        #     game_result.update_score(5 * quantity * extra)
 
     def next_in_queue(self):
         next = self.queue[0]
@@ -214,18 +214,13 @@ class Board:
     #                     self.board[ore[0]] = ''.join(line)
     #                 next_ore = True
 
-    def tools_into_battle(self, cell, instrument_quadra):
+    def tools_into_battle(self, cell, instrument_quadra, board):
+        self.board = board
         for ins in instrument_quadra:
             if ins.active and not ins.used:
-                if ins.name in ['lantern', 'dynamite']:
-                    an = AnimatedSprite(instrument_animations[ins.name], 6, 1,
-                                        BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size,
-                                        big=True)
-                else:
-                    an = AnimatedSprite(instrument_animations[ins.name], 6, 1,
-                                        BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
+                animate = [ins.name, 6, 1, cell]
                 if ins.name == 'pickaxe' and not ins.used:
-                    to_statistic(self.board[cell[0]][cell[1]], 1)
+                    self.to_statistic(self.board[cell[0]][cell[1]], 1)
                     if cell in lighted_cells:
                         to_statistic(self.board[cell[0]][cell[1]], 1)
                     line = list(self.board[cell[0]])

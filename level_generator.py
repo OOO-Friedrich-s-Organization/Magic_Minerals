@@ -72,7 +72,7 @@ class GamePlace:
         for instr in self.instruments:
             self.instruments[instr] = pygame.transform.scale(self.instruments[instr], (90, 90))
 
-        self.animation_lens = {'die': [15, 6, 1],
+        self.animation_lens = {'die': [15, 5, 75],
                                'boren': [33, 6, 1],
                                'dinamite': [12, 4, 3],
                                'lantern': [15, 6, 3],
@@ -213,7 +213,7 @@ class GamePlace:
         if self.del_list:
             for die in self.del_list[0]:
                 boom = AnimatedSprite(self.animations['die'],
-                                      3, 1, 120 + 75 * die[1], 30 + 75 * die[0])
+                                      3, 1, 120 + 75 * die[1], 30 + 75 * die[0], self.animation_lens['die'])
             self.del_list.clear()
 
     def render_statistik(self):
@@ -266,7 +266,7 @@ class GamePlace:
                     for instr in instruments_create:
                         if (instr.rect.x < coords[0] < instr.rect.x + instr.rect.w and
                                 instr.rect.y < coords[1] < instr.rect.y + instr.rect.h):
-                            pass
+                           board.tools_into_battle(self.get_cell(coords), instruments_create)
                 else:
                     if self.get_click(coords) and not self.move_now:
                         self.old_board = self.board[:]
@@ -327,12 +327,14 @@ class NecessaryStone(pygame.sprite.Sprite):
 
 
 class AnimatedSprite(pygame.sprite.Sprite):
-    def __init__(self, sheet, columns, rows, x, y):
+    def __init__(self, sheet, columns, rows, x, y, frame_info):
         super().__init__(anim_sprites)
         self.frames = []
+        self.frame_info = frame_info
         self.cut_sheet(sheet, columns, rows)
         self.cur_frame = 0
-        self.image = pygame.transform.scale(self.frames[self.cur_frame], (75, 75))
+        self.image = pygame.transform.scale(self.frames[self.cur_frame],
+                                            (self.frame_info[2], self.frame_info[2]))
         self.rect = self.rect.move(x, y)
         self.i = 0
         self.timer = 0
@@ -347,10 +349,11 @@ class AnimatedSprite(pygame.sprite.Sprite):
                     frame_location, self.rect.size)))
 
     def update(self):
-        if self.timer % 5 == 0:
-            if self.i < len(self.frames) and self.timer < 15:
+        if self.timer % self.frame_info[1] == 0:
+            if self.i < len(self.frames) and self.timer < self.frame_info[0]:
                 self.cur_frame = (self.cur_frame + 1) % len(self.frames)
-                self.image = pygame.transform.scale(self.frames[self.cur_frame], (75, 75))
+                self.image = pygame.transform.scale(self.frames[self.cur_frame],
+                                                    (self.frame_info[2], self.frame_info[2]))
                 self.i += 1
             else:
                 self.kill()
