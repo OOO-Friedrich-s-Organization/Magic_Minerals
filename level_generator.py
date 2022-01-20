@@ -20,6 +20,7 @@ top_layer_sprites = pygame.sprite.Group()
 field = pygame.sprite.Group()
 field_minerals_and_stones = pygame.sprite.Group()
 stat_group = pygame.sprite.Group()
+anim_sprites = pygame.sprite.Group()
 
 instruments_create = []
 paneles_create = []
@@ -33,7 +34,9 @@ class GamePlace:
         self.first_time = True
         self.was_move = True
         self.move_now = False
+        self.statistik_update = True
         self.move_wasnt_done = False
+        self.animation_active = False
         self.move_x = self.move_y = 0
 
         self.fon = pygame.transform.scale(self.parent.load_image('fon/bg.png'), (WIDTH, HEIGHT))
@@ -69,11 +72,11 @@ class GamePlace:
         for instr in self.instruments:
             self.instruments[instr] = pygame.transform.scale(self.instruments[instr], (90, 90))
 
-        self.animation_lens = {'die': [15, 3, 1],
-                               'boren': [33, 3, 1],
-                               'dinamite': [12, 2, 3],
-                               'lantern': [15, 3, 3],
-                               'pikhouweel': [25, 1, 1],
+        self.animation_lens = {'die': [15, 6, 1],
+                               'boren': [33, 6, 1],
+                               'dinamite': [12, 4, 3],
+                               'lantern': [15, 6, 3],
+                               'pikhouweel': [25, 2, 1],
                                }
 
         self.animations = {'die': self.parent.load_image('animations/mineral_die_animate.png'),
@@ -112,7 +115,6 @@ class GamePlace:
         if self.first_time:
             screen.blit(self.fon, (0, 0))
             self.board_loader(level)
-        screen.blit(self.fon, (0, 0))
 
         for btn in self.parent.btns_now[2:]:
             Button(self.btns[btn], self.btns_positions[btn], btn_sprites)
@@ -121,15 +123,26 @@ class GamePlace:
         self.render_instruments()
         self.draw_cell_field()
         self.render_statistik()
+        self.render_die_animate()
 
         bg_panels_sprites.draw(screen)
         btn_sprites.draw(screen)
         btn_sprites.empty()
         instruments_group.draw(screen)
-        top_layer_sprites.draw(screen)
         field.draw(screen)
         field_minerals_and_stones.draw(screen)
         stat_group.draw(screen)
+        anim_sprites.draw(screen)
+        anim_sprites.update()
+
+        top_layer_sprites.draw(screen)
+
+        # font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 40)
+        # string_rendered = font.render(f'Ходов: 13', 3, (180, 100, 0))
+        # text_rect = string_rendered.get_rect()
+        # text_rect.top = 540
+        # text_rect.x = 800
+        # screen.blit(string_rendered, text_rect)
 
         self.first_time = False
 
@@ -194,21 +207,34 @@ class GamePlace:
                                 31 + 75 * ind_y + move_y], field_minerals_and_stones)
             self.was_move = False
 
+    def render_die_animate(self):
+        self.del_list = board.global_del_list
+        if self.del_list:
+            for die in self.del_list[0]:
+                boom = AnimatedSprite(self.animations['die'],
+                                      3, 1, 120 + 75 * die[1], 30 + 75 * die[0])
+            self.del_list.clear()
+
     def render_statistik(self):
         if self.first_time:
             for ind, mineral in enumerate(self.statistik):
                 Button(self.stone_images[mineral[0]], [12, ind * 150 + 105], stat_group)
 
-        font = pygame.font.Font(None, 40)
-        for ind, stat in enumerate(self.statistik):
-            if int(stat[1]) < int(stat[2]):
-                string_rendered = font.render('/'.join(stat[1:]), 3, (180, 100, 0))
-            else:
-                string_rendered = font.render(f'{stat[2]}/{stat[2]}', 3, (180, 100, 0))
-            text_rect = string_rendered.get_rect()
-            text_rect.top = ind * 150 + 180
-            text_rect.x = 20 if len(stat[1]) == 1 else 13
-            screen.blit(string_rendered, text_rect)
+        if self.statistik_update:
+            screen.blit(self.fon, (0, 0))
+            font = pygame.font.Font(None, 40)
+            for ind, stat in enumerate(self.statistik):
+                if int(stat[1]) < int(stat[2]):
+                    string_rendered = font.render('/'.join(stat[1:]), 3, (180, 100, 0))
+                else:
+                    string_rendered = font.render(f'{stat[2]}/{stat[2]}', 3, (180, 100, 0))
+                text_rect = string_rendered.get_rect()
+                text_rect.top = ind * 150 + 180
+                text_rect.x = 20 if len(stat[1]) == 1 else 13
+                screen.blit(string_rendered, text_rect)
+                if int(stat[1]) >= int(stat[2]):
+                    checkmark = pygame.transform.scale(self.parent.load_image('buttons/checkmark.png'), (60, 45))
+                    Button(checkmark, [12, ind * 150 + 135], top_layer_sprites)
 
     def stone_move(self):
         if abs(self.move_x) == 70 or abs(self.move_y) == 70:
@@ -249,14 +275,15 @@ class GamePlace:
                         self.old_board = self.board[:]
                         if self.move_wasnt_done:
                             self.move_wasnt_done = False
-                        self.board = board.on_click(self.get_cell(coords), self.board, self.statistik)
-                        self.statistik = board.statistic_minerals
+                        self.board, self.statistik = board.on_click(self.get_cell(coords), self.board, self.statistik)
+                        self.animation_active = True
                         if type(board.c1[0]) == int and type(board.c2[0]) == int and self.board == self.old_board:
                             self.move_wasnt_done = True
                         elif type(board.c1[0]) == int and type(board.c2[0]) == int and self.board != self.old_board:
                             self.move_now = True
                             self.board, self.old_board = self.old_board[:], self.board[:]
                         self.was_move = True
+                        self.statistik_update = True
 
     def get_cell(self, mouse_pos):
         cell_x = (mouse_pos[0] - 120) // 75
@@ -304,14 +331,14 @@ class NecessaryStone(pygame.sprite.Sprite):
 
 class AnimatedSprite(pygame.sprite.Sprite):
     def __init__(self, sheet, columns, rows, x, y):
-        super().__init__(all_sprites)
+        super().__init__(anim_sprites)
         self.frames = []
         self.cut_sheet(sheet, columns, rows)
         self.cur_frame = 0
-        self.image = self.frames[self.cur_frame]
+        self.image = pygame.transform.scale(self.frames[self.cur_frame], (75, 75))
         self.rect = self.rect.move(x, y)
+        self.i = 0
         self.timer = 0
-        self.play = True
 
     def cut_sheet(self, sheet, columns, rows):
         self.rect = pygame.Rect(0, 0, sheet.get_width() // columns,
@@ -323,5 +350,12 @@ class AnimatedSprite(pygame.sprite.Sprite):
                     frame_location, self.rect.size)))
 
     def update(self):
-        self.cur_frame = (self.cur_frame + 1) % len(self.frames)
-        self.image = self.frames[self.cur_frame]
+        if self.timer % 5 == 0:
+            if self.i < len(self.frames) and self.timer < 15:
+                self.cur_frame = (self.cur_frame + 1) % len(self.frames)
+                self.image = pygame.transform.scale(self.frames[self.cur_frame], (75, 75))
+                self.i += 1
+            else:
+                self.kill()
+                anim_sprites.empty()
+        self.timer += 1

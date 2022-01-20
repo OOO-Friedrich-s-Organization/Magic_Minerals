@@ -309,7 +309,7 @@ class Board:
                 # board.horizontal_reduce()
                 # board.vertical_reduce()
         # self.tools_into_battle(cell)
-        return self.board
+        return self.board, self.statistic_minerals
 
     # def check_move_possibility(self, old_board):
     #     i, j = self.c1[1], 0
