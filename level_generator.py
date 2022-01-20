@@ -136,6 +136,7 @@ class GamePlace:
         anim_sprites.update()
 
         top_layer_sprites.draw(screen)
+        top_layer_sprites.empty()
 
         # font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 40)
         # string_rendered = font.render(f'Ходов: 13', 3, (180, 100, 0))
