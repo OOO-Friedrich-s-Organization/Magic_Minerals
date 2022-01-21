@@ -4,6 +4,7 @@ import os
 import random
 
 pygame.init()
+
 FPS = 15
 WIDTH = 1080
 HEIGHT = 720
@@ -19,6 +20,7 @@ BOARD_Y = 20
 first_time = True
 first_time_in_ore = True
 victory = False
+v = False
 double_stones_in_ores = True
 
 # группы спрайтов
@@ -40,6 +42,12 @@ necessary_stones_group = pygame.sprite.Group()
 instruments_group = pygame.sprite.Group()
 
 loaded_images = {}
+loaded_voices = {'dzin': 'stones/dzin.mp3', 'pickaxe': 'stones/pic.mp3',
+                 'drill': 'stones/drill.mp3', 'dynamite': 'stones/dyn.mp3',
+                 'lantern': 'stones/lan.mp3', 'win': 'stones/win.mp3',
+                 'loose': 'stones/loose.mp3'}
+
+pygame.mixer.music.load(loaded_voices['dzin'])
 
 all_sprites.add(pygame.sprite.Sprite())
 
@@ -121,6 +129,11 @@ def draw_fly_stones():
         stone = FlyStone(st, x, y)
 
 
+def voice(key):
+    pygame.mixer.music.load(loaded_voices[key])
+    pygame.mixer.music.play(1)
+
+
 def to_statistic(stone_num, quantity, prize=False):
     for st in necessary_stones:
         if st.tile_type == stone_num:
@@ -137,11 +150,11 @@ def to_statistic(stone_num, quantity, prize=False):
 
 
 def write_statistic(*stones):
-   # text = ''
+    # text = ''
     text = []
     x, y = NECES_PAD_X, NECES_PAD_Y
     coeff = 10
-    global first_time
+    global first_time, v
     if first_time:
         for stone in stones:
             st = NecessaryStone(stone[0], x, y, stone[1])
@@ -177,6 +190,7 @@ def write_statistic(*stones):
             count += 1
     if count == len(necessary_stones):
         game_result.victory()
+        v = True
 
 
 stone_images = {
@@ -379,6 +393,7 @@ class Board:
                     instrument_quadra[instruments.index(ins.name)].used = True
                     boom = AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
                                           3, 1, BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
+                    voice('pickaxe')
                 elif ins.name == 'drill' and not ins.used:
                     i = 0
                     for elem in self.board[cell[0]]:
@@ -397,6 +412,7 @@ class Board:
                         AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
                                               3, 1, BOARD_X + i * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
                     instrument_quadra[instruments.index(ins.name)].used = True
+                    voice('drill')
                 elif ins.name == 'dynamite':
                     lines = []
                     faze = -1
@@ -448,6 +464,7 @@ class Board:
                         self.board[ln_index] = ''.join(l)
                         faze += 1
                     instrument_quadra[instruments.index(ins.name)].used = True
+                    voice('dynamite')
                 elif ins.name == 'lantern':
                     lines = []
                     faze = -1
@@ -468,9 +485,11 @@ class Board:
                             lighted_cells.append((cell[0] + faze, cell[1] + 1))
                         faze += 1
                     instrument_quadra[instruments.index(ins.name)].used = True
+                    voice('lantern')
                 self.horizontal_reduce()
                 self.vertical_reduce()
                 [st.kill() for st in stones_group]
+            # voice(ins.name)
             ins.active = False
             self.vertical_reduce()
             self.horizontal_reduce()
@@ -618,6 +637,7 @@ class Board:
                         tmp_line = list(self.board[i])
                         for tpl in del_list:
                             tmp_line[tpl[1]] = self.next_in_queue(tmp_line[tpl[1]])
+                            voice('dzin')
                         tmp_line = ''.join(tmp_line)
                         self.board[i] = tmp_line
                         self.check_near_ores(del_list)
@@ -669,6 +689,7 @@ class Board:
                             tmp_line[tpl[1]] = self.next_in_queue(tmp_line[tpl[1]])
                             tmp_line = ''.join(tmp_line)
                             self.board[tpl[0]] = tmp_line
+                            voice('dzin')
                         self.check_near_ores(del_list)
                         del_list = []
                 else:
@@ -824,6 +845,8 @@ class Move:
 
     def minus(self):
         self.n -= 1
+        if self.n == 0:
+            game_result.defeat()
         if self.n < 0:
             self.n = 0
 
@@ -864,9 +887,12 @@ class WinOrDefeat:
         text_rect.top = text_coord
         text_rect.x = 10
         screen.blit(string_rendered, text_rect)
+        voice('loose')
 
     def victory(self):
         global victory
+        if not v:
+            voice('win')
         text = 'Изумительно!' if self.moves < 3 else 'Прелестно!'
         font = pygame.font.Font(None, 200)
         text_coord = 17
@@ -876,13 +902,13 @@ class WinOrDefeat:
         text_rect.x = 10
         screen.blit(string_rendered, text_rect)
         victory = True
-        draw_fly_stones()
+        # draw_fly_stones()
 
 
 Border(5, 5, WIDTH - 5, 5)
 Border(5, HEIGHT - 5, WIDTH - 5, HEIGHT - 5)
 Border(5, 5, 5, HEIGHT - 5)
-Border(WIDTH- 5, 5, WIDTH - 5, HEIGHT - 5)
+Border(WIDTH - 5, 5, WIDTH - 5, HEIGHT - 5)
 
 board = Board(8, 8, BOARD_X, BOARD_Y, 75)
 instrument_pad = InstrumentPad()
@@ -902,10 +928,10 @@ while running:
     draw_cell_field()
     draw_instruments()
     move_pad.show()
-    write_statistic(('5', 10), ('6', 15), ('4', 20))
+    write_statistic(('5', 10), ('6', 15), ('4', 10))
     game_result.check_moves()
-    fly_stones_group.draw(screen)
-    fly_stones_group.update()
+    # fly_stones_group.draw(screen)
+    # fly_stones_group.update()
     animated_group.draw(screen)
     animated_group.update()
     checkmark_group.draw(screen)
