@@ -11,157 +11,18 @@ victory = False
 double_stones_in_ores = True
 
 
-# def load_image(name,  directory='stones', color_key=None):
-#     full_name = os.path.join(directory, name)
-#     if full_name not in loaded_images.keys():
-#         try:
-#             image = pygame.image.load(full_name)
-#         except pygame.error as message:
-#             print(f'В папке отсутствует файл {name}')
-#             raise SystemExit(message)
-#
-#         if color_key is not None:
-#             if color_key == -1:
-#                 color_key = image.get_at((0, 0))
-#             image.set_colorkey(color_key)
-#         else:
-#             image = image.convert_alpha()
-#         loaded_images[full_name] = image
-#         return image
-#     else:
-#         return loaded_images[full_name]
-
-
-# def load_level(filename):
-#     filename = os.path.join('stones', filename)
-#     # читаем уровень, убирая символы перевода строки
-#     with open(filename, 'r') as mapFile:
-#         level_map = [line.strip() for line in mapFile]
-#
-#     # и подсчитываем максимальную длину
-#     max_width = max(map(len, level_map))
-#
-#     # дополняем каждую строку пустыми клетками ('.')
-#     return list(map(lambda x: x.ljust(max_width, '.'), level_map))
-
-
-# def generate_level(level):
-#     x, y = None, None
-#     for y in range(len(level)):
-#         for x in range(len(level[y])):
-#             Stone(level[y][x], x, y)
-#     return x, y
-
-
-# def terminate():
-#     pygame.quit()
-#     sys.exit()
-
-
-# def draw_cell_field():
-#     fon_sprites.draw(screen)
-#     board.render(screen)
-#     stones_group.draw(screen)
-
-
-# def draw_instruments():
-#     pygame.draw.rect(screen, pygame.Color('brown'), (630, 130, 90, 360), 0)
-#     pygame.draw.rect(screen, pygame.Color('wheat'), (630, 130, 90, 360), 3)
-#     for i in range(4):
-#         if first_time:
-#             instrument_quadra.append(Instrument(instruments[i], 0, i))
-#         else:
-#             if instrument_quadra[i].active:
-#                 pygame.draw.ellipse(screen, pygame.Color('skyblue'), (630, 130 + 90 * i, 90, 90), 0)
-#             else:
-#                 pygame.draw.ellipse(screen, pygame.Color('lightsalmon'), (630, 130 + 90 * i, 90, 90), 0)
-#             if instrument_quadra[i].used:
-#                 pygame.draw.ellipse(screen, pygame.Color('red'), (630, 130 + 90 * i, 90, 90), 0)
-#             pygame.draw.ellipse(screen, pygame.Color('wheat'), (630, 130 + 90 * i, 90, 90), 2)
-#     instruments_group.draw(screen)
-
-
-# def write_statistic(*stones):
-#     text = ''
-#     x, y = 1.5, 8
-#     coeff = 10
-#     global first_time
-#     if first_time:
-#         for stone in stones:
-#             st = NecessaryStone(stone[0], x, y, stone[1])
-#             necessary_stones.append(st)
-#             text += ' ' * coeff + f'0/{stone[1]}'
-#             x += 2
-#             coeff = 19
-#             first_time = False
-#     else:
-#         for stone in necessary_stones:
-#             text += ' ' * coeff + f'{stone.text[0]}/{stone.text[1]}'
-#             x += 2
-#             coeff = 19
-#             if stone.text[0] >= stone.text[1]:
-#                 cm = Checkmark(stone.x, stone.y)
-#     text = [text]
-#     font = pygame.font.Font(None, 30)
-#     text_coord = 650
-#     necessary_stones_group.draw(screen)
-#     for line in text:
-#         string_rendered = font.render(line, 1, pygame.Color('white'))
-#         text_rect = string_rendered.get_rect()
-#         text_coord += 10
-#         text_rect.top = text_coord
-#         text_rect.x = 130
-#         text_coord += text_rect.height
-#         screen.blit(string_rendered, text_rect)
-#     count = 0
-#     for stone in necessary_stones:
-#         if stone.text[0] >= stone.text[1]:
-#             count += 1
-#     if count == len(necessary_stones):
-#         game_result.victory()
-
-
-# stone_images = {
-#     '1': load_image('amber.png'),
-#     '2': load_image('amethyst.png'), '3': load_image('diamond.png'),
-#     '4': load_image('emerald.png'), '5': load_image('ruby.png'),
-#     '6': load_image('sapphire.png'), '7': load_image('ore_1.png'),
-#     '8': load_image('ore_2.png'), '9': load_image('ore_3.png'), '$': load_image('double_stone.png')
-# }
-#
-# instrument_animations = {'pikhouweel': load_image('pikhouweel_animate.png', directory='assets/animations'),
-#                          'boren': load_image('boren_animate.png', directory='assets/animations'),
-#                          'dinamite': load_image('dinamite_animate.png', directory='assets/animations'),
-#                          'lantern': load_image('lantern_animate.png', directory='assets/animations')}
-
-# instruments = ['pikhouweel', 'boren', 'dinamite', 'lantern']
-# instrument_images = {}
-# instrument_quadra = []
-#
-# for i in range(1, 10):
-#     stone_images[str(i)] = pygame.transform.scale(stone_images[str(i)], (75, 75))
-# stone_images['$'] = pygame.transform.scale(stone_images['$'], (75, 75))
-#
-# for ins in instruments:
-#     instrument_images[ins] = load_image(f'{ins}.png', directory='assets/instruments')
-#     instrument_images[ins] = pygame.transform.scale(instrument_images[ins], (90, 90))
-
-
-# tile_width = tile_height = 75
-
-
 class Board:
     def __init__(self):
         self.c1 = (None, None)
         self.c2 = (None, None)
         self.width = 8
         self.height = 8
-        self.ore_coords = []
         with open('stones/fall.txt', 'rt') as f:
             file = f.readlines()
         self.queue = list(file[0])
         self.global_del_list = []
         self.statistic_minerals = []
+        self.double_stones_in_ores = True
 
     def to_statistic(self, stone_num, quantity, prize=False):
         for ind, st in enumerate(self.statistic_minerals):
@@ -176,83 +37,97 @@ class Board:
         # else:
         #     game_result.update_score(5 * quantity * extra)
 
-    def next_in_queue(self):
-        next = self.queue[0]
-        del self.queue[0]
+    def next_in_queue(self, stone):
+        if stone != '0':
+            next = self.queue[0]
+            del self.queue[0]
+        else:
+            next = '0'
         return next
 
-    # def find_ores(self):
-    #     for y in range(self.height):
-    #         for x in range(self.width):
-    #             if self.board[y][x] == '7':
-    #                 self.ore_coords.append((y, x))
+    def check_near_ores(self, del_list, it_is_stone=False):
+        allowed = False
+        a = 0
+        b = 1
+        for ore in self.ore_coords:
+            next_ore = False
+            for st in del_list:
+                if next_ore:
+                    break
+                if it_is_stone:
+                    if st == ore:
+                        allowed = True
+                else:
+                    if st[0] + 1 == ore[a] and st[1] == ore[b] or \
+                            st[0] - 1 == ore[a] and st[1] == ore[b] or \
+                            st[0] == ore[a] and st[1] + 1 == ore[b] or \
+                            st[0] == ore[a] and st[1] - 1 == ore[b]:
+                        allowed = True
+                if allowed:
+                    o = self.board[ore[a]][ore[b]]
+                    o = str(int(o) + 1)
+                    if o == '10':
+                        if double_stones_in_ores:
+                            sym = '$'
+                        else:
+                            sym = self.next_in_queue(1)
+                        # self.ore_coords.pop(self.ore_coords.index(st))
+                        line = list(self.board[ore[a]])
+                        line[ore[b]] = sym
+                        self.board[ore[a]] = ''.join(line)
+                        del self.ore_coords[self.ore_coords.index(ore)]
+                    else:
+                        line = list(self.board[ore[a]])
+                        line[ore[b]] = o
+                        self.board[ore[a]] = ''.join(line)
+                    next_ore = True
+                    allowed = False
 
-    # def check_near_ores(self, del_list):
-    #     for ore in self.ore_coords:
-    #         next_ore = False
-    #         for st in del_list:
-    #             if next_ore:
-    #                 break
-    #             if st[0] + 1 == ore[0] and st[1] == ore[1] or \
-    #                     st[0] - 1 == ore[0] and st[1] == ore[1] or \
-    #                     st[0] == ore[0] and st[1] + 1 == ore[1] or \
-    #                     st[0] == ore[0] and st[1] - 1 == ore[1]:
-    #                 o = self.board[ore[0]][ore[1]]
-    #                 o = str(int(o) + 1)
-    #                 if o == '10':
-    #                     if double_stones_in_ores:
-    #                         sym = '$'
-    #                     else:
-    #                         sym = self.next_in_queue()
-    #                     line = list(self.board[ore[0]])
-    #                     line[ore[1]] = sym
-    #                     self.board[ore[0]] = ''.join(line)
-    #                     del self.ore_coords[self.ore_coords.index(ore)]
-    #                 else:
-    #                     line = list(self.board[ore[0]])
-    #                     line[ore[1]] = o
-    #                     self.board[ore[0]] = ''.join(line)
-    #                 next_ore = True
-
-    def tools_into_battle(self, cell, instrument_quadra, board):
-        self.board = board
+    def tools_into_battle(self, cell, instrument_quadra, board, stat, lighted_cells, ore_coords):
+        self.ore_coords = ore_coords
+        self.statistic_minerals = stat
+        self.board, animate = board, False
+        cell = cell[1], cell[0]
         for ins in instrument_quadra:
             if ins.active and not ins.used:
-                animate = [ins.name, 6, 1, cell]
-                if ins.name == 'pickaxe' and not ins.used:
+                if ins.name == 'pikhouweel' and not ins.used:
                     self.to_statistic(self.board[cell[0]][cell[1]], 1)
                     if cell in lighted_cells:
-                        to_statistic(self.board[cell[0]][cell[1]], 1)
+                        self.to_statistic(self.board[cell[0]][cell[1]], 1)
                     line = list(self.board[cell[0]])
                     if self.board[cell[0]][cell[1]] not in ['7', '8', '9', '$']:
                         line[cell[1]] = self.next_in_queue(line[cell[1]])
                         self.board[cell[0]] = ''.join(line)
-                    else:
-                        self.check_near_ores([(cell[0], cell[1])], it_is_stone=True)
+                    # else:
+                    #     self.check_near_ores([(cell[0], cell[1])], it_is_stone=True)
 
-                    instrument_quadra[instruments.index(ins.name)].used = True
-                    boom = AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-                                          3, 1, BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
-                elif ins.name == 'drill' and not ins.used:
+                    instrument_quadra[0].used = True
+                    animate = ins.name
+                    self.global_del_list += [[cell]]
+                elif ins.name == 'boren' and not ins.used:
                     i = 0
                     for elem in self.board[cell[0]]:
-                        to_statistic(elem, 1)
+                        self.to_statistic(elem, 1)
                         if tuple([cell[0], i]) in lighted_cells:
-                            to_statistic(elem, 1)
+                            self.to_statistic(elem, 1)
                         i += 1
                     line = list(self.board[cell[0]])
                     for i in range(self.width):
                         if line[i] not in ['7', '8', '9', '$']:
                             line[i] = self.next_in_queue(line[i])
-                        else:
-                            self.check_near_ores([tuple([(cell[0]), i])], it_is_stone=True)
-                            line[i] = self.board[cell[0]][i]
+                        # else:
+                        #     self.check_near_ores([tuple([(cell[0]), i])], it_is_stone=True)
+                        #     line[i] = self.board[cell[0]][i]
                         self.board[cell[0]] = ''.join(line)
-                        AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-                                              3, 1, BOARD_X + i * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
-                    instrument_quadra[instruments.index(ins.name)].used = True
-                elif ins.name == 'dynamite':
+                    instrument_quadra[1].used = True
+                    animate = ins.name
+                    for ind, elem in enumerate(line):
+                        if elem not in ['7', '8', '9', '$']:
+                            line[ind] = [cell[0], ind]
+                    self.global_del_list += [line]
+                elif ins.name == 'dinamite':
                     lines = []
+                    boom_pole = []
                     faze = -1
                     if cell[0] - 1 > -1:
                         lines.append(self.board[cell[0] - 1])
@@ -263,45 +138,43 @@ class Board:
                         lines.append(self.board[cell[0] + 1])
                     for line in lines:
                         ln_index = self.board.index(line)
-                        l = list(self.board[ln_index])
+                        ln = list(self.board[ln_index])
                         if cell[1] - 1 > -1:
-                            to_statistic(l[cell[1] - 1], 1)
+                            self.to_statistic(ln[cell[1] - 1], 1)
                             if tuple([ln_index, cell[1] - 1]) in lighted_cells:
-                                to_statistic(l[cell[1] - 1], 1)
-                            if l[cell[1] - 1] not in ['7', '8', '9', '$']:
-                                l[cell[1] - 1] = self.next_in_queue(l[cell[1] - 1])
-                            else:
-                                self.check_near_ores([(ln_index, cell[1] - 1)], it_is_stone=True)
-                                l[cell[1] - 1] = self.board[ln_index][cell[1] - 1]
-                            AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-                                                  3, 1, BOARD_X + (cell[1] - 1) * self.cell_size,
-                                                  BOARD_Y + (cell[0] + faze) * self.cell_size)
-                        to_statistic(l[cell[1]], 1)
+                                self.to_statistic(ln[cell[1] - 1], 1)
+                            if ln[cell[1] - 1] not in ['7', '8', '9', '$']:
+                                ln[cell[1] - 1] = self.next_in_queue(ln[cell[1] - 1])
+                            # else:
+                            #     self.check_near_ores([(ln_index, cell[1] - 1)], it_is_stone=True)
+                            #     l[cell[1] - 1] = self.board[ln_index][cell[1] - 1]
+                        self.to_statistic(ln[cell[1]], 1)
                         if tuple([ln_index, cell[1]]) in lighted_cells:
-                            to_statistic(l[cell[1]], 1)
-                        if l[cell[1]] not in ['7', '8', '9', '$']:
-                            l[cell[1]] = self.next_in_queue(l[cell[1]])
-                        else:
-                            self.check_near_ores([(ln_index, cell[1])], it_is_stone=True)
-                            l[cell[1]] = self.board[ln_index][cell[1]]
-                        AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-                                              3, 1, BOARD_X + cell[1] * self.cell_size,
-                                              BOARD_Y + (cell[0] + faze) * self.cell_size)
+                            self.to_statistic(ln[cell[1]], 1)
+                        if ln[cell[1]] not in ['7', '8', '9', '$']:
+                            ln[cell[1]] = self.next_in_queue(ln[cell[1]])
+                        # else:
+                        #     self.check_near_ores([(ln_index, cell[1])], it_is_stone=True)
+                        #     l[cell[1]] = self.board[ln_index][cell[1]]
                         if cell[1] + 1 < self.width:
-                            to_statistic(l[cell[1] + 1], 1)
+                            self.to_statistic(ln[cell[1] + 1], 1)
                             if tuple([ln_index, cell[1] + 1]) in lighted_cells:
-                                to_statistic(l[cell[1] + 1], 1)
-                            if l[cell[1] + 1] not in ['7', '8', '9', '$']:
-                                l[cell[1] + 1] = self.next_in_queue(l[cell[1] + 1])
-                            else:
-                                self.check_near_ores([(ln_index, cell[1] + 1)], it_is_stone=True)
-                                l[cell[1] + 1] = self.board[ln_index][cell[1] + 1]
-                            AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
-                                                  3, 1, BOARD_X + (cell[1] + 1) * self.cell_size,
-                                                  BOARD_Y + (cell[0] + faze) * self.cell_size)
-                        self.board[ln_index] = ''.join(l)
+                                self.to_statistic(ln[cell[1] + 1], 1)
+                            if ln[cell[1] + 1] not in ['7', '8', '9', '$']:
+                                ln[cell[1] + 1] = self.next_in_queue(ln[cell[1] + 1])
+                            # else:
+                            #     self.check_near_ores([(ln_index, cell[1] + 1)], it_is_stone=True)
+                            #     l[cell[1] + 1] = self.board[ln_index][cell[1] + 1]
+                        self.board[ln_index] = ''.join(ln)
                         faze += 1
-                    instrument_quadra[instruments.index(ins.name)].used = True
+                        boom_pole.append(ln)
+                    instrument_quadra[2].used = True
+                    animate = ins.name
+                    self.global_del_list = [[]]
+                    for ind_y, line in enumerate(boom_pole):
+                        for ind_x, elem in enumerate(line):
+                            if elem not in ['7', '8', '9', '$', '_'] and elem != lines[ind_y][ind_x]:
+                                self.global_del_list[0].append([cell[0] + ind_y - 1, ind_x])
                 elif ins.name == 'lantern':
                     lines = []
                     faze = -1
@@ -313,24 +186,25 @@ class Board:
                     if cell[1] + 1 < 8:
                         lines.append(self.board[cell[0] + 1])
                     for line in lines:
-                        l = list(self.board[self.board.index(line)])
+                        ln = list(self.board[self.board.index(line)])
                         if cell[1] - 1 > -1 and self.board[cell[0] + faze][cell[1] - 1] != '0':
                             lighted_cells.append((cell[0] + faze, cell[1] - 1))
                         if self.board[cell[0] + faze][cell[1]] != '0':
                             lighted_cells.append((cell[0] + faze, cell[1]))
-                        if cell[1] + 1 < 8 and self.board[cell[0]+ faze][cell[1] + 1] != '0':
+                        if cell[1] + 1 < 8 and self.board[cell[0] + faze][cell[1] + 1] != '0':
                             lighted_cells.append((cell[0] + faze, cell[1] + 1))
                         faze += 1
-                    instrument_quadra[instruments.index(ins.name)].used = True
-                self.horizontal_reduce()
-                self.vertical_reduce()
-                [st.kill() for st in stones_group]
+                    instrument_quadra[3].used = True
+                    animate = ins.name
+                self.horizontal_reduce(self.board, lighted_cells)
+                self.vertical_reduce(self.board, lighted_cells)
             ins.active = False
-            self.vertical_reduce()
-            self.horizontal_reduce()
-        instrument_pad.active_instrument = None
+            self.vertical_reduce(self.board, lighted_cells)
+            self.horizontal_reduce(self.board, lighted_cells)
+        return self.board, animate, lighted_cells
 
-    def on_click(self, cell, board, stat):
+    def on_click(self, cell, board, stat, lighted_cells, ore_coords):
+        self.ore_coords = ore_coords
         self.statistic_minerals = stat
         self.board = board
         self.global_del_list = []
@@ -343,14 +217,9 @@ class Board:
             self.c2 = (None, None)
         if self.c1 != (None, None) and self.c2 != (None, None) and self.c1 != self.c2:
             c1, c2 = self.c1, self.c2
-            old_board = self.board[:]
-            # for i, st in enumerate(stones_group):
-            #     if i == c1[0] * 8 + c1[1]:
-            #         st.kill()
-            #     if i == c2[0] * 8 + c2[1]:
-            #         st.kill()
-            # if self.board[c1[0]][c1[1]] not in ['7', '8', '9'] and self.board[c2[0]][c2[1]] not in ['7', '8', '9']:
-            if c1 not in self.ore_coords and c2 not in self.ore_coords:
+            if c1 not in self.ore_coords and c2 not in self.ore_coords and\
+                    self.board[c1[0]][c1[1]] not in ['7', '8', '9', '$'] and\
+                    self.board[c2[0]][c2[1]] not in ['7', '8', '9', '$']:
                 if c1[1] == c2[1] and abs(c1[0] - c2[0]) == 1:
                     line1 = list(self.board[c1[1]])
                     stone1, stone2 = line1[c1[0]], line1[c2[0]]
@@ -365,28 +234,9 @@ class Board:
                         line1.insert(c1[0] - 1, stone2)
                         line1.insert(c2[0], stone1)
                     line1 = ''.join(line1)
-                    old_line = self.board[self.c1[1]][:]
                     self.board[self.c1[1]] = line1
-                    # i, j = self.c1[1], 0
-                    # count = 1
-                    # cur_st = self.board[i][j]
-                    # while j < self.width:
-                    #     j += 1
-                    #     if j == self.width - 1:
-                    #         break
-                    #     if self.board[i][j] == cur_st:
-                    #         while self.board[i][j] == cur_st:
-                    #             count += 1
-                    #             j += 1
-                    #             if j == self.width - 1:
-                    #                 break
-                    #     else:
-                    #         cur_st = self.board[i][j]
-                    # if count >= 3:
-                    self.horizontal_reduce()
-                    self.vertical_reduce()
-                    # else:
-                    #     self.board[self.c1[1]] = old_line
+                    self.horizontal_reduce(self.board, lighted_cells)
+                    self.vertical_reduce(self.board, lighted_cells)
                 elif c1[0] == c2[0] and abs(c1[1] - c2[1]) == 1:
                     line1, line2 = list(self.board[c1[1]]), list(self.board[c2[1]])
                     stone1, stone2 = line1[c1[0]], line2[c2[0]]
@@ -396,102 +246,112 @@ class Board:
                     line2.insert(c1[0], stone1)
                     line1, line2 = ''.join(line1), ''.join(line2)
                     self.board[c1[1]], self.board[c2[1]] = line1, line2
-                    self.horizontal_reduce()
-                    self.vertical_reduce()
-                # move_pad.minus()
-                # board.horizontal_reduce()
-                # board.vertical_reduce()
-        # self.tools_into_battle(cell)
+                    self.horizontal_reduce(self.board, lighted_cells)
+                    self.vertical_reduce(self.board, lighted_cells)
+        #         move_pad.minus()
+        # self.activate_double_stone()
         return self.board, self.statistic_minerals
 
-    # def check_move_possibility(self, old_board):
-    #     i, j = self.c1[1], 0
-    #     count = 1
-    #     cur_st = self.board[i][j]
-    #     while j < self.width:
-    #         j += 1
-    #         if j == self.width - 1:
-    #             break
-    #         if self.board[i][j] == cur_st:
-    #             while self.board[i][j] == cur_st:
-    #                 count += 1
-    #                 j += 1
-    #                 if j == self.width - 1:
-    #                     break
-    #         else:
-    #             cur_st = self.board[i][j]
-    #     if count >= 3:
-    #         self.horizontal_reduce()
-    #         self.vertical_reduce()
-    #     else:
-    #         self.board = old_board
-
-    def horizontal_reduce(self):
+    def horizontal_reduce(self, board, lighted_cells):
+        self.board = board
         i, j = 0, 0
         while i < self.height:
             del_list = []
             while j < self.width:
                 cur_st = self.board[i][j]
-                del_list.append((i, j))
-                j += 1
-                if j == self.width:
-                    break
-                if self.board[i][j] == cur_st:
-                    while self.board[i][j] == cur_st:
-                        del_list.append((i, j))
-                        j += 1
-                        if j == self.width:
-                            break
+                if cur_st != '0':
+                    del_list.append((i, j))
+                    j += 1
+                    if j == self.width:
+                        break
+                    if self.board[i][j] == cur_st:
+                        while self.board[i][j] == cur_st:
+                            del_list.append((i, j))
+                            j += 1
+                            if j == self.width:
+                                break
+                        if len(del_list) >= 3:
+                            score = 0
+                            prize = False
+                            for st in del_list:
+                                if st in lighted_cells:
+                                    score += 2
+                                    prize = True
+                                else:
+                                    score += 1
+                            self.to_statistic(cur_st, score, prize=prize)
+                        else:  # последовательность меньше 3-х удаляем из списка удалений
+                            if j < self.width:
+                                cur_st = self.board[i][j]
+                            del_list = []
+                    else:
+                        cur_st = self.board[i][j]
+                        del_list = []
                     if len(del_list) >= 3:
-                        self.to_statistic(cur_st, len(del_list))
+                        self.global_del_list.append(del_list)
+                        tmp_line = list(self.board[i])
+                        for tpl in del_list:
+                            tmp_line[tpl[1]] = self.next_in_queue(tmp_line[tpl[1]])
+                        tmp_line = ''.join(tmp_line)
+                        self.board[i] = tmp_line
+                        self.check_near_ores(del_list)
+                        del_list = []
                 else:
-                    cur_st = self.board[i][j]
-                    del_list = []
-                if len(del_list) >= 3:
-                    self.global_del_list.append(del_list)
-                    tmp_line = list(self.board[i])
-                    for tpl in del_list:
-                        tmp_line[tpl[1]] = self.next_in_queue()
-                    tmp_line = ''.join(tmp_line)
-                    self.board[i] = tmp_line
-                    # self.check_near_ores(del_list)
-                    del_list = []
+                    j += 1
             i += 1
             j = 0
+        return self.board
 
-    def vertical_reduce(self):
+    def vertical_reduce(self, board, lighted_cells):
+        self.board = board
         i, j = 0, 0
         while j < self.height:
             del_list = []
             while i < self.width:
                 cur_st = self.board[i][j]
-                del_list.append((i, j))
-                i += 1
-                if i == self.height:
-                    break
-                if self.board[i][j] == cur_st:
-                    while self.board[i][j] == cur_st:
-                        del_list.append((i, j))
-                        i += 1
-                        if i == self.height:
-                            break
+                if cur_st != '0':
+                    del_list.append((i, j))
+                    i += 1
+                    if i == self.height:
+                        break
+                    if self.board[i][j] == cur_st:
+                        while self.board[i][j] == cur_st:
+                            del_list.append((i, j))
+                            i += 1
+                            if i == self.height:
+                                break
+                        if len(del_list) >= 3:
+                            score = 0
+                            prize = False
+                            for st in del_list:
+                                if st in lighted_cells:
+                                    score += 2
+                                    prize = True
+                                else:
+                                    score += 1
+                            self.to_statistic(cur_st, score, prize=prize)
+                        else:  # последовательность меньше 3-х удаляем из списка удалений
+                            if i < self.height:
+                                cur_st = self.board[i][j]
+                            del_list = []
+                    else:
+                        cur_st = self.board[i][j]
+                        del_list = []
                     if len(del_list) >= 3:
-                        self.to_statistic(cur_st, len(del_list))
+                        # tmp_line = list(self.board[i])
+                        self.global_del_list.append(del_list)
+                        for tpl in del_list:
+                            tmp_line = list(self.board[tpl[0]])
+                            tmp_line[tpl[1]] = self.next_in_queue(tmp_line[tpl[1]])
+                            tmp_line = ''.join(tmp_line)
+                            self.board[tpl[0]] = tmp_line
+                        self.check_near_ores(del_list)
+                        del_list = []
                 else:
-                    cur_st = self.board[i][j]
-                    del_list = []
-                if len(del_list) >= 3:
-                    # tmp_line = list(self.board[i])
-                    self.global_del_list.append(del_list)
-                    for tpl in del_list:
-                        tmp_line = list(self.board[tpl[0]])
-                        tmp_line[tpl[1]] = self.next_in_queue()
-                        tmp_line = ''.join(tmp_line)
-                        self.board[tpl[0]] = tmp_line
-                    # self.check_near_ores(del_list)
-                    del_list = []
+                    i += 1
             j += 1
             i = 0
+        return self.board
 
 # class Move:
 #     def __init__(self, n):
@@ -550,32 +410,3 @@ class WinOrDefeat:
         screen.blit(string_rendered, text_rect)
         victory = True
         draw_fly_stones()
-
-
-# board = Board(8, 8, 10, 10, 75)
-# instrument_pad = InstrumentPad()
-# move_pad = Move(20)
-# running = True
-# while running:
-#     game_result = WinOrDefeat(move_pad.n)
-#     level_x, level_y = generate_level(board.board)
-#     for event in pygame.event.get():
-#         if event.type == pygame.QUIT:
-#             running = False
-#         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-#             board.get_click(event.pos)
-#             instrument_pad.get_click(event.pos)
-#     # board.horizontal_reduce()
-#     # board.vertical_reduce()
-#     draw_cell_field()
-#     draw_instruments()
-#     move_pad.show()
-#     write_statistic(('5', 10), ('6', 15), ('4', 20))
-#     game_result.check_moves()
-#     animated_group.draw(screen)
-#     animated_group.update()
-#     checkmark_group.draw(screen)
-#     pygame.display.flip()
-#     screen.fill('black')
-#     clock.tick(FPS)
-# terminate()

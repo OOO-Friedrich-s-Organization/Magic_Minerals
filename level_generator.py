@@ -20,7 +20,8 @@ top_layer_sprites = pygame.sprite.Group()
 field = pygame.sprite.Group()
 field_minerals_and_stones = pygame.sprite.Group()
 stat_group = pygame.sprite.Group()
-anim_sprites = pygame.sprite.Group()
+anim_die_sprites = pygame.sprite.Group()
+anim_instr_sprites = pygame.sprite.Group()
 
 instruments_create = []
 paneles_create = []
@@ -37,7 +38,11 @@ class GamePlace:
         self.statistik_update = True
         self.move_wasnt_done = False
         self.animation_active = False
+        self.instrument_active = False
         self.move_x = self.move_y = 0
+
+        self.lighted_cells = []
+        self.ore_coords = []
 
         self.fon = pygame.transform.scale(self.parent.load_image('fon/bg.png'), (WIDTH, HEIGHT))
 
@@ -73,10 +78,10 @@ class GamePlace:
             self.instruments[instr] = pygame.transform.scale(self.instruments[instr], (90, 90))
 
         self.animation_lens = {'die': [15, 5, 75],
-                               'boren': [33, 6, 1],
-                               'dinamite': [12, 4, 3],
-                               'lantern': [15, 6, 3],
-                               'pikhouweel': [25, 2, 1],
+                               'boren': [33, 6, 100],
+                               'dinamite': [24, 4, 270],
+                               'lantern': [32, 4, 225],
+                               'pikhouweel': [20, 2, 100],
                                }
 
         self.animations = {'die': self.parent.load_image('animations/mineral_die_animate.png'),
@@ -119,6 +124,12 @@ class GamePlace:
         for btn in self.parent.btns_now[2:]:
             Button(self.btns[btn], self.btns_positions[btn], btn_sprites)
 
+        old_board = self.board[:]
+        self.board = board.horizontal_reduce(self.board, self.lighted_cells)
+        self.board = board.vertical_reduce(self.board, self.lighted_cells)
+        if self.board != old_board:
+            self.was_move = True
+
         self.render_bg_panels()
         self.render_instruments()
         self.draw_cell_field()
@@ -132,8 +143,10 @@ class GamePlace:
         field.draw(screen)
         field_minerals_and_stones.draw(screen)
         stat_group.draw(screen)
-        anim_sprites.draw(screen)
-        anim_sprites.update()
+        anim_die_sprites.draw(screen)
+        anim_die_sprites.update()
+        anim_instr_sprites.draw(screen)
+        anim_instr_sprites.update()
 
         top_layer_sprites.draw(screen)
         top_layer_sprites.empty()
@@ -169,6 +182,20 @@ class GamePlace:
             if instruments_create[ind].used:
                 Button(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
 
+    def render_instruments_animate(self, cell, animate):
+        if animate == 'pikhouweel':
+            instr = AnimatedSprite(self.animations[animate],
+                                   6, 1, 50 + 75 * cell[0], 75 * cell[1], self.animation_lens[animate])
+        elif animate == 'boren':
+            instr = AnimatedSprite(self.animations[animate],
+                                   6, 1, 50 + 75 * cell[0], 75 * cell[1] - 30, self.animation_lens[animate])
+        elif animate == 'dinamite':
+            instr = AnimatedSprite(self.animations[animate],
+                                   6, 1, 25 + 75 * cell[0], 75 * cell[1] - 65, self.animation_lens[animate])
+        elif animate == 'lantern':
+            instr = AnimatedSprite(self.animations[animate],
+                                   6, 1, 45 + 75 * cell[0], 75 * cell[1] - 45, self.animation_lens[animate])
+
     def draw_cell_field(self):
         if self.first_time:
             board.c1, board.c2 = (None, None), (None, None)
@@ -179,7 +206,7 @@ class GamePlace:
                 self.stone_move()
             for ind_y, row in enumerate(self.board):
                 for ind_x, elem in enumerate(row):
-                    if elem != '_':
+                    if elem != '0':
                         cell = 'simple'
                         if (ind_x, ind_y) == board.c1 and not self.move_wasnt_done:
                             cell = 'sel1'
@@ -189,7 +216,8 @@ class GamePlace:
                             cell = '$'
                         elif int(elem) >= 7:
                             cell = 'ore'
-                        elif elem == '??????????????????????????????????????????????????????????????????':
+                            self.ore_coords += [[ind_x, ind_y]]
+                        elif (ind_x, ind_y) in self.lighted_cells:
                             cell = 'x2'
                             if (ind_x, ind_y) == board.c1 and not self.move_wasnt_done:
                                 cell = 'x2_sel1'
@@ -266,13 +294,20 @@ class GamePlace:
                     for instr in instruments_create:
                         if (instr.rect.x < coords[0] < instr.rect.x + instr.rect.w and
                                 instr.rect.y < coords[1] < instr.rect.y + instr.rect.h):
-                           board.tools_into_battle(self.get_cell(coords), instruments_create)
+                            if not instr.active and not self.instrument_active and not instr.used:
+                                instr.active = True
+                                self.instrument_active = True
+                            elif instr.active and self.instrument_active:
+                                instr.active = False
+                                self.instrument_active = False
                 else:
-                    if self.get_click(coords) and not self.move_now:
+                    if self.get_click(coords) and not self.move_now and not self.instrument_active:
                         self.old_board = self.board[:]
                         if self.move_wasnt_done:
                             self.move_wasnt_done = False
-                        self.board, self.statistik = board.on_click(self.get_cell(coords), self.board, self.statistik)
+                        self.board, self.statistik = board.on_click(self.get_cell(coords), self.board,
+                                                                    self.statistik, self.lighted_cells,
+                                                                    self.ore_coords)
                         self.animation_active = True
                         if type(board.c1[0]) == int and type(board.c2[0]) == int and self.board == self.old_board:
                             self.move_wasnt_done = True
@@ -281,6 +316,23 @@ class GamePlace:
                             self.board, self.old_board = self.old_board[:], self.board[:]
                         self.was_move = True
                         self.statistik_update = True
+                    elif self.get_click(coords) and self.instrument_active:
+                        self.old_board = self.board[:]
+                        self.board, animate, self.lighted_cells = board.tools_into_battle(self.get_cell(coords),
+                                                                                          instruments_create,
+                                                                                          self.board,
+                                                                                          self.statistik,
+                                                                                          self.lighted_cells,
+                                                                                          self.ore_coords)
+                        self.instrument_active = False
+                        if self.board != self.old_board:
+                            self.was_move = True
+                            self.statistik_update = True
+                            if animate:
+                                self.render_instruments_animate(self.get_cell(coords), animate)
+                        elif animate == 'lantern':
+                            self.was_move = True
+                            self.render_instruments_animate(self.get_cell(coords), animate)
 
     def get_cell(self, mouse_pos):
         cell_x = (mouse_pos[0] - 120) // 75
@@ -328,7 +380,11 @@ class NecessaryStone(pygame.sprite.Sprite):
 
 class AnimatedSprite(pygame.sprite.Sprite):
     def __init__(self, sheet, columns, rows, x, y, frame_info):
-        super().__init__(anim_sprites)
+        if columns == 3:
+            self.group = anim_die_sprites
+        else:
+            self.group = anim_instr_sprites
+        super().__init__(self.group)
         self.frames = []
         self.frame_info = frame_info
         self.cut_sheet(sheet, columns, rows)
@@ -350,12 +406,12 @@ class AnimatedSprite(pygame.sprite.Sprite):
 
     def update(self):
         if self.timer % self.frame_info[1] == 0:
-            if self.i < len(self.frames) and self.timer < self.frame_info[0]:
+            if self.timer < self.frame_info[0]:
                 self.cur_frame = (self.cur_frame + 1) % len(self.frames)
                 self.image = pygame.transform.scale(self.frames[self.cur_frame],
                                                     (self.frame_info[2], self.frame_info[2]))
                 self.i += 1
             else:
                 self.kill()
-                anim_sprites.empty()
+                self.group.empty()
         self.timer += 1

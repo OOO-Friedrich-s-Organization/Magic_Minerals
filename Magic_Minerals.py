@@ -505,28 +505,9 @@ class Board:
                         line1.insert(c1[1] - 1, stone2)
                         line1.insert(c2[1], stone1)
                     line1 = ''.join(line1)
-                    old_line = self.board[self.c1[0]][:]
                     self.board[self.c1[0]] = line1
-                    # i, j = self.c1[1], 0
-                    # count = 1
-                    # cur_st = self.board[i][j]
-                    # while j < self.width:
-                    #     j += 1
-                    #     if j == self.width - 1:
-                    #         break
-                    #     if self.board[i][j] == cur_st:
-                    #         while self.board[i][j] == cur_st:
-                    #             count += 1
-                    #             j += 1
-                    #             if j == self.width - 1:
-                    #                 break
-                    #     else:
-                    #         cur_st = self.board[i][j]
-                    # if count >= 3:
                     self.horizontal_reduce()
                     self.vertical_reduce()
-                    # else:
-                    #     self.board[self.c1[1]] = old_line
                 elif c1[1] == c2[1] and abs(c1[0] - c2[0]) == 1:
                     line1, line2 = list(self.board[c1[0]]), list(self.board[c2[0]])
                     stone1, stone2 = line1[c1[1]], line2[c2[1]]
