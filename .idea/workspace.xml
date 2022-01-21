@@ -43,6 +43,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_48__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Magic_Minerals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Magic_Minerals.py" afterDir="false" />
@@ -84,17 +85,17 @@
   </component>
   <component name="RunManager" selected="Python.main_menu">
     <configuration name="Magic Minerals_v3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Magic_Minerals" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Gip4eer\AppData\Local\Programs\Python\Python39\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Magic Minerals_v3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -295,8 +296,8 @@
       <list>
         <item itemvalue="Python.main_menu" />
         <item itemvalue="Python.Magic_Minerals" />
-        <item itemvalue="Python.level_generator" />
         <item itemvalue="Python.Magic Minerals_v3" />
+        <item itemvalue="Python.level_generator" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>

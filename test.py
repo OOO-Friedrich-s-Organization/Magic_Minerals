@@ -65,23 +65,63 @@ class Board:
                         allowed = True
                 if allowed:
                     o = self.board[ore[a]][ore[b]]
-                    o = str(int(o) + 1)
-                    if o == '10':
-                        if double_stones_in_ores:
-                            sym = '$'
+                    if o != '$':
+                        o = str(int(o) + 1)
+                        if o == '10':
+                            if double_stones_in_ores:
+                                sym = '$'
+                            else:
+                                sym = self.next_in_queue(1)
+                            # self.ore_coords.pop(self.ore_coords.index(st))
+                            line = list(self.board[ore[a]])
+                            line[ore[b]] = sym
+                            self.board[ore[a]] = ''.join(line)
+                            del self.ore_coords[self.ore_coords.index(ore)]
                         else:
-                            sym = self.next_in_queue(1)
-                        # self.ore_coords.pop(self.ore_coords.index(st))
-                        line = list(self.board[ore[a]])
-                        line[ore[b]] = sym
-                        self.board[ore[a]] = ''.join(line)
-                        del self.ore_coords[self.ore_coords.index(ore)]
-                    else:
-                        line = list(self.board[ore[a]])
-                        line[ore[b]] = o
-                        self.board[ore[a]] = ''.join(line)
+                            line = list(self.board[ore[a]])
+                            line[ore[b]] = o
+                            self.board[ore[a]] = ''.join(line)
                     next_ore = True
                     allowed = False
+
+    def activate_double_stone(self, lighted_cells):
+        for line in self.board:
+            if '$' in line:
+                lst_index_dblst = []
+                lst_index = self.board.index(line)
+                i = 0
+                for elem in line:
+                    if elem == "$":
+                        lst_index_dblst.append(i)
+                    i += 1
+                #cell = (line.index("$"), )
+                for elem in lst_index_dblst:
+                    cell = (lst_index, elem)
+                    lines = []
+                    faze = -1
+                    if cell[0] - 1 > -1:
+                        lines.append(self.board[cell[0] - 1])
+                    else:
+                        faze = 0
+                    lines.append(self.board[cell[0]])
+                    if cell[0] + 1 < 8:
+                        lines.append(self.board[cell[0] + 1])
+                    for line in lines:
+                        if cell[1] - 1 > -1:
+                            if (cell[0] + faze, cell[1] - 1) not in lighted_cells and\
+                                    self.board[cell[0] + faze][cell[1] - 1] != '0':
+                                lighted_cells.append((cell[0] + faze, cell[1] - 1))
+                        if (cell[0] + faze, cell[1]) not in lighted_cells and\
+                                self.board[cell[0] + faze][cell[1]] != '0':
+                            lighted_cells.append((cell[0] + faze, cell[1]))
+                        if cell[1] + 1 < self.width:
+                            if (cell[0] + faze, cell[1] + 1) not in lighted_cells and\
+                                    self.board[cell[0] + faze][cell[1] + 1] != '0':
+                                lighted_cells.append((cell[0] + faze, cell[1] + 1))
+                        faze += 1
+                self.horizontal_reduce(self.board, lighted_cells)
+                self.vertical_reduce(self.board, lighted_cells)
+        return lighted_cells
 
     def tools_into_battle(self, cell, instrument_quadra, board, stat, lighted_cells, ore_coords):
         self.ore_coords = ore_coords
@@ -98,8 +138,8 @@ class Board:
                     if self.board[cell[0]][cell[1]] not in ['7', '8', '9', '$']:
                         line[cell[1]] = self.next_in_queue(line[cell[1]])
                         self.board[cell[0]] = ''.join(line)
-                    # else:
-                    #     self.check_near_ores([(cell[0], cell[1])], it_is_stone=True)
+                    else:
+                        self.check_near_ores([(cell[0], cell[1])], it_is_stone=True)
 
                     instrument_quadra[0].used = True
                     animate = ins.name
@@ -115,14 +155,14 @@ class Board:
                     for i in range(self.width):
                         if line[i] not in ['7', '8', '9', '$']:
                             line[i] = self.next_in_queue(line[i])
-                        # else:
-                        #     self.check_near_ores([tuple([(cell[0]), i])], it_is_stone=True)
-                        #     line[i] = self.board[cell[0]][i]
+                        else:
+                            self.check_near_ores([tuple([(cell[0]), i])], it_is_stone=True)
+                            line[i] = self.board[cell[0]][i]
                         self.board[cell[0]] = ''.join(line)
                     instrument_quadra[1].used = True
                     animate = ins.name
                     for ind, elem in enumerate(line):
-                        if elem not in ['7', '8', '9', '$']:
+                        if elem != '$':
                             line[ind] = [cell[0], ind]
                     self.global_del_list += [line]
                 elif ins.name == 'dinamite':
@@ -145,26 +185,26 @@ class Board:
                                 self.to_statistic(ln[cell[1] - 1], 1)
                             if ln[cell[1] - 1] not in ['7', '8', '9', '$']:
                                 ln[cell[1] - 1] = self.next_in_queue(ln[cell[1] - 1])
-                            # else:
-                            #     self.check_near_ores([(ln_index, cell[1] - 1)], it_is_stone=True)
-                            #     l[cell[1] - 1] = self.board[ln_index][cell[1] - 1]
+                            else:
+                                self.check_near_ores([(ln_index, cell[1] - 1)], it_is_stone=True)
+                                ln[cell[1] - 1] = self.board[ln_index][cell[1] - 1]
                         self.to_statistic(ln[cell[1]], 1)
                         if tuple([ln_index, cell[1]]) in lighted_cells:
                             self.to_statistic(ln[cell[1]], 1)
                         if ln[cell[1]] not in ['7', '8', '9', '$']:
                             ln[cell[1]] = self.next_in_queue(ln[cell[1]])
-                        # else:
-                        #     self.check_near_ores([(ln_index, cell[1])], it_is_stone=True)
-                        #     l[cell[1]] = self.board[ln_index][cell[1]]
+                        else:
+                            self.check_near_ores([(ln_index, cell[1])], it_is_stone=True)
+                            ln[cell[1]] = self.board[ln_index][cell[1]]
                         if cell[1] + 1 < self.width:
                             self.to_statistic(ln[cell[1] + 1], 1)
                             if tuple([ln_index, cell[1] + 1]) in lighted_cells:
                                 self.to_statistic(ln[cell[1] + 1], 1)
                             if ln[cell[1] + 1] not in ['7', '8', '9', '$']:
                                 ln[cell[1] + 1] = self.next_in_queue(ln[cell[1] + 1])
-                            # else:
-                            #     self.check_near_ores([(ln_index, cell[1] + 1)], it_is_stone=True)
-                            #     l[cell[1] + 1] = self.board[ln_index][cell[1] + 1]
+                            else:
+                                self.check_near_ores([(ln_index, cell[1] + 1)], it_is_stone=True)
+                                ln[cell[1] + 1] = self.board[ln_index][cell[1] + 1]
                         self.board[ln_index] = ''.join(ln)
                         faze += 1
                         boom_pole.append(ln)
@@ -201,6 +241,7 @@ class Board:
             ins.active = False
             self.vertical_reduce(self.board, lighted_cells)
             self.horizontal_reduce(self.board, lighted_cells)
+        lighted_cells = self.activate_double_stone(lighted_cells)
         return self.board, animate, lighted_cells
 
     def on_click(self, cell, board, stat, lighted_cells, ore_coords):
@@ -249,8 +290,8 @@ class Board:
                     self.horizontal_reduce(self.board, lighted_cells)
                     self.vertical_reduce(self.board, lighted_cells)
         #         move_pad.minus()
-        # self.activate_double_stone()
-        return self.board, self.statistic_minerals
+        lighted_cells = self.activate_double_stone(lighted_cells)
+        return self.board, self.statistic_minerals, lighted_cells
 
     def horizontal_reduce(self, board, lighted_cells):
         self.board = board

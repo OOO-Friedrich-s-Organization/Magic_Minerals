@@ -133,6 +133,7 @@ def to_statistic(stone_num, quantity, prize=False):
         game_result.update_score(15 * quantity * extra)
     else:
         game_result.update_score(5 * quantity * extra)
+    print(game_result.score)
 
 
 def write_statistic(*stones):
@@ -213,7 +214,7 @@ class Board:
                  left=10, top=10, cell_size=30):
         self.width = width
         self.height = height
-        self.board = load_level('level_1.txt')
+        self.board = load_level('level_2.txt')
         self.org_board = self.board[:]
         self.cell_size = cell_size
         self.left = left
@@ -357,14 +358,14 @@ class Board:
     def tools_into_battle(self, cell):
         for ins in instrument_quadra:
             if ins.active and not ins.used:
-                if ins.name in ['lantern', 'dynamite']:
+                if ins.name in ['lantern', 'dinamite']:
                     an = AnimatedSprite(instrument_animations[ins.name], 6, 1,
                                         BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size,
                                         big=True)
                 else:
                     an = AnimatedSprite(instrument_animations[ins.name], 6, 1,
                                         BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
-                if ins.name == 'pickaxe' and not ins.used:
+                if ins.name == 'pikhouweel' and not ins.used:
                     to_statistic(self.board[cell[0]][cell[1]], 1)
                     if cell in lighted_cells:
                         to_statistic(self.board[cell[0]][cell[1]], 1)
@@ -378,7 +379,7 @@ class Board:
                     instrument_quadra[instruments.index(ins.name)].used = True
                     boom = AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
                                           3, 1, BOARD_X + cell[1] * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
-                elif ins.name == 'drill' and not ins.used:
+                elif ins.name == 'boren' and not ins.used:
                     i = 0
                     for elem in self.board[cell[0]]:
                         to_statistic(elem, 1)
@@ -396,7 +397,7 @@ class Board:
                         AnimatedSprite(load_image('mineral_die_animate.png', directory='assets/animations'),
                                               3, 1, BOARD_X + i * self.cell_size, BOARD_Y + cell[0] * self.cell_size)
                     instrument_quadra[instruments.index(ins.name)].used = True
-                elif ins.name == 'dynamite':
+                elif ins.name == 'dinamite':
                     lines = []
                     faze = -1
                     if cell[0] - 1 > -1:
@@ -505,9 +506,28 @@ class Board:
                         line1.insert(c1[1] - 1, stone2)
                         line1.insert(c2[1], stone1)
                     line1 = ''.join(line1)
+                    old_line = self.board[self.c1[0]][:]
                     self.board[self.c1[0]] = line1
+                    # i, j = self.c1[1], 0
+                    # count = 1
+                    # cur_st = self.board[i][j]
+                    # while j < self.width:
+                    #     j += 1
+                    #     if j == self.width - 1:
+                    #         break
+                    #     if self.board[i][j] == cur_st:
+                    #         while self.board[i][j] == cur_st:
+                    #             count += 1
+                    #             j += 1
+                    #             if j == self.width - 1:
+                    #                 break
+                    #     else:
+                    #         cur_st = self.board[i][j]
+                    # if count >= 3:
                     self.horizontal_reduce()
                     self.vertical_reduce()
+                    # else:
+                    #     self.board[self.c1[1]] = old_line
                 elif c1[1] == c2[1] and abs(c1[0] - c2[0]) == 1:
                     line1, line2 = list(self.board[c1[0]]), list(self.board[c2[0]])
                     stone1, stone2 = line1[c1[1]], line2[c2[1]]

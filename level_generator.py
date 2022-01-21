@@ -216,8 +216,9 @@ class GamePlace:
                             cell = '$'
                         elif int(elem) >= 7:
                             cell = 'ore'
-                            self.ore_coords += [[ind_x, ind_y]]
-                        elif (ind_x, ind_y) in self.lighted_cells:
+                            if (ind_x, ind_y) not in self.ore_coords:
+                                self.ore_coords += [(ind_x, ind_y)]
+                        elif (ind_y, ind_x) in self.lighted_cells:
                             cell = 'x2'
                             if (ind_x, ind_y) == board.c1 and not self.move_wasnt_done:
                                 cell = 'x2_sel1'
@@ -305,9 +306,11 @@ class GamePlace:
                         self.old_board = self.board[:]
                         if self.move_wasnt_done:
                             self.move_wasnt_done = False
-                        self.board, self.statistik = board.on_click(self.get_cell(coords), self.board,
-                                                                    self.statistik, self.lighted_cells,
-                                                                    self.ore_coords)
+                        self.board, self.statistik, self.lighted_cells = board.on_click(self.get_cell(coords),
+                                                                                        self.board,
+                                                                                        self.statistik,
+                                                                                        self.lighted_cells,
+                                                                                        self.ore_coords)
                         self.animation_active = True
                         if type(board.c1[0]) == int and type(board.c2[0]) == int and self.board == self.old_board:
                             self.move_wasnt_done = True
