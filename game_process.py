@@ -12,30 +12,47 @@ double_stones_in_ores = True
 
 
 class Board:
-    def __init__(self):
+    def __init__(self, movies, level_now):
         self.c1 = (None, None)
         self.c2 = (None, None)
         self.width = 8
         self.height = 8
-        with open('stones/fall.txt', 'rt') as f:
+        self.score = 0
+        with open(f'assets/levels/fall_{level_now}.txt', 'rt') as f:
             file = f.readlines()
         self.queue = list(file[0])
         self.global_del_list = []
         self.statistic_minerals = []
         self.double_stones_in_ores = True
+        self.movies = movies
 
     def to_statistic(self, stone_num, quantity, prize=False):
         for ind, st in enumerate(self.statistic_minerals):
             if st[0] == stone_num:
                 self.statistic_minerals[ind][1] = str(int(self.statistic_minerals[ind][1]) + quantity)
-        # if prize:
-        #     extra = 7
-        # else:
-        #     extra = 1
-        # if stone_num in list(map(lambda x: x[0], self.statistic_minerals)):
-        #     game_result.update_score(15 * quantity * extra)
-        # else:
-        #     game_result.update_score(5 * quantity * extra)
+        if prize:
+            extra = 7
+        else:
+            extra = 1
+        if stone_num in list(map(lambda x: x[0], self.statistic_minerals)):
+            self.update_score(15 * quantity * extra)
+        else:
+            self.update_score(5 * quantity * extra)
+
+    def update_score(self, plus):
+        self.score += plus
+    
+    def end_checker(self):
+        stater = 0
+        for stat in self.statistic_minerals:
+            if int(stat[1]) >= int(stat[2]):
+                stater += 1
+        if stater == 3:
+            return True, self.score
+        elif self.movies == 0:
+            return False, self.score
+        else:
+            return False, None
 
     def next_in_queue(self, stone):
         if stone != '0':
@@ -46,7 +63,6 @@ class Board:
         return next
 
     def check_near_ores(self, del_list, it_is_stone=False):
-        print(del_list, self.ore_coords)
         allowed = False
         a = 1
         b = 0
@@ -59,7 +75,6 @@ class Board:
                     if st == ore:
                         allowed = True
                 else:
-                    # print(st[0] + 1 == ore[a], st[1] == ore[b], st[0] - 1 == ore[a], st[1] == ore[b], st[0] == ore[a], st[1] + 1 == ore[b], st[0] == ore[a], st[1] - 1 == ore[b])
                     if st[0] + 1 == ore[a] and st[1] == ore[b] or \
                             st[0] - 1 == ore[a] and st[1] == ore[b] or \
                             st[0] == ore[a] and st[1] + 1 == ore[b] or \
@@ -67,7 +82,6 @@ class Board:
                         allowed = True
                 if allowed:
                     o = self.board[ore[a]][ore[b]]
-                    print(o)
                     if o != '$':
                         o = str(int(o) + 1)
                         if o == '10':
@@ -159,7 +173,7 @@ class Board:
                         if line[i] not in ['7', '8', '9', '$']:
                             line[i] = self.next_in_queue(line[i])
                         else:
-                            self.check_near_ores([tuple([(i, cell[1])])], it_is_stone=True)
+                            self.check_near_ores([(i, cell[0])], it_is_stone=True)
                             line[i] = self.board[cell[0]][i]
                         self.board[cell[0]] = ''.join(line)
                     instrument_quadra[1].used = True
@@ -244,8 +258,9 @@ class Board:
             ins.active = False
             self.vertical_reduce(self.board, lighted_cells)
             self.horizontal_reduce(self.board, lighted_cells)
+        win, score_win = self.end_checker()
         lighted_cells = self.activate_double_stone(lighted_cells)
-        return self.board, animate, lighted_cells
+        return self.board, animate, lighted_cells, win, score_win
 
     def on_click(self, cell, board, stat, lighted_cells, ore_coords):
         self.ore_coords = ore_coords
@@ -292,9 +307,10 @@ class Board:
                     self.board[c1[1]], self.board[c2[1]] = line1, line2
                     self.horizontal_reduce(self.board, lighted_cells)
                     self.vertical_reduce(self.board, lighted_cells)
-        #         move_pad.minus()
+                self.movies -= 1
+        win, score_win = self.end_checker()
         lighted_cells = self.activate_double_stone(lighted_cells)
-        return self.board, self.statistic_minerals, lighted_cells
+        return self.board, self.statistic_minerals, lighted_cells, win, score_win
 
     def horizontal_reduce(self, board, lighted_cells):
         self.board = board
@@ -396,61 +412,3 @@ class Board:
             j += 1
             i = 0
         return self.board
-
-# class Move:
-#     def __init__(self, n):
-#         self.n = n
-#
-#     def minus(self):
-#         self.n -= 1
-#
-#     def show(self):
-#         pygame.draw.ellipse(screen, 'YellowGreen', (630, 10, 90, 90), 0)
-#         pygame.draw.ellipse(screen, 'DarkGreen', (630, 10, 90, 90), 5)
-#         text = [str(self.n).rjust(2, ' ')]
-#         font = pygame.font.Font(None, 70)
-#         text_coord = 17
-#         for line in text:
-#             string_rendered = font.render(line, 1, pygame.Color('DarkGreen'))
-#             text_rect = string_rendered.get_rect()
-#             text_coord += 10
-#             text_rect.top = text_coord
-#             text_rect.x = 645
-#             text_coord += text_rect.height
-#             screen.blit(string_rendered, text_rect)
-
-
-class WinOrDefeat:
-    def __init__(self, moves):
-        self.moves = moves
-        self.score = 0
-
-    def check_moves(self):
-        if self.moves == 0 and not victory:
-            self.defeat()
-
-    def update_score(self, plus):
-        self.score += plus
-
-    def defeat(self):
-        text = 'Неудача!'
-        font = pygame.font.Font(None, 200)
-        text_coord = 17
-        string_rendered = font.render(text, 1, pygame.Color('White'))
-        text_rect = string_rendered.get_rect()
-        text_rect.top = text_coord
-        text_rect.x = 10
-        screen.blit(string_rendered, text_rect)
-
-    def victory(self):
-        global victory
-        text = 'Изумительно!' if self.moves < 3 else 'Прелестно!'
-        font = pygame.font.Font(None, 200)
-        text_coord = 17
-        string_rendered = font.render(text, 1, pygame.Color('White'))
-        text_rect = string_rendered.get_rect()
-        text_rect.top = text_coord
-        text_rect.x = 10
-        screen.blit(string_rendered, text_rect)
-        victory = True
-        draw_fly_stones()

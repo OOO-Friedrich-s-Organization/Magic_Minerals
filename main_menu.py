@@ -1,7 +1,8 @@
 import pygame
 import os
 import sys
-from level_generator import GamePlace, Button
+import csv
+from level_generator import GamePlace, Image
 
 
 pygame.init()
@@ -14,8 +15,30 @@ clock = pygame.time.Clock()
 btn_menu_sprites = pygame.sprite.Group()
 btn_levels_sprites = pygame.sprite.Group()
 levels_sprites = pygame.sprite.Group()
+locked_group = pygame.sprite.Group()
 
-last_level = 2
+
+def get_last_level():
+    with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
+        data = csv.reader(file, delimiter=';', quotechar='"')
+        data = list(data)
+        if len(data) == 6:
+            del data[5]
+        return int(list(filter(lambda x: x[1] == 'open', data))[-1][0])
+
+
+def get_locked_levels():
+    with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
+        data = csv.reader(file, delimiter=';', quotechar='"')
+        data = list(data)
+        if len(data) == 6:
+            del data[5]
+        data = list(filter(lambda x: x[1] == 'locked', data))
+        data = list(map(lambda x: int(x[0]), data))
+    return data
+
+
+last_level = get_last_level()
 
 
 class Main:
@@ -33,6 +56,7 @@ class Main:
         self.btns = {'Начать игру': self.load_image('buttons/300x100_btn.png'),
                      'Уровни': self.load_image('buttons/300x100_btn.png'),
                      '100x100': self.load_image('buttons/100x100_btn.png'),
+                     'locked': self.load_image('buttons/locked.png'),
                      'circle': self.load_image('buttons/circle.png'),
                      'laud_on': self.load_image('buttons/60x60_btn_laud_on.png'),
                      'laud_off': self.load_image('buttons/60x60_btn_laud_off.png'),
@@ -70,28 +94,73 @@ class Main:
         return image
 
     def click_check_main(self, coords):
-        for ind, button in enumerate(self.btns_positions):
-            if ind >= 2:
-                btn = self.btns_positions[button]
-                if (btn[0] < coords[0] < btn[0] + btn[2] and
-                        btn[1] < coords[1] < btn[1] + btn[3]):
-                    if ind == 2 or ind == 3:
-                        self.laud_control()
-                        break
+        if self.condition == 'game' and type(game.score) == int:
+            if game.win:
+                for button in game.end_win_btns_positions:
+                    btn = game.end_win_btns_positions[button]
+                    if (btn[0] < coords[0] < btn[0] + 100 and
+                            btn[1] < coords[1] < btn[1] + 100):
+                        if button == 'repeat':
+                            main.condition = 'game'
+                            game_start()
+                        elif button == 'levels':
+                            main.condition = 'levels'
+                            levels.first_time = True
+                        elif button == 'skip':
+                            global last_level
+                            if last_level != 5:
+                                with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
+                                    data = csv.reader(file, delimiter=';', quotechar='"')
+                                    data = list(data)
+                                    if len(data) == 6:
+                                        del data[5]
+                                with open('assets/data/levels_menu.csv', 'w', encoding='utf-8', newline='') as file:
+                                    writer = csv.writer(file, delimiter=';', quotechar='"')
+                                    for ind, elem in enumerate(data):
+                                        if last_level + 1 == ind + 2:
+                                            elem[1] = 'open'
+                                        writer.writerow(elem)
+                                last_level += 1
+                                main.condition = 'game'
+                                game_start()
+                            else:
+                                self.condition = 'menu'
+                                menu.first_time = True
+                                game_start()
+            elif not game.win:
+                for button in game.end_lose_btns_positions:
+                    btn = game.end_lose_btns_positions[button]
+                    if (btn[0] < coords[0] < btn[0] + 100 and
+                            btn[1] < coords[1] < btn[1] + 100):
+                        if button == 'repeat':
+                            main.condition = 'game'
+                            game_start()
+                        elif button == 'levels':
+                            main.condition = 'levels'
+                            levels.first_time = True
+        else:
+            for ind, button in enumerate(self.btns_positions):
+                if ind >= 2:
+                    btn = self.btns_positions[button]
+                    if (btn[0] < coords[0] < btn[0] + btn[2] and
+                            btn[1] < coords[1] < btn[1] + btn[3]):
+                        if ind == 2 or ind == 3:
+                            self.laud_control()
+                            break
+                        elif ind == 4:
+                            self.condition = 'menu'
+                            menu.first_time = True
+                            game_start()
                     elif ind == 4:
-                        self.condition = 'menu'
-                        menu.first_time = True
-                        game_start()
-                elif ind == 4:
-                    if self.condition == 'menu':
-                        menu.click_check(coords)
-                        break
-                    elif self.condition == 'levels':
-                        levels.click_check(coords)
-                        break
-                    elif self.condition == 'game':
-                        game.click_check(coords)
-                        break
+                        if self.condition == 'menu':
+                            menu.click_check(coords)
+                            break
+                        elif self.condition == 'levels':
+                            levels.click_check(coords)
+                            break
+                        elif self.condition == 'game':
+                            game.click_check(coords)
+                            break
 
     def laud_control(self):
         if 'laud_off' in self.btns_now:
@@ -114,7 +183,7 @@ class Menu(Main):
         for btn in self.btns_now[:-1]:
             if btn == 'loud_on':
                 print(1)
-            Button(self.btns[btn], self.btns_positions[btn], btn_menu_sprites)
+            Image(self.btns[btn], self.btns_positions[btn], btn_menu_sprites)
         btn_menu_sprites.draw(screen)
         btn_menu_sprites.update()
 
@@ -133,6 +202,8 @@ class Menu(Main):
                 if (btn[0] < coords[0] < btn[0] + btn[2] and
                         btn[1] < coords[1] < btn[1] + btn[3]):
                     if ind == 0:
+                        global last_level
+                        last_level = get_last_level()
                         main.condition = 'game'
                         game_start()
                     elif ind == 1:
@@ -150,16 +221,23 @@ class LevelsMenu(Main):
         screen.blit(self.fon, (0, 0))
         if self.first_time:
             screen.blit(self.fon, (0, 0))
-            self.first_time = False
 
         for btn in self.btns_now[2:]:
-            Button(self.btns[btn], self.btns_positions[btn], btn_levels_sprites)
-        for circle in self.circles_pos:
-            Button(self.btns['circle'], circle, btn_levels_sprites)
-        for btn in self.btns_levels_pos:
-            Button(self.btns['100x100'], btn, btn_levels_sprites)
+            Image(self.btns[btn], self.btns_positions[btn], btn_levels_sprites)
+        if self.first_time:
+            btn_levels_sprites.empty()
+            locked_group.empty()
+            for circle in self.circles_pos:
+                Image(self.btns['circle'], circle, btn_levels_sprites)
+            for btn in self.btns_levels_pos:
+                Image(self.btns['100x100'], btn, btn_levels_sprites)
+            data = get_locked_levels()
+            for ind, btn in enumerate(self.btns_levels_pos):
+                if ind + 1 in data:
+                    Image(self.btns['locked'], btn, locked_group)
+            self.first_time = False
+
         btn_levels_sprites.draw(screen)
-        btn_levels_sprites.update()
 
         font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 70)
         for button in range(1, 6):
@@ -169,24 +247,32 @@ class LevelsMenu(Main):
             text_rect.x = self.btns_levels_pos[button - 1][0] + 35
             screen.blit(string_rendered, text_rect)
 
+        locked_group.draw(screen)
+
     def click_check(self, coords):
-        for ind, button in enumerate(self.btns_positions):
-            if ind < 2:
-                btn = self.btns_positions[button]
+        data = get_locked_levels()
+        for ind, button in enumerate(self.btns_levels_pos):
+            if ind + 1 not in data:
+                btn = self.btns_levels_pos[ind]
                 if (btn[0] < coords[0] < btn[0] + btn[2] and
                         btn[1] < coords[1] < btn[1] + btn[3]):
-                    pass
+                    global last_level
+                    last_level = ind + 1
+                    main.condition = 'game'
+                    game_start()
 
 
 main = Main()
 menu = Menu()
 levels = LevelsMenu()
-game = 0
+game = None
 
 
 def game_start():
     global game
-    game = GamePlace(main)
+    del game
+    game = GamePlace(main, last_level)
+    game.cleaner()
 
 
 if __name__ == '__main__':

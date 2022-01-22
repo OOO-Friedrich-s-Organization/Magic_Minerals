@@ -1,7 +1,8 @@
 import pygame
 import os
 import sys
-from test import Board
+import csv
+from game_process import Board
 
 
 pygame.init()
@@ -11,7 +12,6 @@ WIDTH, HEIGHT = 1080, 720
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 clock = pygame.time.Clock()
-fps = 15
 
 btn_sprites = pygame.sprite.Group()
 bg_panels_sprites = pygame.sprite.Group()
@@ -22,15 +22,19 @@ field_minerals_and_stones = pygame.sprite.Group()
 stat_group = pygame.sprite.Group()
 anim_die_sprites = pygame.sprite.Group()
 anim_instr_sprites = pygame.sprite.Group()
+end_game_group = pygame.sprite.Group()
 
 instruments_create = []
 paneles_create = []
 
-board = Board()
+board = None
 
 
 class GamePlace:
-    def __init__(self, parent):
+    def __init__(self, parent, level_now):
+        self.level_now = level_now
+        global board
+        board = Board(self.get_moves(), self.level_now)
         self.parent = parent
         self.first_time = True
         self.was_move = True
@@ -40,6 +44,9 @@ class GamePlace:
         self.animation_active = False
         self.instrument_active = False
         self.move_x = self.move_y = 0
+        self.movies = board.movies
+        self.score = None
+        self.win = False
 
         self.lighted_cells = []
         self.ore_coords = []
@@ -57,6 +64,15 @@ class GamePlace:
                                'laud_off': [1000, 640, 60, 60],
                                'back_btn': [20, 640, 60, 60]
                                }
+
+        self.end_win_btns_positions = {'repeat': [330, 435],
+                                       'levels': [490, 435],
+                                       'skip': [650, 435]
+                                       }
+
+        self.end_lose_btns_positions = {'repeat': [390, 435],
+                                        'levels': [590, 435]
+                                        }
 
         self.btns = {'100x100': self.parent.load_image('buttons/100x100_btn.png', -1),
                      'circle': self.parent.load_image('buttons/circle.png', -1),
@@ -114,15 +130,31 @@ class GamePlace:
                       'x2_sel2': self.parent.load_image('cells/cell_blue_sel2.png'),
                       }
 
-        self.statistik = [['5', '0', '10'], ['6', '0', '15'], ['4', '0', '20']]
+    def get_stat(self):
+        with open('assets/data/levels.csv', 'r', encoding='utf-8') as file:
+            data = csv.reader(file, delimiter=';', quotechar='"')
+            for ind, elem in enumerate(data):
+                if self.level_now == ind + 1:
+                    stat1 = [elem[2], '0', elem[5]]
+                    stat2 = [elem[3], '0', elem[6]]
+                    stat3 = [elem[4], '0', elem[7]]
+                    self.statistik = [stat1, stat2, stat3]
+
+    def get_moves(self):
+        with open('assets/data/levels.csv', 'r', encoding='utf-8') as file:
+            data = csv.reader(file, delimiter=';', quotechar='"')
+            for ind, elem in enumerate(data):
+                if self.level_now == ind + 1:
+                    return int(elem[1])
 
     def render(self, level):
         if self.first_time:
             screen.blit(self.fon, (0, 0))
             self.board_loader(level)
+            self.get_stat()
 
         for btn in self.parent.btns_now[2:]:
-            Button(self.btns[btn], self.btns_positions[btn], btn_sprites)
+            Image(self.btns[btn], self.btns_positions[btn], btn_sprites)
 
         old_board = self.board[:]
         self.board = board.horizontal_reduce(self.board, self.lighted_cells)
@@ -151,12 +183,19 @@ class GamePlace:
         top_layer_sprites.draw(screen)
         top_layer_sprites.empty()
 
-        # font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 40)
-        # string_rendered = font.render(f'Ходов: 13', 3, (180, 100, 0))
-        # text_rect = string_rendered.get_rect()
-        # text_rect.top = 540
-        # text_rect.x = 800
-        # screen.blit(string_rendered, text_rect)
+        font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 40)
+        string_rendered = font.render(f'Ходов: {self.movies}', 3, (180, 100, 0))
+        text_rect = string_rendered.get_rect()
+        text_rect.top = 540
+        text_rect.x = 800
+        screen.blit(string_rendered, text_rect)
+
+        end_game_group.draw(screen)
+        if type(self.score) == int:
+            if not end_game_group:
+                WinOrDefeat(self.parent, self.level_now, self.win)
+            else:
+                WinOrDefeat.text(self, self.win, self.score)
 
         self.first_time = False
 
@@ -165,7 +204,7 @@ class GamePlace:
             bg_panels_sprites.empty()
             paneles_create.clear()
             for bg in self.bg_panels:
-                paneles_create.append(Button(self.bg_panels[bg], self.bg_panels_pos[bg], bg_panels_sprites))
+                paneles_create.append(Image(self.bg_panels[bg], self.bg_panels_pos[bg], bg_panels_sprites))
 
     def render_instruments(self):
         if self.first_time:
@@ -176,11 +215,11 @@ class GamePlace:
                 instruments_create.append(Instrument(instrument, ind,
                                                      self.instruments[instrument], self.animations[instrument]))
             if instruments_create[ind].active:
-                Button(self.btns['selected_instrument'], [805, 55 + 110 * ind], btn_sprites)
+                Image(self.btns['selected_instrument'], [805, 55 + 110 * ind], btn_sprites)
             else:
-                Button(self.btns['instrumet_btn'], [820, 70 + 110 * ind], btn_sprites)
+                Image(self.btns['instrumet_btn'], [820, 70 + 110 * ind], btn_sprites)
             if instruments_create[ind].used:
-                Button(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
+                Image(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
 
     def render_instruments_animate(self, cell, animate):
         if animate == 'pikhouweel':
@@ -224,7 +263,7 @@ class GamePlace:
                                 cell = 'x2_sel1'
                             elif (ind_x, ind_y) == board.c2 and not self.move_wasnt_done:
                                 cell = 'x2_sel2'
-                        Button(self.cells[cell], [120 + 75 * ind_x, 30 + 75 * ind_y], field)
+                        Image(self.cells[cell], [120 + 75 * ind_x, 30 + 75 * ind_y], field)
                         move_x = move_y = 0
                         if (ind_x, ind_y) == board.c1:
                             move_x += self.move_x
@@ -232,7 +271,7 @@ class GamePlace:
                         elif (ind_x, ind_y) == board.c2:
                             move_x -= self.move_x
                             move_y -= self.move_y
-                        Button(self.stone_images[elem],
+                        Image(self.stone_images[elem],
                                [121 + 75 * ind_x + move_x,
                                 31 + 75 * ind_y + move_y], field_minerals_and_stones)
             self.was_move = False
@@ -248,7 +287,7 @@ class GamePlace:
     def render_statistik(self):
         if self.first_time:
             for ind, mineral in enumerate(self.statistik):
-                Button(self.stone_images[mineral[0]], [12, ind * 150 + 105], stat_group)
+                Image(self.stone_images[mineral[0]], [12, ind * 150 + 105], stat_group)
 
         if self.statistik_update:
             screen.blit(self.fon, (0, 0))
@@ -264,7 +303,7 @@ class GamePlace:
                 screen.blit(string_rendered, text_rect)
                 if int(stat[1]) >= int(stat[2]):
                     checkmark = pygame.transform.scale(self.parent.load_image('buttons/checkmark.png'), (60, 45))
-                    Button(checkmark, [12, ind * 150 + 135], top_layer_sprites)
+                    Image(checkmark, [12, ind * 150 + 135], top_layer_sprites)
 
     def stone_move(self):
         if abs(self.move_x) == 70 or abs(self.move_y) == 70:
@@ -272,12 +311,12 @@ class GamePlace:
             self.move_now = False
             self.was_move = True
             self.board, self.old_board = self.old_board[:], self.board[:]
-        elif board.c1[0] == board.c2[0]:
+        elif board.c1[0] == board.c2[0] and board.c1[0]:
             if board.c1[1] < board.c2[1]:
                 self.move_y += 10
             else:
                 self.move_y -= 10
-        elif board.c1[1] == board.c2[1]:
+        elif board.c1[1] == board.c2[1] and board.c1[0]:
             if board.c1[0] < board.c2[0]:
                 self.move_x += 10
             else:
@@ -291,7 +330,7 @@ class GamePlace:
         for ind, panel in enumerate(paneles_create):
             if (panel.rect.x < coords[0] < panel.rect.x + panel.rect.w and
                     panel.rect.y < coords[1] < panel.rect.y + panel.rect.h):
-                if ind == 1:
+                if ind == 1 and self.movies:
                     for instr in instruments_create:
                         if (instr.rect.x < coords[0] < instr.rect.x + instr.rect.w and
                                 instr.rect.y < coords[1] < instr.rect.y + instr.rect.h):
@@ -302,31 +341,34 @@ class GamePlace:
                                 instr.active = False
                                 self.instrument_active = False
                 else:
-                    if self.get_click(coords) and not self.move_now and not self.instrument_active:
+                    if self.get_click(coords) and not self.move_now and not self.instrument_active and self.movies:
                         self.old_board = self.board[:]
                         if self.move_wasnt_done:
                             self.move_wasnt_done = False
-                        self.board, self.statistik, self.lighted_cells = board.on_click(self.get_cell(coords),
-                                                                                        self.board,
-                                                                                        self.statistik,
-                                                                                        self.lighted_cells,
-                                                                                        self.ore_coords)
+                        self.board, self.statistik, self.lighted_cells,\
+                            self.win, self.score = board.on_click(self.get_cell(coords),
+                                                                  self.board,
+                                                                  self.statistik,
+                                                                  self.lighted_cells,
+                                                                  self.ore_coords)
                         self.animation_active = True
                         if type(board.c1[0]) == int and type(board.c2[0]) == int and self.board == self.old_board:
                             self.move_wasnt_done = True
                         elif type(board.c1[0]) == int and type(board.c2[0]) == int and self.board != self.old_board:
                             self.move_now = True
                             self.board, self.old_board = self.old_board[:], self.board[:]
+                            self.movies = board.movies
                         self.was_move = True
                         self.statistik_update = True
                     elif self.get_click(coords) and self.instrument_active:
                         self.old_board = self.board[:]
-                        self.board, animate, self.lighted_cells = board.tools_into_battle(self.get_cell(coords),
-                                                                                          instruments_create,
-                                                                                          self.board,
-                                                                                          self.statistik,
-                                                                                          self.lighted_cells,
-                                                                                          self.ore_coords)
+                        self.board, animate, self.lighted_cells,\
+                            self.win, self.score = board.tools_into_battle(self.get_cell(coords),
+                                                                           instruments_create,
+                                                                           self.board,
+                                                                           self.statistik,
+                                                                           self.lighted_cells,
+                                                                           self.ore_coords)
                         self.instrument_active = False
                         if self.board != self.old_board:
                             self.was_move = True
@@ -350,8 +392,33 @@ class GamePlace:
             return True
         return False
 
+    def cleaner(self):
+        self.first_time = True
+        self.was_move = True
+        self.move_now = False
+        self.statistik_update = True
+        self.move_wasnt_done = False
+        self.animation_active = False
+        self.instrument_active = False
+        self.move_x = self.move_y = 0
+        self.movies = self.get_moves()
+        self.score = None
+        self.win = False
+        bg_panels_sprites.empty()
+        btn_sprites.empty()
+        instruments_group.empty()
+        field.empty()
+        field_minerals_and_stones.empty()
+        stat_group.empty()
+        anim_die_sprites.empty()
+        anim_instr_sprites.empty()
+        top_layer_sprites.empty()
+        end_game_group.empty()
+        global board
+        board = Board(self.movies, self.level_now)
 
-class Button(pygame.sprite.Sprite):
+
+class Image(pygame.sprite.Sprite):
     def __init__(self, image, coords, group):
         super().__init__(group)
         self.image = image
@@ -418,3 +485,70 @@ class AnimatedSprite(pygame.sprite.Sprite):
                 self.kill()
                 self.group.empty()
         self.timer += 1
+
+
+class WinOrDefeat(GamePlace):
+    def __init__(self, parent, level, win):
+        self.parent = parent
+        super().__init__(self.parent, level)
+        if win:
+            self.victory()
+        elif not win:
+            self.defeat()
+    
+    def victory(self):
+        if not end_game_group:
+            Image(self.parent.load_image('fon/black.png', -1), [0, 0], end_game_group)
+            Image(self.parent.load_image('windows/end_game.png', -1), [240, 135], end_game_group)
+            for btn in self.end_win_btns_positions:
+                Image(self.parent.load_image(f'buttons/{btn}.png', -1),
+                      [self.end_win_btns_positions[btn][0], self.end_win_btns_positions[btn][1]], end_game_group)
+
+    def defeat(self):
+        if not end_game_group:
+            Image(self.parent.load_image('fon/black.png', -1), [0, 0], end_game_group)
+            Image(self.parent.load_image('windows/end_game.png', -1), [240, 135], end_game_group)
+            for btn in self.end_lose_btns_positions:
+                Image(self.parent.load_image(f'buttons/{btn}.png', -1),
+                      [self.end_lose_btns_positions[btn][0], self.end_lose_btns_positions[btn][1]], end_game_group)
+
+    def text(self, win, score):
+        if win:
+            font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 60)
+            string_rendered = font.render(f'Вы выиграли!', 3, (180, 100, 0))
+            text_rect = string_rendered.get_rect()
+            text_rect.top = 200
+            text_rect.x = 370
+            screen.blit(string_rendered, text_rect)
+        else:
+            font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 60)
+            string_rendered = font.render(f'Вы проиграли!', 3, (180, 100, 0))
+            text_rect = string_rendered.get_rect()
+            text_rect.top = 200
+            text_rect.x = 360
+            screen.blit(string_rendered, text_rect)
+
+        font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 40)
+        string_rendered = font.render(f'Набрано очков: {score}', 3, (180, 100, 0))
+        text_rect = string_rendered.get_rect()
+        text_rect.top = 300
+        text_rect.x = 380
+        screen.blit(string_rendered, text_rect)
+
+
+class FlyStone(pygame.sprite.Sprite):
+    def __init__(self, tile_type, pos_x, pos_y):
+        super().__init__(fly_stones_group, all_sprites)
+        self.tile_type = tile_type
+        self.image = stone_images[tile_type]
+        self.x, self.y = pos_x, pos_y
+        self.rect = self.image.get_rect().move(pos_x * tile_width, pos_y * tile_height)
+        self.vx = random.randint(-5, 5)
+        self.vy = random.randrange(-5, 5)
+
+    def update(self):
+        self.rect = self.rect.move(self.vx, self.vy)
+        if pygame.sprite.spritecollideany(self, horizontal_borders):
+            self.vy = -self.vy
+        if pygame.sprite.spritecollideany(self, vertical_borders):
+            self.vx = -self.vx

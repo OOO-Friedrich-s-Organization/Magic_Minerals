@@ -16,10 +16,26 @@
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_2_01__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_2_01__Changes_1.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Magic_Minerals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Magic_Minerals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Pole_cells.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/Pole_cells.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/fall_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/fall_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/level_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/level_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/level_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/level_4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_4.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/level_5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_5.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_3.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_4.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_5.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/windows/end_game.xcf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/level_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/level_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,10 +50,15 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/level_generator.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/main_menu.py" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/test.py" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Magic_Minerals.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="23SCvioPclZQrUn51YmHjptsL5E" />
@@ -117,19 +138,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="level_generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="game_process" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Magic_Minerals" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Gip4eer\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/level_generator.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/game_process.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -256,18 +277,18 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.level_generator" />
       <item itemvalue="Python.test" />
       <item itemvalue="Python.Magic Minerals_v3" />
       <item itemvalue="Python.Magic_Minerals" />
       <item itemvalue="Python.main_menu" />
+      <item itemvalue="Python.game_process" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main_menu" />
+        <item itemvalue="Python.game_process" />
         <item itemvalue="Python.Magic_Minerals" />
         <item itemvalue="Python.Magic Minerals_v3" />
-        <item itemvalue="Python.level_generator" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
