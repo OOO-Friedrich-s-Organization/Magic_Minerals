@@ -46,9 +46,10 @@ class Board:
         return next
 
     def check_near_ores(self, del_list, it_is_stone=False):
+        print(del_list, self.ore_coords)
         allowed = False
-        a = 0
-        b = 1
+        a = 1
+        b = 0
         for ore in self.ore_coords:
             next_ore = False
             for st in del_list:
@@ -58,6 +59,7 @@ class Board:
                     if st == ore:
                         allowed = True
                 else:
+                    # print(st[0] + 1 == ore[a], st[1] == ore[b], st[0] - 1 == ore[a], st[1] == ore[b], st[0] == ore[a], st[1] + 1 == ore[b], st[0] == ore[a], st[1] - 1 == ore[b])
                     if st[0] + 1 == ore[a] and st[1] == ore[b] or \
                             st[0] - 1 == ore[a] and st[1] == ore[b] or \
                             st[0] == ore[a] and st[1] + 1 == ore[b] or \
@@ -65,6 +67,7 @@ class Board:
                         allowed = True
                 if allowed:
                     o = self.board[ore[a]][ore[b]]
+                    print(o)
                     if o != '$':
                         o = str(int(o) + 1)
                         if o == '10':
@@ -139,7 +142,7 @@ class Board:
                         line[cell[1]] = self.next_in_queue(line[cell[1]])
                         self.board[cell[0]] = ''.join(line)
                     else:
-                        self.check_near_ores([(cell[0], cell[1])], it_is_stone=True)
+                        self.check_near_ores([(cell[1], cell[0])], it_is_stone=True)
 
                     instrument_quadra[0].used = True
                     animate = ins.name
@@ -156,7 +159,7 @@ class Board:
                         if line[i] not in ['7', '8', '9', '$']:
                             line[i] = self.next_in_queue(line[i])
                         else:
-                            self.check_near_ores([tuple([(cell[0]), i])], it_is_stone=True)
+                            self.check_near_ores([tuple([(i, cell[1])])], it_is_stone=True)
                             line[i] = self.board[cell[0]][i]
                         self.board[cell[0]] = ''.join(line)
                     instrument_quadra[1].used = True
@@ -186,7 +189,7 @@ class Board:
                             if ln[cell[1] - 1] not in ['7', '8', '9', '$']:
                                 ln[cell[1] - 1] = self.next_in_queue(ln[cell[1] - 1])
                             else:
-                                self.check_near_ores([(ln_index, cell[1] - 1)], it_is_stone=True)
+                                self.check_near_ores([(cell[1] - 1, ln_index)], it_is_stone=True)
                                 ln[cell[1] - 1] = self.board[ln_index][cell[1] - 1]
                         self.to_statistic(ln[cell[1]], 1)
                         if tuple([ln_index, cell[1]]) in lighted_cells:
@@ -194,7 +197,7 @@ class Board:
                         if ln[cell[1]] not in ['7', '8', '9', '$']:
                             ln[cell[1]] = self.next_in_queue(ln[cell[1]])
                         else:
-                            self.check_near_ores([(ln_index, cell[1])], it_is_stone=True)
+                            self.check_near_ores([(cell[1], ln_index)], it_is_stone=True)
                             ln[cell[1]] = self.board[ln_index][cell[1]]
                         if cell[1] + 1 < self.width:
                             self.to_statistic(ln[cell[1] + 1], 1)
@@ -203,7 +206,7 @@ class Board:
                             if ln[cell[1] + 1] not in ['7', '8', '9', '$']:
                                 ln[cell[1] + 1] = self.next_in_queue(ln[cell[1] + 1])
                             else:
-                                self.check_near_ores([(ln_index, cell[1] + 1)], it_is_stone=True)
+                                self.check_near_ores([(cell[1] + 1, ln_index)], it_is_stone=True)
                                 ln[cell[1] + 1] = self.board[ln_index][cell[1] + 1]
                         self.board[ln_index] = ''.join(ln)
                         faze += 1
@@ -259,8 +262,8 @@ class Board:
         if self.c1 != (None, None) and self.c2 != (None, None) and self.c1 != self.c2:
             c1, c2 = self.c1, self.c2
             if c1 not in self.ore_coords and c2 not in self.ore_coords and\
-                    self.board[c1[0]][c1[1]] not in ['7', '8', '9', '$'] and\
-                    self.board[c2[0]][c2[1]] not in ['7', '8', '9', '$']:
+                    self.board[c1[1]][c1[0]] not in ['7', '8', '9', '$'] and\
+                    self.board[c2[1]][c2[0]] not in ['7', '8', '9', '$']:
                 if c1[1] == c2[1] and abs(c1[0] - c2[0]) == 1:
                     line1 = list(self.board[c1[1]])
                     stone1, stone2 = line1[c1[0]], line1[c2[0]]

@@ -15,7 +15,7 @@ btn_menu_sprites = pygame.sprite.Group()
 btn_levels_sprites = pygame.sprite.Group()
 levels_sprites = pygame.sprite.Group()
 
-last_level = 1
+last_level = 2
 
 
 class Main:
