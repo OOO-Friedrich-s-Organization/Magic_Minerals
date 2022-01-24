@@ -3,6 +3,7 @@ import os
 import sys
 import csv
 from game_process import Board
+import random
 
 
 pygame.init()
@@ -23,11 +24,30 @@ stat_group = pygame.sprite.Group()
 anim_die_sprites = pygame.sprite.Group()
 anim_instr_sprites = pygame.sprite.Group()
 end_game_group = pygame.sprite.Group()
+fly_stones_group = pygame.sprite.Group()
+horizontal_borders = pygame.sprite.Group()
+vertical_borders = pygame.sprite.Group()
+border_sprites = pygame.sprite.Group()
+end_game_fon_group = pygame.sprite.Group()
 
 instruments_create = []
 paneles_create = []
 
 board = None
+
+
+loaded_voices = {'dzin': 'assets/sounds/dzin.mp3',
+                 'pikhouweel': 'assets/sounds/pic.mp3',
+                 'boren': 'assets/sounds/drill.mp3',
+                 'dinamite': 'assets/sounds/dyn.mp3',
+                 'lantern': 'assets/sounds/lan.mp3',
+                 'win': 'assets/sounds/win.mp3',
+                 'loose': 'assets/sounds/loose.mp3'}
+
+
+def voice(key):
+    pygame.mixer.music.load(loaded_voices[key])
+    pygame.mixer.music.play(1)
 
 
 class GamePlace:
@@ -47,6 +67,8 @@ class GamePlace:
         self.movies = board.movies
         self.score = None
         self.win = False
+        self.instr_sound = False
+        self.animate = False
 
         self.lighted_cells = []
         self.ore_coords = []
@@ -190,6 +212,8 @@ class GamePlace:
         text_rect.x = 800
         screen.blit(string_rendered, text_rect)
 
+        end_game_fon_group.draw(screen)
+        fly_stones_group.draw(screen)
         end_game_group.draw(screen)
         if type(self.score) == int:
             if not end_game_group:
@@ -221,19 +245,19 @@ class GamePlace:
             if instruments_create[ind].used:
                 Image(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
 
-    def render_instruments_animate(self, cell, animate):
-        if animate == 'pikhouweel':
-            instr = AnimatedSprite(self.animations[animate],
-                                   6, 1, 50 + 75 * cell[0], 75 * cell[1], self.animation_lens[animate])
-        elif animate == 'boren':
-            instr = AnimatedSprite(self.animations[animate],
-                                   6, 1, 50 + 75 * cell[0], 75 * cell[1] - 30, self.animation_lens[animate])
-        elif animate == 'dinamite':
-            instr = AnimatedSprite(self.animations[animate],
-                                   6, 1, 25 + 75 * cell[0], 75 * cell[1] - 65, self.animation_lens[animate])
-        elif animate == 'lantern':
-            instr = AnimatedSprite(self.animations[animate],
-                                   6, 1, 45 + 75 * cell[0], 75 * cell[1] - 45, self.animation_lens[animate])
+    def render_instruments_animate(self, cell):
+        if self.animate == 'pikhouweel':
+            instr = AnimatedSprite(self.animations[self.animate],
+                                   6, 1, 50 + 75 * cell[0], 75 * cell[1], self.animation_lens[self.animate])
+        elif self.animate == 'boren':
+            instr = AnimatedSprite(self.animations[self.animate],
+                                   6, 1, 50 + 75 * cell[0], 75 * cell[1] - 30, self.animation_lens[self.animate])
+        elif self.animate == 'dinamite':
+            instr = AnimatedSprite(self.animations[self.animate],
+                                   6, 1, 25 + 75 * cell[0], 75 * cell[1] - 65, self.animation_lens[self.animate])
+        elif self.animate == 'lantern':
+            instr = AnimatedSprite(self.animations[self.animate],
+                                   6, 1, 45 + 75 * cell[0], 75 * cell[1] - 45, self.animation_lens[self.animate])
 
     def draw_cell_field(self):
         if self.first_time:
@@ -278,11 +302,23 @@ class GamePlace:
 
     def render_die_animate(self):
         self.del_list = board.global_del_list
+        if self.animate:
+            if self.parent.btns_now[2] == 'laud_on':
+                voice(self.animate)
         if self.del_list:
             for die in self.del_list[0]:
-                boom = AnimatedSprite(self.animations['die'],
-                                      3, 1, 120 + 75 * die[1], 30 + 75 * die[0], self.animation_lens['die'])
+                try:
+                    if self.board[die[0]][die[1]] != '0':
+                        boom = AnimatedSprite(self.animations['die'],
+                                              3, 1, 120 + 75 * die[1], 30 + 75 * die[0], self.animation_lens['die'])
+                except IndexError:
+                    pass
+                except TypeError:
+                    pass
             self.del_list.clear()
+            if self.parent.btns_now[2] == 'laud_on' and not self.animate:
+                voice('dzin')
+        self.animate = False
 
     def render_statistik(self):
         if self.first_time:
@@ -311,12 +347,12 @@ class GamePlace:
             self.move_now = False
             self.was_move = True
             self.board, self.old_board = self.old_board[:], self.board[:]
-        elif board.c1[0] == board.c2[0] and board.c1[0]:
+        elif board.c1[0] == board.c2[0] and type(board.c1[0]) == int:
             if board.c1[1] < board.c2[1]:
                 self.move_y += 10
             else:
                 self.move_y -= 10
-        elif board.c1[1] == board.c2[1] and board.c1[0]:
+        elif board.c1[1] == board.c2[1] and type(board.c1[1]) == int:
             if board.c1[0] < board.c2[0]:
                 self.move_x += 10
             else:
@@ -362,7 +398,7 @@ class GamePlace:
                         self.statistik_update = True
                     elif self.get_click(coords) and self.instrument_active:
                         self.old_board = self.board[:]
-                        self.board, animate, self.lighted_cells,\
+                        self.board, self.animate, self.lighted_cells,\
                             self.win, self.score = board.tools_into_battle(self.get_cell(coords),
                                                                            instruments_create,
                                                                            self.board,
@@ -373,16 +409,16 @@ class GamePlace:
                         if self.board != self.old_board:
                             self.was_move = True
                             self.statistik_update = True
-                            if animate:
-                                self.render_instruments_animate(self.get_cell(coords), animate)
-                        elif animate == 'lantern':
+                            if self.animate:
+                                self.render_instruments_animate(self.get_cell(coords))
+                        elif self.animate == 'lantern':
                             self.was_move = True
-                            self.render_instruments_animate(self.get_cell(coords), animate)
+                            self.render_instruments_animate(self.get_cell(coords))
 
     def get_cell(self, mouse_pos):
         cell_x = (mouse_pos[0] - 120) // 75
         cell_y = (mouse_pos[1] - 30) // 75
-        if cell_x < 0 or cell_x >= WIDTH or cell_y < 0 or cell_y >= HEIGHT:
+        if cell_x < 0 or cell_x >= 8 or cell_y < 0 or cell_y >= 8:
             return None
         return cell_x, cell_y
 
@@ -414,8 +450,18 @@ class GamePlace:
         anim_instr_sprites.empty()
         top_layer_sprites.empty()
         end_game_group.empty()
+        fly_stones_group.empty()
+        end_game_fon_group.empty()
         global board
         board = Board(self.movies, self.level_now)
+
+    def draw_fly_stones(self):
+        fly_stones_group.update()
+        if len(fly_stones_group) <= 40:
+            for _ in range(30):
+                st = str(random.randint(1, 6))
+                x, y = random.randint(0, 90), random.randint(0, 60)
+                stone = FlyStone(st, x, y, self.stone_images)
 
 
 class Image(pygame.sprite.Sprite):
@@ -498,11 +544,13 @@ class WinOrDefeat(GamePlace):
     
     def victory(self):
         if not end_game_group:
-            Image(self.parent.load_image('fon/black.png', -1), [0, 0], end_game_group)
+            Image(self.parent.load_image('fon/black.png', -1), [0, 0], end_game_fon_group)
             Image(self.parent.load_image('windows/end_game.png', -1), [240, 135], end_game_group)
             for btn in self.end_win_btns_positions:
                 Image(self.parent.load_image(f'buttons/{btn}.png', -1),
                       [self.end_win_btns_positions[btn][0], self.end_win_btns_positions[btn][1]], end_game_group)
+            if self.parent.btns_now[2] == 'laud_on':
+                voice('win')
 
     def defeat(self):
         if not end_game_group:
@@ -511,6 +559,8 @@ class WinOrDefeat(GamePlace):
             for btn in self.end_lose_btns_positions:
                 Image(self.parent.load_image(f'buttons/{btn}.png', -1),
                       [self.end_lose_btns_positions[btn][0], self.end_lose_btns_positions[btn][1]], end_game_group)
+            if self.parent.btns_now[2] == 'laud_on':
+                voice('loose')
 
     def text(self, win, score):
         if win:
@@ -520,6 +570,7 @@ class WinOrDefeat(GamePlace):
             text_rect.top = 200
             text_rect.x = 370
             screen.blit(string_rendered, text_rect)
+            self.draw_fly_stones()
         else:
             font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 60)
             string_rendered = font.render(f'Вы проиграли!', 3, (180, 100, 0))
@@ -537,14 +588,18 @@ class WinOrDefeat(GamePlace):
 
 
 class FlyStone(pygame.sprite.Sprite):
-    def __init__(self, tile_type, pos_x, pos_y):
-        super().__init__(fly_stones_group, all_sprites)
+    def __init__(self, tile_type, pos_x, pos_y, stone_images):
+        super().__init__(fly_stones_group)
         self.tile_type = tile_type
         self.image = stone_images[tile_type]
         self.x, self.y = pos_x, pos_y
-        self.rect = self.image.get_rect().move(pos_x * tile_width, pos_y * tile_height)
+        self.rect = self.image.get_rect().move(30 + pos_x * 10, 30 + pos_y * 10)
         self.vx = random.randint(-5, 5)
+        if self.vx == 0:
+            self.vx = random.randint(-5, 5)
         self.vy = random.randrange(-5, 5)
+        if self.vy == 0:
+            self.vy = random.randrange(-5, 5)
 
     def update(self):
         self.rect = self.rect.move(self.vx, self.vy)
@@ -552,3 +607,22 @@ class FlyStone(pygame.sprite.Sprite):
             self.vy = -self.vy
         if pygame.sprite.spritecollideany(self, vertical_borders):
             self.vx = -self.vx
+
+
+class Border(pygame.sprite.Sprite):
+    def __init__(self, x1, y1, x2, y2):
+        super().__init__(border_sprites)
+        if x1 == x2:
+            self.add(vertical_borders)
+            self.image = pygame.Surface([1, y2 - y1])
+            self.rect = pygame.Rect(x1, y1, 1, y2 - y1)
+        else:
+            self.add(horizontal_borders)
+            self.image = pygame.Surface([x2 - x1, 1])
+            self.rect = pygame.Rect(x1, y1, x2 - x1, 1)
+
+
+Border(0, 0, WIDTH, 0)
+Border(0, HEIGHT, WIDTH - 0, HEIGHT)
+Border(0, 0, 0, HEIGHT)
+Border(WIDTH - 0, 0, WIDTH, HEIGHT)

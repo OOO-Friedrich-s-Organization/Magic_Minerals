@@ -38,11 +38,27 @@ def get_locked_levels():
     return data
 
 
+def open_new_level():
+    global last_level
+    if last_level != 5:
+        with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
+            data = csv.reader(file, delimiter=';', quotechar='"')
+            data = list(data)
+            if len(data) == 6:
+                del data[5]
+        with open('assets/data/levels_menu.csv', 'w', encoding='utf-8', newline='') as file:
+            writer = csv.writer(file, delimiter=';', quotechar='"')
+            for ind, elem in enumerate(data):
+                if last_level == ind:
+                    elem[1] = 'open'
+                writer.writerow(elem)
+
+
 last_level = get_last_level()
 
 
 class Main:
-    btns_now = ['Начать игру', 'Уровни', 'laud_off', 'back_btn']
+    btns_now = ['Начать игру', 'Уровни', 'laud_on', 'back_btn']
 
     def __init__(self):
         self.condition = 'menu'
@@ -103,25 +119,17 @@ class Main:
                         if button == 'repeat':
                             main.condition = 'game'
                             game_start()
+                            open_new_level()
                         elif button == 'levels':
                             main.condition = 'levels'
                             levels.first_time = True
+                            open_new_level()
                         elif button == 'skip':
                             global last_level
+                            open_new_level()
                             if last_level != 5:
-                                with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
-                                    data = csv.reader(file, delimiter=';', quotechar='"')
-                                    data = list(data)
-                                    if len(data) == 6:
-                                        del data[5]
-                                with open('assets/data/levels_menu.csv', 'w', encoding='utf-8', newline='') as file:
-                                    writer = csv.writer(file, delimiter=';', quotechar='"')
-                                    for ind, elem in enumerate(data):
-                                        if last_level + 1 == ind + 2:
-                                            elem[1] = 'open'
-                                        writer.writerow(elem)
-                                last_level += 1
                                 main.condition = 'game'
+                                last_level += 1
                                 game_start()
                             else:
                                 self.condition = 'menu'

@@ -903,7 +903,6 @@ class WinOrDefeat:
         text_rect.x = 10
         screen.blit(string_rendered, text_rect)
         victory = True
-        # draw_fly_stones()
 
 
 Border(5, 5, WIDTH - 5, 5)
@@ -924,6 +923,7 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
             board.get_click(event.pos)
             instrument_pad.get_click(event.pos)
+    draw_fly_stones()
     # board.horizontal_reduce()
     # board.vertical_reduce()
     draw_cell_field()
@@ -931,8 +931,8 @@ while running:
     move_pad.show()
     write_statistic(('5', 10), ('6', 15), ('4', 10))
     game_result.check_moves()
-    # fly_stones_group.draw(screen)
-    # fly_stones_group.update()
+    fly_stones_group.draw(screen)
+    fly_stones_group.update()
     animated_group.draw(screen)
     animated_group.update()
     checkmark_group.draw(screen)

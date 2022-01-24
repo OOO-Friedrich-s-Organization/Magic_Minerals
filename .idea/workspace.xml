@@ -2,40 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="save">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_01_2022_16_54__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_01_2022_16_54__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_39__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_29__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_29__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_36__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_36__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_20_52__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_20_52__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_21_22__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_21_22__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_42__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_42__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_44__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_48__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_48__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_2_01__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_2_01__Changes_1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44__Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/drill.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/dyn.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/dzin.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/lan.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/loose.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/pic.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/victory.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/win.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Magic_Minerals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Magic_Minerals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Pole_cells.xcf" beforeDir="false" afterPath="$PROJECT_DIR$/Pole_cells.xcf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/levels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/levels.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/levels_menu — копия.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/levels_menu.csv" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/levels_menu.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/levels/fall_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/fall_1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/fall_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/fall_2.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/levels/level_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/levels/level_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels/level_3.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_3.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels/level_4.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_4.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels/level_5.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_5.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_2.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_3.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_4.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels_zag/level_5.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/windows/end_game.xcf" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/level_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/level_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,13 +47,16 @@
     <setting file="file://$PROJECT_DIR$/Magic_Minerals.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="23SCvioPclZQrUn51YmHjptsL5E" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
     <option name="showMembers" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -159,6 +147,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="level_generator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Magic_Minerals" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/level_generator.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main_menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -172,27 +181,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_menu.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Magic_Minerals" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -277,19 +265,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.Magic Minerals_v3" />
       <item itemvalue="Python.Magic_Minerals" />
       <item itemvalue="Python.main_menu" />
       <item itemvalue="Python.game_process" />
+      <item itemvalue="Python.level_generator" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main_menu" />
-        <item itemvalue="Python.game_process" />
         <item itemvalue="Python.Magic_Minerals" />
+        <item itemvalue="Python.level_generator" />
+        <item itemvalue="Python.game_process" />
         <item itemvalue="Python.Magic Minerals_v3" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -351,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1642691984959</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="save">
+      <created>1642847900646</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1642847900646</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -379,6 +374,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Old New Year update plus images" />
     <MESSAGE value="Old New Year update plus images to master" />
     <MESSAGE value="Old New Year update plus images to master 2" />
@@ -386,6 +382,7 @@
     <MESSAGE value="Day 4th troll update" />
     <MESSAGE value="Day 4th troll update plus fly stones" />
     <MESSAGE value="save7" />
-    <option name="LAST_COMMIT_MESSAGE" value="save7" />
+    <MESSAGE value="save" />
+    <option name="LAST_COMMIT_MESSAGE" value="save" />
   </component>
 </project>
