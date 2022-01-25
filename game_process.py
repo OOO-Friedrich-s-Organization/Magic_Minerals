@@ -26,7 +26,8 @@ class Board:
         self.double_stones_in_ores = True
         self.movies = movies
 
-    def to_statistic(self, stone_num, quantity, prize=False):
+    def to_statistic(self, stone_num, quantity, prize=False):  # отправление собранных камней
+        # в статистику и подсчёт очков
         for ind, st in enumerate(self.statistic_minerals):
             if st[0] == stone_num:
                 self.statistic_minerals[ind][1] = str(int(self.statistic_minerals[ind][1]) + quantity)
@@ -42,7 +43,7 @@ class Board:
     def update_score(self, plus):
         self.score += plus
     
-    def end_checker(self):
+    def end_checker(self):  # проверка на возможность окончания игры
         stater = 0
         for stat in self.statistic_minerals:
             if int(stat[1]) >= int(stat[2]):
@@ -54,7 +55,7 @@ class Board:
         else:
             return False, None
 
-    def next_in_queue(self, stone):
+    def next_in_queue(self, stone):  # получение следующего камня в очереди
         if stone != '0':
             next = self.queue[0]
             del self.queue[0]
@@ -62,7 +63,7 @@ class Board:
             next = '0'
         return next
 
-    def check_near_ores(self, del_list, it_is_stone=False):
+    def check_near_ores(self, del_list, it_is_stone=False):  # проверка на наличие руд по близости
         allowed = False
         a = 1
         b = 0
@@ -101,7 +102,7 @@ class Board:
                     next_ore = True
                     allowed = False
 
-    def activate_double_stone(self, lighted_cells):
+    def activate_double_stone(self, lighted_cells):  # активация удвоения у камня удвоения
         for line in self.board:
             if '$' in line:
                 lst_index_dblst = []
@@ -111,7 +112,6 @@ class Board:
                     if elem == "$":
                         lst_index_dblst.append(i)
                     i += 1
-                #cell = (line.index("$"), )
                 for elem in lst_index_dblst:
                     cell = (lst_index, elem)
                     lines = []
@@ -140,7 +140,8 @@ class Board:
                 self.vertical_reduce(self.board, lighted_cells)
         return lighted_cells
 
-    def tools_into_battle(self, cell, instrument_quadra, board, stat, lighted_cells, ore_coords):
+    def tools_into_battle(self, cell, instrument_quadra, board, stat, lighted_cells, ore_coords):  # выполение
+        # действий инструментов
         self.ore_coords = ore_coords
         self.statistic_minerals = stat
         self.board, animate = board, False
@@ -262,7 +263,7 @@ class Board:
         lighted_cells = self.activate_double_stone(lighted_cells)
         return self.board, animate, lighted_cells, win, score_win
 
-    def on_click(self, cell, board, stat, lighted_cells, ore_coords):
+    def on_click(self, cell, board, stat, lighted_cells, ore_coords):  # передвижение камней по полю
         self.ore_coords = ore_coords
         self.statistic_minerals = stat
         self.board = board
@@ -312,7 +313,7 @@ class Board:
         lighted_cells = self.activate_double_stone(lighted_cells)
         return self.board, self.statistic_minerals, lighted_cells, win, score_win
 
-    def horizontal_reduce(self, board, lighted_cells):
+    def horizontal_reduce(self, board, lighted_cells):  # горизонтальное уничжение камней
         self.board = board
         i, j = 0, 0
         while i < self.height:
@@ -362,7 +363,7 @@ class Board:
             j = 0
         return self.board
 
-    def vertical_reduce(self, board, lighted_cells):
+    def vertical_reduce(self, board, lighted_cells):  # вертикальное уничтожение камней
         self.board = board
         i, j = 0, 0
         while j < self.height:

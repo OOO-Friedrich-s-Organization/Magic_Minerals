@@ -1,26 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="save">
-      <change afterPath="$PROJECT_DIR$/assets/sounds/drill.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/dyn.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/dzin.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/lan.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/loose.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/pic.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/victory.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/win.mp3" afterDir="false" />
+    <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="final">
+      <change afterPath="$PROJECT_DIR$/Presentation_and_PZ/Magic_Minerals.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Presentation_and_PZ/ПЗ.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_menu.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main_menu.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_01_2022_16_54_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_01_2022_16_54_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_01_2022_16_54__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_39_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_39_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_11_01_2022_15_39__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_29_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_29__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_36_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_36_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_13_01_2022_23_36__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_20_52_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_20_52__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_21_22_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_21_22__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_42_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_42__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_43__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_44_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_44__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_48_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_48_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_48__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2022_22_50__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_00__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2022_21_47__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_10_07_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_10_07__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_2_01_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_01_2022_2_01__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_11_01_2022_15_44__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Magic_Minerals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Magic_Minerals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/levels.csv" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/levels.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/levels_menu — копия.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/levels_menu.csv" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/levels_menu.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels/fall_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/fall_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels/fall_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/fall_2.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels/level_1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_1.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/levels/level_2.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_2.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icon/Рубин1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_process.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_process.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/level_generator.py" beforeDir="false" afterPath="$PROJECT_DIR$/level_generator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/amber.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/amethyst.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/boom.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/checkmark.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/diamond.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/double_stone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/emerald.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/fall.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/level_1.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/none.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/ore_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/ore_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/ore_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/ruby.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/sapphire.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/table.JPG" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/stones/tiger.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +89,6 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Magic_Minerals.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="23SCvioPclZQrUn51YmHjptsL5E" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -346,7 +390,28 @@
       <option name="project" value="LOCAL" />
       <updated>1642847900646</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="pred_final">
+      <created>1642997227068</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1642997227068</updated>
+    </task>
+    <task id="LOCAL-00010" summary="pred_final">
+      <created>1642997234778</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1642997234778</updated>
+    </task>
+    <task id="LOCAL-00011" summary="pred_final">
+      <created>1642997255756</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1642997255756</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -383,6 +448,7 @@
     <MESSAGE value="Day 4th troll update plus fly stones" />
     <MESSAGE value="save7" />
     <MESSAGE value="save" />
-    <option name="LAST_COMMIT_MESSAGE" value="save" />
+    <MESSAGE value="pred_final" />
+    <option name="LAST_COMMIT_MESSAGE" value="pred_final" />
   </component>
 </project>

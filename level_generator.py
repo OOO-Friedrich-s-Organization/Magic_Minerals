@@ -45,7 +45,7 @@ loaded_voices = {'dzin': 'assets/sounds/dzin.mp3',
                  'loose': 'assets/sounds/loose.mp3'}
 
 
-def voice(key):
+def voice(key):  # воспроизведение звука
     pygame.mixer.music.load(loaded_voices[key])
     pygame.mixer.music.play(1)
 
@@ -152,7 +152,7 @@ class GamePlace:
                       'x2_sel2': self.parent.load_image('cells/cell_blue_sel2.png'),
                       }
 
-    def get_stat(self):
+    def get_stat(self):  # получение статистики из файла
         with open('assets/data/levels.csv', 'r', encoding='utf-8') as file:
             data = csv.reader(file, delimiter=';', quotechar='"')
             for ind, elem in enumerate(data):
@@ -162,7 +162,7 @@ class GamePlace:
                     stat3 = [elem[4], '0', elem[7]]
                     self.statistik = [stat1, stat2, stat3]
 
-    def get_moves(self):
+    def get_moves(self):  # получение количества ходов на уровень
         with open('assets/data/levels.csv', 'r', encoding='utf-8') as file:
             data = csv.reader(file, delimiter=';', quotechar='"')
             for ind, elem in enumerate(data):
@@ -223,14 +223,14 @@ class GamePlace:
 
         self.first_time = False
 
-    def render_bg_panels(self):
+    def render_bg_panels(self):  # отрисовка заних панелей инструментов и поля
         if self.first_time:
             bg_panels_sprites.empty()
             paneles_create.clear()
             for bg in self.bg_panels:
                 paneles_create.append(Image(self.bg_panels[bg], self.bg_panels_pos[bg], bg_panels_sprites))
 
-    def render_instruments(self):
+    def render_instruments(self):  # отрисовка списка инструментов
         if self.first_time:
             instruments_create.clear()
             instruments_group.empty()
@@ -245,7 +245,7 @@ class GamePlace:
             if instruments_create[ind].used:
                 Image(self.btns['deactive_instrument'], [820, 70 + 110 * ind], top_layer_sprites)
 
-    def render_instruments_animate(self, cell):
+    def render_instruments_animate(self, cell):  # отрисовка анимаций инструментов
         if self.animate == 'pikhouweel':
             instr = AnimatedSprite(self.animations[self.animate],
                                    6, 1, 50 + 75 * cell[0], 75 * cell[1], self.animation_lens[self.animate])
@@ -259,7 +259,7 @@ class GamePlace:
             instr = AnimatedSprite(self.animations[self.animate],
                                    6, 1, 45 + 75 * cell[0], 75 * cell[1] - 45, self.animation_lens[self.animate])
 
-    def draw_cell_field(self):
+    def draw_cell_field(self):  # отрисовка клеток поля и камней
         if self.first_time:
             board.c1, board.c2 = (None, None), (None, None)
         if self.was_move or self.move_now:
@@ -300,7 +300,7 @@ class GamePlace:
                                 31 + 75 * ind_y + move_y], field_minerals_and_stones)
             self.was_move = False
 
-    def render_die_animate(self):
+    def render_die_animate(self):  # отрисовка анимации уничтожения камней
         self.del_list = board.global_del_list
         if self.animate:
             if self.parent.btns_now[2] == 'laud_on':
@@ -320,7 +320,7 @@ class GamePlace:
                 voice('dzin')
         self.animate = False
 
-    def render_statistik(self):
+    def render_statistik(self):  # отрисовка статистики
         if self.first_time:
             for ind, mineral in enumerate(self.statistik):
                 Image(self.stone_images[mineral[0]], [12, ind * 150 + 105], stat_group)
@@ -341,7 +341,7 @@ class GamePlace:
                     checkmark = pygame.transform.scale(self.parent.load_image('buttons/checkmark.png'), (60, 45))
                     Image(checkmark, [12, ind * 150 + 135], top_layer_sprites)
 
-    def stone_move(self):
+    def stone_move(self):  # отрисовка анимации передвижения камней
         if abs(self.move_x) == 70 or abs(self.move_y) == 70:
             self.move_x = self.move_y = 0
             self.move_now = False
@@ -358,11 +358,11 @@ class GamePlace:
             else:
                 self.move_x -= 10
 
-    def board_loader(self, level):
+    def board_loader(self, level):  # выгрузка игрового поля из файла
         with open(f'assets/levels/level_{level}.txt', 'r', encoding='utf-8') as level_file:
             self.board = [line.rstrip('\n') for line in level_file.readlines()]
 
-    def click_check(self, coords):
+    def click_check(self, coords):  # локальная функция обработки нажатий мыши на игровом поле
         for ind, panel in enumerate(paneles_create):
             if (panel.rect.x < coords[0] < panel.rect.x + panel.rect.w and
                     panel.rect.y < coords[1] < panel.rect.y + panel.rect.h):
@@ -428,7 +428,7 @@ class GamePlace:
             return True
         return False
 
-    def cleaner(self):
+    def cleaner(self):  # рестарт игрового поля
         self.first_time = True
         self.was_move = True
         self.move_now = False
@@ -455,7 +455,7 @@ class GamePlace:
         global board
         board = Board(self.movies, self.level_now)
 
-    def draw_fly_stones(self):
+    def draw_fly_stones(self):  # отрисовка летающих на фоне камней после победы
         fly_stones_group.update()
         if len(fly_stones_group) <= 40:
             for _ in range(30):
@@ -464,14 +464,14 @@ class GamePlace:
                 stone = FlyStone(st, x, y, self.stone_images)
 
 
-class Image(pygame.sprite.Sprite):
+class Image(pygame.sprite.Sprite):  # спрайт любых побочных изображений
     def __init__(self, image, coords, group):
         super().__init__(group)
         self.image = image
         self.rect = self.image.get_rect().move(coords[0], coords[1])
 
 
-class Instrument(pygame.sprite.Sprite):
+class Instrument(pygame.sprite.Sprite):  # класс спрайтов инструментов
     def __init__(self, tile_type, pos_y, image, animation):
         super().__init__(instruments_group)
         self.name = tile_type
@@ -483,7 +483,7 @@ class Instrument(pygame.sprite.Sprite):
         self.used = False
 
 
-class NecessaryStone(pygame.sprite.Sprite):
+class NecessaryStone(pygame.sprite.Sprite):  # вывод списка необходмых для победы камней
     def __init__(self, tile_type, pos_x, pos_y, need):
         super().__init__(necessary_stones_group, all_sprites)
         self.tile_type = tile_type
@@ -542,7 +542,7 @@ class WinOrDefeat(GamePlace):
         elif not win:
             self.defeat()
     
-    def victory(self):
+    def victory(self):  # вывод окна победы
         if not end_game_group:
             Image(self.parent.load_image('fon/black.png', -1), [0, 0], end_game_fon_group)
             Image(self.parent.load_image('windows/end_game.png', -1), [240, 135], end_game_group)
@@ -552,7 +552,7 @@ class WinOrDefeat(GamePlace):
             if self.parent.btns_now[2] == 'laud_on':
                 voice('win')
 
-    def defeat(self):
+    def defeat(self):  # вывод окна проигрыша
         if not end_game_group:
             Image(self.parent.load_image('fon/black.png', -1), [0, 0], end_game_group)
             Image(self.parent.load_image('windows/end_game.png', -1), [240, 135], end_game_group)
@@ -562,7 +562,7 @@ class WinOrDefeat(GamePlace):
             if self.parent.btns_now[2] == 'laud_on':
                 voice('loose')
 
-    def text(self, win, score):
+    def text(self, win, score):  # отрисовка текста на поле окончания игры
         if win:
             font = pygame.font.Font('assets/font/Boncegro FF 4F.otf', 60)
             string_rendered = font.render(f'Вы выиграли!', 3, (180, 100, 0))
@@ -587,7 +587,7 @@ class WinOrDefeat(GamePlace):
         screen.blit(string_rendered, text_rect)
 
 
-class FlyStone(pygame.sprite.Sprite):
+class FlyStone(pygame.sprite.Sprite):  # отрисовка камней на фоне после победы
     def __init__(self, tile_type, pos_x, pos_y, stone_images):
         super().__init__(fly_stones_group)
         self.tile_type = tile_type
@@ -609,7 +609,7 @@ class FlyStone(pygame.sprite.Sprite):
             self.vx = -self.vx
 
 
-class Border(pygame.sprite.Sprite):
+class Border(pygame.sprite.Sprite):  # отрисовка рамки окна для создании соллизии
     def __init__(self, x1, y1, x2, y2):
         super().__init__(border_sprites)
         if x1 == x2:

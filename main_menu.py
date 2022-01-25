@@ -18,7 +18,7 @@ levels_sprites = pygame.sprite.Group()
 locked_group = pygame.sprite.Group()
 
 
-def get_last_level():
+def get_last_level():  # получение номера последенего открытого уровня
     with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
         data = csv.reader(file, delimiter=';', quotechar='"')
         data = list(data)
@@ -27,7 +27,7 @@ def get_last_level():
         return int(list(filter(lambda x: x[1] == 'open', data))[-1][0])
 
 
-def get_locked_levels():
+def get_locked_levels():  # получение списка открытых уровней
     with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
         data = csv.reader(file, delimiter=';', quotechar='"')
         data = list(data)
@@ -38,7 +38,7 @@ def get_locked_levels():
     return data
 
 
-def open_new_level():
+def open_new_level():  # открытие нового уровня
     global last_level
     if last_level != 5:
         with open('assets/data/levels_menu.csv', 'r', encoding='utf-8') as file:
@@ -89,11 +89,11 @@ class Main:
                             [679, 368], [668, 409], [666, 446], [694, 471], [833, 472],
                             [866, 453], [895, 430], [917, 355], [913, 394]]
 
-    def terminate(self):
+    def terminate(self):  # завершение работы программы
         pygame.quit()
         sys.exit()
 
-    def load_image(self, name, color_key=None):
+    def load_image(self, name, color_key=None):  # загрузка изображений
         fullname = os.path.join('assets', name)
         try:
             image = pygame.image.load(fullname)
@@ -109,7 +109,7 @@ class Main:
             image = image.convert_alpha()
         return image
 
-    def click_check_main(self, coords):
+    def click_check_main(self, coords):  # основная функция обработки нажатий мыши
         if self.condition == 'game' and type(game.score) == int:
             if game.win:
                 for button in game.end_win_btns_positions:
@@ -170,7 +170,7 @@ class Main:
                             game.click_check(coords)
                             break
 
-    def laud_control(self):
+    def laud_control(self):  # включение/выключение звука
         if 'laud_off' in self.btns_now:
             self.btns_now[self.btns_now.index('laud_off')] = 'laud_on'
         else:
@@ -203,7 +203,7 @@ class Menu(Main):
             text_rect.x = self.font_positions[button][0]
             screen.blit(string_rendered, text_rect)
 
-    def click_check(self, coords):
+    def click_check(self, coords):  # локальная функция обработки нажатий в главном меню
         for ind, button in enumerate(self.btns_positions):
             if ind < 2:
                 btn = self.btns_positions[button]
@@ -257,7 +257,7 @@ class LevelsMenu(Main):
 
         locked_group.draw(screen)
 
-    def click_check(self, coords):
+    def click_check(self, coords):  # локальная функция обработки нажатий в меню уровней
         data = get_locked_levels()
         for ind, button in enumerate(self.btns_levels_pos):
             if ind + 1 not in data:
