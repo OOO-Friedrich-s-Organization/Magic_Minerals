@@ -10,6 +10,7 @@ pygame.init()
 WIDTH, HEIGHT = 1080, 720
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Magic Minerals')
 clock = pygame.time.Clock()
 
 btn_menu_sprites = pygame.sprite.Group()
