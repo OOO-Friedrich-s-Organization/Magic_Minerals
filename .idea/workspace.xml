@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d5f06005-a03e-4a5a-b947-4590c3ba4deb" name="Changes" comment="final1">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/icon/ruby.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/icon/ruby.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/instruments/boren.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/instruments/boren.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/instruments/dinamite.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/instruments/dinamite.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/instruments/pikhouweel.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/instruments/pikhouweel.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/levels/level_6.txt" beforeDir="false" afterPath="$PROJECT_DIR$/assets/levels/level_6.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/stones/double_stone.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/stones/double_stone.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/stones/ore_1.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/stones/ore_1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/stones/ore_2.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/stones/ore_2.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/stones/ore_3.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/stones/ore_3.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main_menu.py" beforeDir="false" afterPath="$PROJECT_DIR$/main_menu.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Denis" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="22hA5X7J0KJzUk4VhrFZWftylBw" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Python/Винг" />
+  </component>
+  <component name="RunManager" selected="Python.main_menu">
+    <configuration name="Magic_Minerals" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Gip4eer\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Magic_Minerals.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main_menu" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Gip4eer\AppData\Local\Programs\Python\Python39\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main_menu.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.Magic_Minerals" />
+      <item itemvalue="Python.main_menu" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.main_menu" />
+        <item itemvalue="Python.Magic_Minerals" />
+        <item itemvalue="Python.main_menu" />
+        <item itemvalue="Python.main_menu" />
+        <item itemvalue="Python.main_menu" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="115c5626-8a81-4c47-8743-1598f21bccc7" name="Changes" comment="" />
+      <created>1640279262411</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1640279262411</updated>
+    </task>
+    <task id="LOCAL-00001" summary="test1">
+      <created>1640279346960</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1640279346960</updated>
+    </task>
+    <task id="LOCAL-00002" summary="gimp_menu_add">
+      <created>1640282341876</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1640282341876</updated>
+    </task>
+    <task id="LOCAL-00003" summary="menu_and_level_start">
+      <created>1640427903442</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1640427903442</updated>
+    </task>
+    <task id="LOCAL-00004" summary="imgs1">
+      <created>1641137708823</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1641137708823</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Andrej" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test1" />
+    <MESSAGE value="gimp_menu_add" />
+    <MESSAGE value="menu_and_level_start" />
+    <MESSAGE value="imgs1" />
+    <MESSAGE value="menu" />
+    <MESSAGE value="final1" />
+    <option name="LAST_COMMIT_MESSAGE" value="final1" />
+  </component>
+</project>
